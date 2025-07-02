@@ -3,14 +3,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Ecalado para los moviles-->
+    <link rel="stylesheet" href="./css/styles.css">
     <title>HappiEty</title>
 </head>
 <body>
-    <h1>HappiEty</h1>
+    <header>
+        <label class="heart">♡</label>
+        <h1>HappiEty</h1>
+    </header>
+    <main>
+        <section class="intro">
+            <label>Crea un jardín de recuerdos más felices y compartelos con alguien especial</label>
+        </section>
+    </main>
 
-    <p>Crea un jardín de recuerdos más felices y compartelos con alguien especial</p>
+    <section class="formulario-jardin">
+        <form id="form-jardin">
+             <input class="formulario" type="text" id="input-jardin" name="nombre-jardin" placeholder="Nombre de tu jardín" required>
 
+            <div class="btn-formulario">
+                <button id="btn-crear-jardin" type="submit" class="btn">Crear nuevo jardín</button>
+                <button id="btn-acceder-jardin" type="button" class="btn-secundario">Acceder a un jardín</button>
+            </div>
+        </form>
+    </section>
+    
     
 </body>
 </html>
