@@ -109,3 +109,5 @@ Escribir
     npm start 
 
 Control + clic  Al link que aparece en localhost
+
+Esto es temporal, para trabajar en el html y las estetica
