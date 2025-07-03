@@ -5,24 +5,26 @@
 
 html {
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
     text-align: center;
-    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: content-box linear-gradient( #e69ee0, #7fc6e8);
-    color: #333;
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
     margin-top: 90px;
+    padding: 20px;
+    background: content-box linear-gradient(#ffc8fb, #bbe6fa);
+    color: #333;
+    font-family: Arial, sans-serif;
 }
-
 
 .heart {
     font-size: 5em;
@@ -30,23 +32,24 @@ body {
 }
 
 h1 {
-    font-family: 'Arial', sans-serif;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     background: linear-gradient(90deg, #FF0080 10.76%, #F600A1 55.51%, #D0F 96.87%);
     background-clip: text;
+    margin-top: 20px;
+    margin-bottom: 30px;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-family: 'Scada', sans-serif;
 }
 
 .intro label {
-    font-size: 32px;
-    text-align: center;
     display: block;
+    margin-bottom: 35px;
     font-size: 1.2em;
-    margin-bottom: 20px;
+    text-align: center;
 }
 
 .formulario-jardin {
@@ -55,65 +58,79 @@ h1 {
     align-self: center;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    width: 36%;
     padding: 20px;
+    border: 1px solid #bbbbbb;
     border-radius: 8px;
-    border : 1px solid #bbbbbb;
-    width: 40%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 .formulario {
-    background-color: #e7e7e7;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
     width: 100%;
     height: 30px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
 }
 
 .btn-formulario {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 10px;
-    border-radius: 10px;
     margin-top: 20px;
-    margin-bottom: 10px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .btn {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    background: linear-gradient(111deg, #FF0080 10.49%, #D0F 95.51%);
-    height: 40px;
-    width: 200px;
-    color: white;
-    border: 1px;
-    padding: 5px 15px;
-    gap: 5px;
-    border-radius: 8px;
-    cursor: pointer;
     width: 340px;
     height: 40px;
+    padding: 5px 15px;
+    border: 1px;
+    border-radius: 8px;
+    background: linear-gradient(111deg, #FF0080 10.49%, #D0F 95.51%);
+    color: white;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    gap: 5px;
 }
 
 .btn-secundario {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    background-color: #fff  ;
-    width: 200px;
-    height: 40px;
-    color: #333;
-    border: 2px solid #ff4da3;
-    padding: 5px 15px;
-    border-radius: 8px;
-    cursor: pointer;
     width: 340px;
     height: 40px;
+    padding: 5px 15px;
+    border: 3px solid #ff4da3;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
 }
 
 .btn:hover {
-  opacity: 0.9;
+    opacity: 0.9;
+}
+
+
+
+/* ------------------------------
+    Responsive Design: móviles
+   ------------------------------ */
+
+@media (max-width: 768px) {
+    .formulario-jardin {
+        width: 90%;
+    }
+
+    .btn,
+    .btn-secundario {
+        width: 100%;
+    }
 }
