@@ -3,49 +3,69 @@
 
     justify-content: center; */
 
+:root {
+    --color-principal: #ff4da3;
+    --color-gradiente1: #FF0080;
+    --color-gradiente2: #F600A1;
+    --color-gradiente3: #D0F;
+    --color-fondo: #e69ee0;
+    --color-fondo2: #7fc6e8;
+    --fuente-principal: Arial, sans-serif;
+    --fuente-secundaria: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 html {
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: var(--fuente-principal);
     text-align: center;
     align-items: center;
 }
+
 body {
-    font-family: Arial, sans-serif;
-    background: content-box linear-gradient( #9ee6b1, #7fc6e8);
+    font-family: var(--fuente-principal);
+    background: content-box linear-gradient(var(--color-fondo), var(--color-fondo2));
     color: #333;
     margin: 0;
     padding: 20px;
     min-height: 100vh;
     display: flex;
-    margin-top: 90px;
     flex-direction: column;
     align-items: center; 
+    margin-top: 90px;
 }
 
-header {
-    margin-bottom: 15px;
-}
 
 .heart {
     font-size: 5em;
-    color: #ff4da3;
-    margin-bottom: 3px;
+    color: var(--color-principal);
+}
+
+h1 {
+    font-family: var(--fuente-principal);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(90deg, var(--color-gradiente1) 10.76%, var(--color-gradiente2) 55.51%, var(--color-gradiente3) 96.87%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .intro label {
+    font-size: 32px;
     text-align: center;
     display: block;
     font-size: 1.2em;
     margin-bottom: 20px;
 }
 
-
-
 .formulario-jardin {
     display: flex;
     flex-direction: column;
     align-self: center;
     align-items: center;
+    justify-content: center;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -55,49 +75,69 @@ header {
 
 .formulario {
     background-color: #e7e7e7;
-    display: flex;
+    font-family: var(--fuente-secundaria);
+    font-size: 16px;
+    text-align: center;
     border: none;
     border-radius: 5px;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
     margin-top: 10px;
     width: 100%;
-    height: 25px;
+    height: 30px;
 }
 
 .btn-formulario {
     display: flex;
     justify-content: center;
     gap: 10px;
+    border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
 .btn {
-    background: linear-gradient( #9634ec, #ff4da3);
+    font-family: var(--fuente-secundaria);
+    font-size: 16px;
+    background: linear-gradient(111deg, #FF0080 10.49%, #D0F 95.51%);
     height: 40px;
     width: 200px;
     color: white;
-    border: 1px;
+    border: 1px solid transparent;
     padding: 5px 15px;
     gap: 5px;
     border-radius: 8px;
     cursor: pointer;
+    width: 340px;
+    height: 40px;
 }
 
 .btn-secundario {
+    font-family: var(--fuente-secundaria);
+    font-size: 16px;
     background-color: #fff  ;
     width: 200px;
     height: 40px;
     color: #333;
-    border: 2px solid #ff4da3;
+    border: 2px solid var(--color-principal);
     padding: 5px 15px;
     border-radius: 8px;
     cursor: pointer;
+    width: 340px;
+    height: 40px;
 }
 
-.btn:hover {
-  opacity: 0.9;
+/* 3. Accesibilidad: focus para botones */
+.btn:focus, .btn-secundario:focus {
+    outline: 2px solid var(--color-principal);
+    outline-offset: 2px;
+}
+
+/* 4. Responsive: Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    .formulario-jardin {
+        width: 90%;
+        padding: 10px;
+    }
+    .btn, .btn-secundario {
+        width: 100%;
+    }
 }
