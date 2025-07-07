@@ -19,7 +19,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    margin-top: 90px;
+    margin-top: 170px;
     padding: 20px;
     background: content-box linear-gradient(#ffcffc, #c7ecfd);
     color: #333;
@@ -58,7 +58,7 @@ h1 {
     align-self: center;
     align-items: center;
     justify-content: center;
-    width: 41%;
+    width: 25%;
     padding: 20px;
     border: 1px solid #bbbbbb;
     border-radius: 8px;
@@ -67,9 +67,10 @@ h1 {
 }
 
 .formulario {
-    width: 100%;
+    width: 83%;
     height: 35px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border: none;
     border-radius: 5px;
     background-color: #f1f1f1;
@@ -87,12 +88,13 @@ h1 {
 }
 
 .btn-formulario {
-    display: flex;
-    justify-content: space-between;
+    display: block; /* FLEX AQUI */
+    justify-content: space-between; /* Space between */
     gap: 10px;
     margin-top: 20px;
-    width: 100%;
+    margin-bottom: 15px;
     max-width: 500px;
+    width: 100%;
 }
 
 .btn {
@@ -100,7 +102,7 @@ h1 {
     height: 40px;
     padding: 5px 15px;
     border: 1px;
-    border-radius: 8px;
+    border-radius: 8px; 
     background: linear-gradient(111deg, #FF0080 10.49%, #D0F 95.51%);
     color: white;
     font-size: 16px;
@@ -112,6 +114,7 @@ h1 {
 .btn-secundario {
     width: 340px;
     height: 40px;
+    margin-top: 20px;
     padding: 5px 15px;
     border: 3px solid #ff4da3;
     border-radius: 8px;
