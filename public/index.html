@@ -9,7 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <title>HappiEty</title>
 </head>
+
 <body>
+
     <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
     <header>
         <h1>HappiEty</h1>
@@ -24,13 +26,20 @@
         <form id="form-jardin">
              <input class="formulario" type="text" id="input-jardin" name="nombre-jardin" placeholder="Nombre de tu jardín" required>
             <div class="btn-formulario">
-                <button id="btn-crear-jardin" type="submit" class="btn">Crear nuevo jardín</button>
+                <button id="btn-crear-jardin" type="button" class="btn">Crear nuevo jardín</button>
 
                 <button id="btn-acceder-jardin" type="button" class="btn-secundario">Acceder a un jardín</button>
             </div>
         </form>
     </section>
     
-    
+    <script>
+        document.getElementById('btn-crear-jardin').addEventListener('click', function() {
+        window.location.href = 'crear-jardin.html';
+    });
+        document.getElementById('btn-acceder-jardin"').addEventListener('click', function() {
+        window.location.href = 'acceder-jardin.html';
+    });
+    </script>
 </body>
 </html>
