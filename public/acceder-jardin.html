@@ -9,7 +9,9 @@
     <title>Acceder a Jardín</title>
 </head>
 <body>
-    
+
+<div class="retorno"><a href="./index.html">< Volver al inicio</a></div>
+    <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
     <h2>Acceder a un Jardín</h1>
     <p>Encuentra y visita tus jardines.</p>
     
@@ -24,7 +26,7 @@
 
             <label for="codigo-jardin" ">Código del jardín *</label>
             <input class="detalles-jardin" type="text" id="codigo-jardin" name="codigo-jardin" required placeholder="Ej: Nuestros momentos mágicos">
-            <label>¿Tienes un codigo de jardín compartido?. Escríbelo aquí.</label>
+            <p class="guia">¿Tienes un codigo de jardín compartido?. Escríbelo aquí.</p>
 
             <div class="btn-container">
                 <button type="button" class="btn-acceder">Acceder al Jardín</button>
@@ -32,8 +34,8 @@
         </form>
 
     <section class="form-container">
-        <legend>Mis Jardínes</legend>
-        <label>Accede a los jardínes que has creado anteriormente.</label>
+        <label class="titulo-form">Mis Jardínes</label>
+        <p class="guia">Accede a los jardínes que has creado anteriormente.</p>
 
         <div class="btn-container">
             <button type="button" class="btn-ver">Ver mis Jardínes</button>
@@ -41,8 +43,18 @@
     </section>
 
     <section class="form-container">
-        <label>Jardínes Recientes</label>
-        
+        <label class="titulo-form">Jardínes Recientes</label>
+        <div class="container-reciente"> 
+            <div class="container-left">
+                <h3>Ejemplo</h3>
+                <p id="last-acces" class="last-access">Ultimo acceso: hace 2 días</p>            
+            </div>
+
+            <div class="container-right">
+                <button class="btn-reciente">Visitar</button>
+            </div>
+
+        </div>
     </section>
 
 </body>
