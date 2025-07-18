@@ -119,24 +119,39 @@
         
         <!-- SECCIÓN TEMA -->
         <section id="tema" class="page-section">
+
             <div class="tema-options">
-                <button class="theme-btn" data-theme="default">🌸 Rosado</button>
-                <button class="theme-btn" data-theme="blue">💙 Azul</button>
-                <button class="theme-btn" data-theme="green">💚 Verde</button>
+                <div class="tema-left">
+                    <h3 class="titulo-form">Selecciona un tema</h3>
+                    <p class="descripcion-tema">Personaliza el aspecto de tu jardín</p>
+                </div>
+
+                <div class="tema-right">
+                    <button class="theme-btn" data-theme="default">🌸 Rosado</button>
+                    <button class="theme-btn" data-theme="blue">💙 Azul</button>
+                    <button class="theme-btn" data-theme="green">💚 Verde</button>
+                </div>
+                
             </div>
         </section>
         
         <!-- SECCIÓN MÚSICA -->
         <section id="musica" class="page-section">
             <div class="music-player">
-                <audio controls>
-                    <source src="./assets/audio/ambient.mp3" type="audio/mpeg">
-                </audio>
-                <div class="playlist">
-                    <button class="music-btn">🎵 Relajante</button>
-                    <button class="music-btn">🎶 Alegre</button>
-                    <button class="music-btn">🎼 Nostálgica</button>
+                <h3 class="titulo-form">Música para tu jardín</h3>
+                <p class="descripcion-musica">Elige una melodía para ambientar tu espacio</p>
+                <div class="inner-player">
+                    <div class="audio-player">
+                        <h3 class="author-name">Autor: </h3>
+                        <p class="music-name">Nombre de cancion:</p>
+                    </div>
+                    <div class="playlist">
+                        <audio controls>
+                            <source src="./assets/audio/ambient.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                 </div>
+
             </div>
         </section>
     </main>
