@@ -182,6 +182,7 @@ label {
 
 .retorno a {
     display: inline-block; 
+    align-content:center;
     color: #FF0080;
     text-decoration: none;
     font-size: 1rem;
@@ -227,8 +228,8 @@ label {
 .titulo-form {
     display: flex; 
     align-items: center;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1.1em;
+    font-weight: 500;
     color: #FF0080;
     margin-bottom: 20px;
     padding: 0;
@@ -353,6 +354,168 @@ h3{
     font-weight:600;
     color:#333;
 }
+
+/*Mis Jardines*/
+
+.header{
+    display: flex;
+    justify-content: space-around; 
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.header-right{
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.header a{
+    display: inline-block; 
+    align-content:center;
+    color: #FF0080;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    padding: 0px 15px;
+    margin: 0;
+    
+    background-color: transparent;
+    border-radius: 5px;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.section-recuerdos{
+    display:flex;
+    flex-direction:column;
+    max-width:1500px;
+}
+
+.card{
+    display: flex;
+    flex-flow:row wrap;
+    justify-content:space-evenly;
+    gap: 30px;
+    padding:10px 100px;
+    margin:10px;
+}
+
+.card-jardin{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    gap:5px;
+    width:270px;
+    height:270px;
+    padding:20px 22px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
+    background-color: #fff;
+    text-align: left; 
+}
+
+.container-ultima-vez{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.card-jardin .titulo-form{
+    padding-bottom:10px;
+}
+
+.card-jardin p{
+    padding:0;
+    margin:0;
+}
+
+.descripcion-jardin{
+    color:rgb(94, 94, 94);
+    font-size:0.9rem;
+    text-align:left;
+    padding-top:10px;
+    margin:0;
+}
+
+/*
+.fecha-jardin{
+
+}
+*/
+
+.conteo-recuerdos{
+    display:flex;
+    flex-direction:column;
+    
+}
+
+.section-estadisticas{
+    display:flex;
+    flex-direction:column;
+    max-width:1500px;
+    margin:20px auto;
+}
+
+.container-estadisticas{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    width:880px;
+    height:200px;
+    padding:20px 30px;
+
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
+    background-color: #fff;
+    text-align: left; 
+}
+
+
+.container-estadisticas-left{
+    display:flez;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+
+.container-estadisticas-right{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    align-items:center;
+}
+
+.mini-card{
+    display:flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    align-items:center;
+    flex:1;
+
+    text-align:center;
+}
+
+.mini-card .conteo-tipo{
+    color:rgb(122, 122, 122);
+    font-size:1rem;
+    font-weight:500;
+    text-align:left;
+    padding-top:30px;
+    margin:0;
+}
+
+.conteo-estadisticas{
+    font-size:2rem;
+    margin:0;
+}
+
+
 /************************************/
 
 /* ------------------------------
