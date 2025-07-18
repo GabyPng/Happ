@@ -1,24 +1,146 @@
 <!--Zona activa-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="styleshett" href="./css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardin</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
+    <title>Jardín - HappiEty</title>
 </head>
 <body>
     <header>
-        <div>
+        <div class="header-brand">
             <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
             <h1>HappiEty</h1>
         </div>
         
+        <nav class="header-nav">
+            <div class="nav-container">
+                <button class="nav-item active" data-section="zona">
+                    <span class="nav-icon">🏠</span>
+                    Zona
+                </button>
+                <button class="nav-item" data-section="agregar">
+                    <span class="nav-icon">➕</span>
+                    Agregar
+                </button>
+                <button class="nav-item" data-section="recuerdos">
+                    <span class="nav-icon">💝</span>
+                    Recuerdos
+                </button>
+                <button class="nav-item" data-section="tema">
+                    <span class="nav-icon">🎨</span>
+                    Tema
+                </button>
+                <button class="nav-item" data-section="musica">
+                    <span class="nav-icon">🎵</span>
+                    Música
+                </button>
+            </div>
+        </nav>
     </header>
 
-    <main>
+    <main class="app-main">
+        <!-- SECCIÓN ZONA -->
+        <section id="zona" class="page-section active">
+            <h2>Zona Activa</h2>
+            <p>Bienvenido a tu jardín de recuerdos</p>
+            <div class="zona-content">
+                <!-- Contenido de la zona aquí -->
+            </div>
+        </section>
+        
+        <!-- SECCIÓN AGREGAR -->
+        <section id="agregar" class="page-section">
 
+            <div class="add-options">
+                <button class="add-option-btn" data-type="texto">
+                    <span class="option-icon">📝</span>
+                    <span class="option-title">Texto</span>
+                    <span class="option-desc">Agrega una nota o reflexión</span>
+                </button>
+                
+                <button class="add-option-btn" data-type="foto">
+                    <span class="option-icon">📷</span>
+                    <span class="option-title">Foto</span>
+                    <span class="option-desc">Sube una imagen especial</span>
+                </button>
+                
+                <button class="add-option-btn" data-type="audio">
+                    <span class="option-icon">🎵</span>
+                    <span class="option-title">Audio</span>
+                    <span class="option-desc">Graba un mensaje de voz</span>
+                </button>
+                
+                <button class="add-option-btn" data-type="video">
+                    <span class="option-icon">🎬</span>
+                    <span class="option-title">Video</span>
+                    <span class="option-desc">Sube un video memorable</span>
+                </button>
+                
+                <button class="add-option-btn" data-type="ubicacion">
+                    <span class="option-icon">📍</span>
+                    <span class="option-title">Ubicación</span>
+                    <span class="option-desc">Marca un lugar especial</span>
+                </button>
+            </div>
+            
+            <!-- Modal/Pop-up para formularios -->
+            <div id="add-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="modal-title">Agregar Contenido</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <!-- Los formularios se cargan dinámicamente aquí -->
+                        <div id="form-container"></div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn-secundario modal-cancel">Cancelar</button>
+                        <button class="btn modal-save">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECCIÓN RECUERDOS -->
+        <section id="recuerdos" class="page-section">
+            <div class="recuerdos-grid">
+                <div class="card-jardin">
+                    <h3>Mi primer recuerdo</h3>
+                    <p>Descripción del recuerdo...</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECCIÓN TEMA -->
+        <section id="tema" class="page-section">
+            <div class="tema-options">
+                <button class="theme-btn" data-theme="default">🌸 Rosado</button>
+                <button class="theme-btn" data-theme="blue">💙 Azul</button>
+                <button class="theme-btn" data-theme="green">💚 Verde</button>
+            </div>
+        </section>
+        
+        <!-- SECCIÓN MÚSICA -->
+        <section id="musica" class="page-section">
+            <div class="music-player">
+                <audio controls>
+                    <source src="./assets/audio/ambient.mp3" type="audio/mpeg">
+                </audio>
+                <div class="playlist">
+                    <button class="music-btn">🎵 Relajante</button>
+                    <button class="music-btn">🎶 Alegre</button>
+                    <button class="music-btn">🎼 Nostálgica</button>
+                </div>
+            </div>
+        </section>
     </main>
+    
+    <script src="./js/spa-navigation.js"></script>
 </body>
 </html>
