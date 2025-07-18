@@ -12,7 +12,7 @@
     <div class="header">
         <a href="./index.html">< Volver al inicio</a>
         <div classs="header-right">
-            <button class="btn-acceder">+ Nuevo Jardín</button>
+            <button id="btn-nuevo-jardin" name="btn-nuevo-jardin" class="btn-acceder">+ Nuevo Jardín</button>
         </div>
         
     </div>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="mini-card">
-                    <img src="./assets/icons/red-heart.png" width="36px" height="36px">
+                    <img src="./assets/icons/red-heart.png" alt="heart" class="icon-heart">
                     <p class="conteo-tipo">Momentos felices</p>
                 </div>
             </div>
@@ -83,7 +83,7 @@
     </section>
 
     <script>
-        document.getElementById('btn-cancelar').addEventListener('click', function() {
+        document.getElementById('btn-nuevo-jardin').addEventListener('click', function() {
         window.location.href = 'index.html';
         });
     </script>
