@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
     <link rel="stylesheet" href="./css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <title>Crear Jardín</title>
@@ -12,8 +13,8 @@
     <h2>Crear Jardín de Recuerdos</h1>
     <p>Comienza a plantar las semillas de tus momentos más felices.</p>
     
-    
-    <form id="crear-jardin-form" class="formulario-crear-jardin">
+
+    <form id="form-container" class="form-container">
         <fieldset>
             <legend class="titulo-form">
                 <span class="icono-estrella">✨</span>
@@ -23,21 +24,21 @@
         
 
         <label for="nombre-jardin" ">Nombre del Jardín *</label>
-        <input type="text" id="nombre-jardin" name="nombre-jardin" required placeholder="Ej: Nuestros momentos mágicos">
+        <input class="detalles-jardin" type="text" id="nombre-jardin" name="nombre-jardin" required placeholder="Ej: Nuestros momentos mágicos">
 
-        <label for="descripcion_jardin">Descripción:</label>
-        <textarea id="descripcion_jardin" name="descripcion_jardin" rows="4" placeholder="Describe que tipos de recuerdos quieres guardar aquí"></textarea>
+        <label for="descripcion-jardin">Descripción:(Opcional)</label>
+        <textarea class="detalles-jardin" id="descripcion-jardin" name="descripcion_jardin" rows="4" placeholder="Describe que tipos de recuerdos quieres guardar aquí"></textarea>
 
         <label for="tema-jardin">Tema del jardín</label>
-        <select id="tema-jardin" name="tema_jardin">
-            <option value="naturaleza">Naturaleza</option>
-            <option value="playa">Playa</option>
-            <option value="montaña">Montaña</option>
-            <option value="ciudad">Ciudad</option>
-            <option value="otro">Otro</option>
+        <select class="detalles-jardin" id="tema-jardin" name="tema_jardin">
+            <option value="naturaleza">🥦 Naturaleza</option>
+            <option value="playa">🌅 Playa</option>
+            <option value="montaña">⛰️ Montaña</option>
+            <option value="Primavera">🌸 Primavera</option>
+            <option value="otro">🌈 Otro</option>
         </select>
 
-        <div>
+        <div class="btn-container">
             <button type="button" class="btn-secundario">Cancelar</button>
             <button type="submit" class="btn">Crear Jardín</button>
         </div>

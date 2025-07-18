@@ -45,7 +45,7 @@ h1 {
     font-family: 'Scada', sans-serif;                                                                   
 }                                           
 
-.intro label {
+ p {
     display: block;
     margin-bottom: 35px;
     font-size: 1.2em;
@@ -55,10 +55,12 @@ h1 {
 .formulario-jardin {
     display: flex;
     flex-direction: column;
-    align-self: center;
+    /*  align-self: center; */
     align-items: center;
     justify-content: center;
-    width: 30%;
+    width: 800px;
+    
+
     padding: 20px;
     border: 1px solid #bbbbbb;
     border-radius: 8px;
@@ -67,10 +69,10 @@ h1 {
 }
 
 .formulario {
-    width: 87%;
+    width: 100%;
     height: 35px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     border: none;
     border-radius: 5px;
     background-color: #f1f1f1;
@@ -90,34 +92,46 @@ h1 {
 }
 
 .btn-formulario {
-    display: block; /* FLEX AQUI */
-    justify-content: space-between; /* Space between */
+    display: flex;
+    flex-direction: row; 
     gap: 10px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    max-width: 500px;
+    justify-content: center; 
+    align-items: center;
+    margin-top:10px;
+    margin-bottom:10px;
     width: 100%;
 }
 
-.btn {
-    width: 340px;
+.btn-formulario > .btn, 
+.btn-formulario > .btn-secundario {
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0; 
+    min-width: 140px; 
+}
+
+/*El tramaño del inpu varia segun el tamaño de los botones, porque? no se */
+
+.btn, .btn-secundario {
+    width: 360px;
     height: 40px;
+
     padding: 5px 15px;
-    border: 1px;
+    box-sizing:border-box;
+}
+
+.btn {
+    border: none;
     border-radius: 8px; 
     background: linear-gradient(111deg, #FF0080 10.49%, #D0F 95.51%);
     color: white;
     font-size: 16px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: pointer;
-    gap: 5px;
 }
 
 .btn-secundario {
-    width: 340px;
-    height: 40px;
-    margin-top: 20px;
-    padding: 5px 15px;
     border: 3px solid #ff4da3;
     border-radius: 8px;
     background-color: #fff;
@@ -133,14 +147,51 @@ h1 {
 
 /* Crear Jardin */
 
-.formulario-crear-jardin {
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+h2{
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(90deg, #FF0080 10.76%, #F600A1 55.51%, #D0F 96.87%);
+    background-clip: text;
+    margin-top: 20px;
+    margin-bottom: 30px;                                                                                                                                                                                                                                                                                
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Scada', sans-serif;  
+}
+
+label {
+    font-size:0.9rem;
+    font-weight:550;
+    color:rgb(37, 37, 37);
+
+}
+
+
+.detalles-jardin{
+    border: none;
+    border-radius: 5px;
+    padding:10px;
+    background-color: #f1f1f1;
+    font-size: 0.9rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.form-container {
     display: flex;
     flex-direction: column;
-    align-self: center;
-    align-items: flex-start; 
-    justify-content: flex-start;
-    width: 50%;
+    width: 30%;
     padding: 20px;
+    gap:10px;
+
     border: 1px solid #e2e2e2;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
@@ -148,17 +199,9 @@ h1 {
     text-align: left; 
 }
 
-fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
 .titulo-form {
-    display: flex;
-    align-items: center; 
-    justify-content: flex-start; 
-    gap: 10px;
+    display: flex; 
+    align-items: center;
     font-size: 1.2em;
     font-weight: bold;
     color: #FF0080;
@@ -167,17 +210,95 @@ fieldset {
     width: 100%; 
 }
 
+.btn-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+
+}
+
+
 /* ------------------------------
     Responsive Design: móviles
    ------------------------------ */
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
+    body {
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .heart {
+        font-size: 3em;
+    }
+
+    .formulario-jardin {
+        width: 95%; 
+        padding: 15px; 
+    }
+
+    .form-container {
+        width: 95%; 
+        padding: 15px;
+    }
+
+    .formulario {
+        height: 45px; 
+        font-size: 16px; 
+    }
+
+    .btn-formulario,
+    .btn-container {
+        flex-direction: column; 
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .btn, 
+    .btn-secundario {
+        width: 100%; 
+        min-width: auto; 
+        height: 45px; 
+        font-size: 16px;
+    }
+
+    .titulo-form {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    .intro label {
+        font-size: 1.1em;
+        margin-bottom: 25px;
+        padding: 0 10px;
+    }
+}
+
+/* ------------------------------
+    Responsive para tablets
+   ------------------------------ */
+
+@media (max-width: 1024px) and (min-width: 780px) {
     .formulario-jardin {
         width: 90%;
     }
 
-    .btn,
+    .form-container {
+        width: 60%;
+    }
+
+    .btn, 
     .btn-secundario {
-        width: 100%;
+        width: 250px; /* Tamaño intermedio */
     }
 }
