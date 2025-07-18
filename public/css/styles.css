@@ -19,7 +19,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    margin-top: 120px;
+    margin-top: 30px;
     padding: 20px;
     background: content-box linear-gradient(#ffcffc, #c7ecfd);
     color: #333;
@@ -38,8 +38,7 @@ h1 {
     line-height: normal;
     background: linear-gradient(90deg, #FF0080 10.76%, #F600A1 55.51%, #D0F 96.87%);
     background-clip: text;
-    margin-top: 20px;
-    margin-bottom: 30px;                                                                                                                                                                                                                                                                                
+    margin-top: 20px;                                                                                                                                                                                                                                                                       
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Scada', sans-serif;                                                                   
@@ -47,7 +46,6 @@ h1 {
 
  p {
     display: block;
-    margin-bottom: 35px;
     font-size: 1.2em;
     text-align: center;
 }
@@ -154,14 +152,15 @@ fieldset {
 
 
 h2{
+    padding:0;
+    margin:0;
     font-size: 36px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     background: linear-gradient(90deg, #FF0080 10.76%, #F600A1 55.51%, #D0F 96.87%);
     background-clip: text;
-    margin-top: 20px;
-    margin-bottom: 30px;                                                                                                                                                                                                                                                                                
+    margin-top: 20px;                                                                                                                                                                                                                                                 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Scada', sans-serif;  
@@ -174,11 +173,37 @@ label {
 
 }
 
+.retorno {
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.retorno a {
+    display: inline-block; 
+    color: #FF0080;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    padding: 0px 15px;
+    margin: 0;
+    
+    background-color: transparent;
+    border-radius: 5px;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
 .detalles-jardin{
     border: none;
     border-radius: 5px;
-    padding:10px;
+    padding:10px 20px;
     background-color: #f1f1f1;
     font-size: 0.9rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -225,7 +250,6 @@ label {
 
 /*Acceder*/
 
-
 .btn-acceder, .btn-ver {
     width: 100%;
     height: 40px;
@@ -266,6 +290,70 @@ label {
     cursor: pointer;
 }
 
+.guia{
+    display:flex;
+    margin:0;
+    font-size:0.8rem;
+    font-weight:550;
+    color:rgb(136, 136, 136);
+}
+
+
+/*Jardines Recientes*/
+.container-reciente{
+    display: flex;
+    padding: 20px;
+    margin:10px;
+
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
+    background-color: #fff4f4;
+    text-align: left; 
+}
+
+.container-left{
+    flex:1;
+    flex-direction:column;
+    justify-content:left;
+}
+
+.last-access{
+    color:grey;
+    font-size:1rem;
+    text-align:left;
+    padding-top:10px;
+    margin:0;
+}
+
+.container-right{
+    display:flex;
+    flex:1;
+    justify-content:flex-end;
+    align-items:center;
+}
+
+.btn-reciente{
+    width:100px;
+    height:35px;
+
+    border-radius:5px;
+    border:1px solid rgb(213, 213, 213);
+    background:white;
+    color:black;
+
+    font-weight:600;
+
+}
+
+h3{
+    padding:0;
+    margin:0;
+    font-size:1.1rem;
+    font-weight:600;
+    color:#333;
+}
+/************************************/
 
 /* ------------------------------
     Responsive Design: móviles

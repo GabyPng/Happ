@@ -10,6 +10,7 @@
 </head>
 <body>
     
+   <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
     <h2>Crear Jardín de Recuerdos</h1>
     <p>Comienza a plantar las semillas de tus momentos más felices.</p>
     
@@ -39,10 +40,14 @@
         </select>
 
         <div class="btn-container">
-            <button type="button" class="btn-secundario">Cancelar</button>
-            <button type="submit" class="btn">Crear Jardín</button>
+            <button id="btn-cancelar" type="button" class="btn-secundario">Cancelar</button>
+            <button id="btn-crear" type="submit" class="btn">Crear Jardín</button>
         </div>
     </form>
-
+    <script>
+        document.getElementById('btn-cancelar').addEventListener('click', function() {
+        window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
