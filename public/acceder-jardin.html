@@ -38,7 +38,7 @@
         <p class="guia">Accede a los jardínes que has creado anteriormente.</p>
 
         <div class="btn-container">
-            <button type="button" class="btn-ver">Ver mis Jardínes</button>
+            <button id="btn-mis-jardines" type="button" class="btn-ver">Ver mis Jardínes</button>
         </div>
     </section>
 
@@ -46,7 +46,7 @@
         <label class="titulo-form">Jardínes Recientes</label>
         <div class="container-reciente"> 
             <div class="container-left">
-                <h3>Ejemplo</h3>
+                <h3 id="nombre-jardin" name="nombre-jardin">Ejemplo</h3>
                 <p id="last-acces" class="last-access">Ultimo acceso: hace 2 días</p>            
             </div>
 
@@ -56,6 +56,10 @@
 
         </div>
     </section>
-
+    <script>
+        document.getElementById('btn-mis-jardines').addEventListener('click', function() {
+        window.location.href = 'mis-jardines.html';
+        });
+    </script>
 </body>
 </html>

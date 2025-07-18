@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
+    <title>Crear Jardín</title>
+</head>
+<body>
+    <div class="header">
+        <a href="./index.html">< Volver al inicio</a>
+        <div classs="header-right">
+            <button class="btn-acceder">+ Nuevo Jardín</button>
+        </div>
+        
+    </div>
+   <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
+    <h2>Mis Jardínes de Recuerdos</h1>
+    <p>Todos tus jardínes creados en un solo lugar.</p>
+
+    <section class="section-recuerdos">
+
+        <div class ="card">
+        <div class="card-jardin">
+            <div class="container-ultima-vez"><p id="ultima-vez" name="ultima-vez" class="guia">2 días</p></div>
+            <p id="nombre-jardin" nam="nombre-jardin" class="titulo-form">Ejemplo</p>
+            <p id="descripcion-jardin" name="descripcion-jardin" class="descripcion-jardin">Descripcion</p>
+            <p id="fecha-jardin" name="fecha-jardin" class="guia">Creado: 15 de Julio del 2025</p>
+            <p id="conteo-recuerdos" name="conteo-recuerdos" class="guia"># Recuerdos guardados</p>
+            <button id="btn-ver-jardin" class="btn-acceder">Ver Jardín</button>
+        </div>
+        <div class="card-jardin">
+            <div class="container-ultima-vez"><p id="ultima-vez" name="ultima-vez" class="guia">2 días</p></div>
+            <p id="nombre-jardin" nam="nombre-jardin" class="titulo-form">Ejemplo</p>
+            <p id="descripcion-jardin" name="descripcion-jardin" class="descripcion-jardin">Descripcion</p>
+            <p id="fecha-jardin" name="fecha-jardin" class="guia">Creado: 15 de Julio del 2025</p>
+            <p id="conteo-recuerdos" name="conteo-recuerdos" class="guia"># Recuerdos guardados</p>
+            <button id="btn-ver-jardin" class="btn-acceder">Ver Jardín</button>
+        </div>
+        <div class="card-jardin">
+            <div class="container-ultima-vez"><p id="ultima-vez" name="ultima-vez" class="guia">2 días</p></div>
+            <p id="nombre-jardin" nam="nombre-jardin" class="titulo-form">Ejemplo</p>
+            <p id="descripcion-jardin" name="descripcion-jardin" class="descripcion-jardin">Descripcion</p>
+            <p id="fecha-jardin" name="fecha-jardin" class="guia">Creado: 15 de Julio del 2025</p>
+            <p id="conteo-recuerdos" name="conteo-recuerdos" class="guia"># Recuerdos guardados</p>
+            <button id="btn-ver-jardin" class="btn-acceder">Ver Jardín</button>
+        </div>
+        </div>
+    </section>
+
+    <section class="section-estadisticas">
+        <div id="estadisticas" name="estadisticas" class="container-estadisticas">
+            <div class="container-estadisticas-left">
+                <div class="estadisticas">
+                <p class="titulo-form">Estadísticas</p>
+                </div>
+            </div>   
+
+            <div class="container-estadisticas-right">
+                <div class="mini-card">
+                    <p id="conteo-jardines-creados" name="conteo-jardines-creados" class="conteo-estadisticas">2</p>
+                    <p class="conteo-tipo">Jardínes creados</p>
+                </div>
+
+                <div class="mini-card">
+                    <p id="conteo-recuerdos" name="conteo-recuerdos" class="conteo-estadisticas">72</p>
+                    <p class="conteo-tipo">Recuerdos totales</p>
+                </div>
+
+                <div class="mini-card">
+                    <p id="conteo-promedio" name="conteo-promedio" class="conteo-estadisticas">24</p>
+                    <p class="conteo-tipo">Promedio por jardín</p>
+                </div>
+
+                <div class="mini-card">
+                    <img src="./assets/icons/red-heart.png" width="36px" height="36px">
+                    <p class="conteo-tipo">Momentos felices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('btn-cancelar').addEventListener('click', function() {
+        window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
