@@ -623,6 +623,7 @@ header.ver-jardin.html {
 /* Secciones por página */
 .page-section {
     display: none; /* La oculta por defecto */
+    
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.3s ease;
@@ -631,6 +632,7 @@ header.ver-jardin.html {
 
 .page-section.active {
     display: block; /*  Cuando la sección esta activa */
+
     opacity: 1;
     transform: translateY(0);
 }
@@ -639,6 +641,64 @@ header.ver-jardin.html {
     margin-bottom: 2rem;
     text-align: center;
 }
+
+/* SECCION RECUERDOS */
+
+/*
+#recuentos {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 1500px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+*/
+
+.box{
+    display: flex;
+    flex-flow:row wrap;
+    justify-content:space-evenly;
+    gap: 30px;
+    padding:10px 100px;
+    margin:10px;
+    /*width:1500px; <-- no es necesario, ya que el contenedor se adapta al contenido*/ 
+}
+
+.box-recuerdo{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    width:300px;
+    height:270px;
+    padding:20px 20px;
+
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
+    background-color: #fff;
+    text-align: left; 
+}
+
+.box-recuerdo h3{
+    padding:0;
+    margin:0;
+    font-size:1.1rem;
+    font-weight:600;
+    color:#333;
+    text-align:left;
+}
+
+.box-recuerdo p{
+    padding:0;
+    margin:0;
+    color:rgb(94, 94, 94);
+    font-size:1rem;
+    text-align:left;
+}
+
 
 /* SELECCION DEL TEMAA*/
 
