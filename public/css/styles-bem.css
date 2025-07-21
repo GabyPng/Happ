@@ -350,14 +350,13 @@ html {
     font-size: 0.9rem;
     font-weight: 550;
     color: rgb(37, 37, 37);
-    padding: 0.5rem 0;
+    padding:.5rem 0;
 }
 
 .form__label--modal {
     font-size: 0.9rem;
     font-weight: 550;
     color: #333;
-    margin-bottom: 0.25rem;
 }
 
 .form__input {
@@ -555,7 +554,7 @@ html {
 .header__brand {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: content;
     align-items: center;
     gap: 0.5rem;
     margin: 50px;
@@ -937,7 +936,7 @@ html {
     background: white;
     border-radius: 1rem;
     width: min(90%, 500px);
-    max-height: 80vh;
+    max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     animation: modalSlideIn 0.3s ease;
