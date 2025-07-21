@@ -476,13 +476,14 @@ h3{
     gap:5px;
     width:880px;
     height:200px;
-    padding:20px 30px;
+    padding:10px 30px;
 
     border: 1px solid #e2e2e2;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
     background-color: #fff;
     text-align: left; 
+    
 }
 
 
@@ -525,8 +526,8 @@ h3{
 }
 
 .icon-heart{
-    width:36px;
-    height:36px;
+    width:40px;
+    height:40px;
 }
 
 
@@ -1109,7 +1110,7 @@ header.ver-jardin.html {
 
 
 
-/* Responsive */
+/* Responsive modal*/
 @media (max-width: 768px) {
     .add-options {
         grid-template-columns: 1fr;
@@ -1140,7 +1141,7 @@ header.ver-jardin.html {
 
 
 
-/*  Responsiva  */
+/*  Responsiva  nav */
 @media (max-width: 768px) {
     .nav-container {
         flex-wrap: wrap;
