@@ -4,54 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles-bem.css">
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <title>Acceder a Jardín</title>
 </head>
-<body>
+<body class="page">
 
-<div class="retorno"><a href="./index.html">< Volver al inicio</a></div>
-    <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
-    <h2>Acceder a un Jardín</h1>
-    <p>Encuentra y visita tus jardines.</p>
+<div class="back-link"><a href="./index.html" class="back-link__item">< Volver al inicio</a></div>
+    <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
+    <h2 class="heading heading--medium">Acceder a un Jardín</h2>
+    <p class="text">Encuentra y visita tus jardines.</p>
     
-        <form id="form-container" class="form-container">
-            <fieldset>
-                <legend class="titulo-form">
-                    <img src="./assets/icons/sparkle.png" class="sparkle"></img>
+        <form id="form-container" class="form">
+            <fieldset class="form__fieldset">
+                <legend class="form__legend">
+                    <img src="./assets/icons/sparkle.png" class="icon icon--small">
                     Ingresa con Código
                 </legend>
             </fieldset>
             
 
-            <label for="codigo-jardin" ">Código del jardín *</label>
-            <input class="detalles-jardin" type="text" id="codigo-jardin" name="codigo-jardin" required placeholder="Ej: Nuestros momentos mágicos">
-            <p class="guia">¿Tienes un codigo de jardín compartido?. Escríbelo aquí.</p>
+            <label for="codigo-jardin" class="form__label">Código del jardín *</label>
+            <input class="form__input form__input--details" type="text" id="codigo-jardin" name="codigo-jardin" required placeholder="Ej: Nuestros momentos mágicos">
+            <p class="text text--guide">¿Tienes un codigo de jardín compartido?. Escríbelo aquí.</p>
 
-            <div class="btn-container">
-                <button type="button" class="btn-acceder">Acceder al Jardín</button>
+            <div class="button-group button-group--container">
+                <button type="button" class="button button--access">Acceder al Jardín</button>
             </div>
         </form>
 
-    <section class="form-container">
-        <label class="titulo-form">    <img src="./assets/icons/sparkle.png" class="sparkle"></img> Mis Jardínes</label>
-        <p class="guia">Accede a los jardínes que has creado anteriormente.</p>
+    <section class="form">
+        <label class="form__legend">    <img src="./assets/icons/sparkle.png" class="icon icon--small"> Mis Jardínes</label>
+        <p class="text text--guide">Accede a los jardínes que has creado anteriormente.</p>
 
-        <div class="btn-container">
-            <button id="btn-mis-jardines" type="button" class="btn-ver">Ver mis Jardínes</button>
+        <div class="button-group button-group--container">
+            <button id="btn-mis-jardines" type="button" class="button button--view">Ver mis Jardínes</button>
         </div>
     </section>
 
-    <section class="form-container">
-        <label class="titulo-form">  <img src="./assets/icons/sparkle.png" class="sparkle"></img>Jardínes Recientes</label>
-        <div class="container-reciente"> 
-            <div class="container-left">
-                <h3 id="nombre-jardin" name="nombre-jardin">Ejemplo</h3>
-                <p id="last-acces" class="last-access">Ultimo acceso: hace 2 días</p>            
+    <section class="form">
+        <label class="form__legend">  <img src="./assets/icons/sparkle.png" class="icon icon--small">Jardínes Recientes</label>
+        <div class="card card--recent"> 
+            <div class="card__left">
+                <h3 id="nombre-jardin" name="nombre-jardin" class="heading heading--small">Ejemplo</h3>
+                <p id="last-acces" class="text text--access">Ultimo acceso: hace 2 días</p>            
             </div>
 
-            <div class="container-right">
-                <button id="btn-nuevo-jardin" name="btn-nuevo-jardin" class="btn-reciente">Visitar</button>
+            <div class="card__right">
+                <button id="btn-nuevo-jardin" name="btn-nuevo-jardin" class="button button--recent">Visitar</button>
             </div>
 
         </div>

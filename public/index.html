@@ -4,32 +4,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Ecalado para los moviles-->
-    <link rel="stylesheet" href="./css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Escalado para los móviles-->
+    <link rel="stylesheet" href="./css/styles-bem.css">
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <title>HappiEty</title>
 </head>
 
-<body class="page-index">
+<body class="page">
 
-    <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
+    <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
     <header>
-        <h1>HappiEty</h1>
+        <h1 class="heading heading--large">HappiEty</h1>
     </header>
     <main>
         <section class="intro">
-            <p>Crea un jardín de <strong>recuerdos</strong> más felices y compartelos con alguien especial</p>
+            <p class="text">Crea un jardín de <strong>recuerdos</strong> más felices y compártelos con alguien especial</p>
         </section>
     </main>
 
-    <section class="formulario-jardin">
+    <section class="form form--garden">
         <form id="form-jardin">
-             <input class="formulario" type="text" id="input-jardin" name="nombre-jardin" placeholder="Nombre de tu jardín" required>
+             <input class="form__input" type="text" id="input-jardin" name="nombre-jardin" placeholder="Nombre de tu jardín" required>
             
-             <div class="btn-formulario">
-                    <button id="btn-crear-jardin" type="button" class="btn">Crear nuevo jardín</button>
+             <div class="button-group">
+                    <button id="btn-crear-jardin" type="button" class="button button--primary">Crear nuevo jardín</button>
             
-                    <button id="btn-acceder-jardin" type="button" class="btn-secundario">Acceder a un jardín</button>
+                    <button id="btn-acceder-jardin" type="button" class="button button--secondary">Acceder a un jardín</button>
                 
             </div>
         </form>

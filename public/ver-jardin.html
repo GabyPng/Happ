@@ -4,48 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles-bem.css">
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <title>Jardín - HappiEty</title>
 </head>
-<body>
+<body class="page">
     <header>
-        <div class="header-brand">
-            <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
-            <h1>HappiEty</h1>
+        <div class="header-brand">  
+            <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
+            <h2 class="heading heading--medium">HappiEty</h2>
         </div>
         
         <nav class="header-nav">
-            <div class="nav-container">
-                <button class="nav-item active" data-section="zona">
-                    <span class="nav-icon">🏠</span>
+            <div class="nav">
+                <button class="nav__item nav__item--active" data-section="zona">
+                    <span class="nav__icon">🏠</span>
                     Zona
                 </button>
-                <button class="nav-item" data-section="agregar">
-                    <span class="nav-icon">➕</span>
+                <button class="nav__item" data-section="agregar">
+                    <span class="nav__icon">➕</span>
                     Agregar
                 </button>
-                <button class="nav-item" data-section="recuerdos">
-                    <span class="nav-icon">💝</span>
+                <button class="nav__item" data-section="recuerdos">
+                    <span class="nav__icon">💝</span>
                     Recuerdos
                 </button>
-                <button class="nav-item" data-section="tema">
-                    <span class="nav-icon">🎨</span>
+                <button class="nav__item" data-section="tema">
+                    <span class="nav__icon">🎨</span>
                     Tema
                 </button>
-                <button class="nav-item" data-section="musica">
-                    <span class="nav-icon">🎵</span>
+                <button class="nav__item" data-section="musica">
+                    <span class="nav__icon">🎵</span>
                     Música
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="app-main">
+    <main class="main">
         <!-- SECCIÓN ZONA -->
-        <section id="zona" class="page-section active">
-            <h2>Zona Activa</h2>
-            <p>Bienvenido a tu jardín de recuerdos</p>
+        <section id="zona" class="page-section page-section--active">
+            <h2 class="page-section__title heading heading--medium">Zona Activa</h2>
+            <p class="text">Bienvenido a tu jardín de recuerdos</p>
             <div class="zona-content">
                 <!-- Contenido de la zona aquí -->
             </div>
@@ -55,53 +55,53 @@
         <section id="agregar" class="page-section">
 
             <div class="add-options">
-                <button class="add-option-btn" data-type="texto">
-                    <img src="./assets/icons/text.png" class="option-icon"></img>
-                    <span class="option-title">Texto</span>
-                    <span class="option-desc">Agrega una nota o reflexión</span>
+                <button class="button button--add-option" data-type="texto">
+                    <img src="./assets/icons/text.png" class="add-option__icon">
+                    <span class="add-option__title">Texto</span>
+                    <span class="add-option__desc">Agrega una nota o reflexión</span>
                 </button>
                 
-                <button class="add-option-btn" data-type="foto">
-                    <img src="./assets/icons/photo.png" class="option-icon"></img>
-                    <span class="option-title">Foto</span>
-                    <span class="option-desc">Sube una imagen especial</span>
+                <button class="button button--add-option" data-type="foto">
+                    <img src="./assets/icons/photo.png" class="add-option__icon">
+                    <span class="add-option__title">Foto</span>
+                    <span class="add-option__desc">Sube una imagen especial</span>
                 </button>
                 
-                <button class="add-option-btn" data-type="audio">
-                    <img src="./assets/icons/audio.png" class="option-icon"></img>
-                    <span class="option-title">Audio</span>
-                    <span class="option-desc">Graba un mensaje de voz</span>
+                <button class="button button--add-option" data-type="audio">
+                    <img src="./assets/icons/audio.png" class="add-option__icon">
+                    <span class="add-option__title">Audio</span>
+                    <span class="add-option__desc">Graba un mensaje de voz</span>
                 </button>
                 
-                <button class="add-option-btn" data-type="video">
-                    <img src="./assets/icons/video.png" class="option-icon"></img>
-                    <span class="option-title">Video</span>
-                    <span class="option-desc">Sube un video memorable</span>
+                <button class="button button--add-option" data-type="video">
+                    <img src="./assets/icons/video.png" class="add-option__icon">
+                    <span class="add-option__title">Video</span>
+                    <span class="add-option__desc">Sube un video memorable</span>
                 </button>
                 
-                <button class="add-option-btn" data-type="ubicacion">
-                    <img src="./assets/icons/location.png" class="option-icon"></img>
-                    <span class="option-title">Ubicación</span>
-                    <span class="option-desc">Marca un lugar especial</span>
+                <button class="button button--add-option" data-type="ubicacion">
+                    <img src="./assets/icons/location.png" class="add-option__icon">
+                    <span class="add-option__title">Ubicación</span>
+                    <span class="add-option__desc">Marca un lugar especial</span>
                 </button>
             </div>
             
             <!-- Modal/Pop-up para formularios -->
             <div id="add-modal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 id="modal-title">Agregar Contenido</h3>
-                        <button class="modal-close">&times;</button>
+                <div class="modal__content">
+                    <div class="modal__header">
+                        <h3 id="modal-title" class="modal__title">Agregar Contenido</h3>
+                        <button class="modal__close">&times;</button>
                     </div>
                     
-                    <div class="modal-body">
+                    <div class="modal__body">
                         <!-- Los formularios se cargan dinámicamente aquí -->
                         <div id="form-container"></div>
                     </div>
                     
-                    <div class="modal-footer">
-                        <button class="btn-secundario modal-cancel">Cancelar</button>
-                        <button class="btn modal-save">Guardar</button>
+                    <div class="modal__footer">
+                        <button class="button button--secondary modal-cancel">Cancelar</button>
+                        <button class="button button--primary modal-save">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -109,35 +109,35 @@
         
         <!-- SECCIÓN RECUERDOS -->
         <section id="recuerdos" class="page-section">
-                <div class="box">
-                    <div class="box-recuerdo">
-                        <h3>Mi primer recuerdo</h3>
-                        <p>Descripción del recuerdo...</p>
+                <div class="card">
+                    <div class="card--memory">
+                        <h3 class="heading heading--small">Mi primer recuerdo</h3>
+                        <p class="text text--garden-description">Descripción del recuerdo...</p>
                     </div>
                 
-                    <div class="box-recuerdo">
-                        <h3>Mi primer recuerdo</h3>
-                        <p>Descripción del recuerdo...</p>
+                    <div class="card--memory">
+                        <h3 class="heading heading--small">Mi primer recuerdo</h3>
+                        <p class="text text--garden-description">Descripción del recuerdo...</p>
                     </div>
 
-                    <div class="box-recuerdo">
-                        <h3>Mi primer recuerdo</h3>
-                        <p>Descripción del recuerdo...</p>
+                    <div class="card--memory">
+                        <h3 class="heading heading--small">Mi primer recuerdo</h3>
+                        <p class="text text--garden-description">Descripción del recuerdo...</p>
                     </div>
 
-                    <div class="box-recuerdo">
-                        <h3>Mi primer recuerdo</h3>
-                        <p>Descripción del recuerdo...</p>
+                    <div class="card--memory">
+                        <h3 class="heading heading--small">Mi primer recuerdo</h3>
+                        <p class="text text--garden-description">Descripción del recuerdo...</p>
                     </div>
 
-                     <div class="box-recuerdo">
-                        <h3>Mi primer recuerdo</h3>
-                        <p>Descripción del recuerdo...</p>
+                     <div class="card--memory">
+                        <h3 class="heading heading--small">Mi primer recuerdo</h3>
+                        <p class="text text--garden-description">Descripción del recuerdo...</p>
                     </div>
                     
-                     <div class="box-recuerdo">
-                        <h3>Mi primer recuerdo</h3>
-                        <p>Descripción del recuerdo...</p>
+                     <div class="card--memory">
+                        <h3 class="heading heading--small">Mi primer recuerdo</h3>
+                        <p class="text text--garden-description">Descripción del recuerdo...</p>
                     </div>
                 </div>
         </section>
@@ -145,16 +145,16 @@
         <!-- SECCIÓN TEMA -->
         <section id="tema" class="page-section">
 
-            <div class="tema-options">
-                <div class="tema-left">
-                    <h3 class="titulo-form">Selecciona un tema</h3>
-                    <p class="descripcion-tema">Personaliza el aspecto de tu jardín</p>
+            <div class="theme-options">
+                <div class="theme-options__left">
+                    <h3 class="form__legend">Selecciona un tema</h3>
+                    <p class="text text--description">Personaliza el aspecto de tu jardín</p>
                 </div>
 
-                <div class="tema-right">
-                    <button class="theme-btn" data-theme="default">🌸 Rosado</button>
-                    <button class="theme-btn" data-theme="blue">💙 Azul</button>
-                    <button class="theme-btn" data-theme="green">💚 Verde</button>
+                <div class="theme-options__right">
+                    <button class="button button--theme" data-theme="default">🌸 Rosado</button>
+                    <button class="button button--theme" data-theme="blue">💙 Azul</button>
+                    <button class="button button--theme" data-theme="green">💚 Verde</button>
                 </div>
                 
             </div>
@@ -163,14 +163,14 @@
         <!-- SECCIÓN MÚSICA -->
         <section id="musica" class="page-section">
             <div class="music-player">
-                <h3 class="titulo-form">Música para tu jardín</h3>
-                <p class="descripcion-musica">Elige una melodía para ambientar tu espacio</p>
-                <div class="inner-player">
-                    <div class="audio-player">
-                        <h3 class="author-name">Autor: </h3>
-                        <p class="music-name">Nombre de cancion:</p>
+                <h3 class="form__legend">Música para tu jardín</h3>
+                <p class="text text--music-description">Elige una melodía para ambientar tu espacio</p>
+                <div class="music-player__inner card card--music">
+                    <div class="music-player__audio card__left">
+                        <h3 class="text text--author">Autor: </h3>
+                        <p class="text text--music-name">Nombre de cancion:</p>
                     </div>
-                    <div class="playlist">
+                    <div class="music-player__playlist card__right">
                         <audio controls>
                             <source src="./assets/audio/ambient.mp3" type="audio/mpeg">
                         </audio>

@@ -4,79 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles-bem.css">
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
-    <title>Crear Jardín</title>
+    <title>Mis Jardines</title>
 </head>
-<body>
+<body class="page">
     <div class="header">
-        <a href="./index.html">< Volver al inicio</a>
-        <div classs="header-right">
-            <button id="btn-nuevo-jardin" name="btn-nuevo-jardin" class="btn-acceder">+ Nuevo Jardín</button>
+        <a href="./index.html" class="header__link">< Volver al inicio</a>
+        <div class="header__right">
+            <button id="btn-nuevo-jardin" name="btn-nuevo-jardin" class="button button--access">+ Nuevo Jardín</button>
         </div>
         
     </div>
-   <img src="./assets/icons/heart-outline.png" alt="Heart" class="heart">
-    <h2>Mis Jardínes de Recuerdos</h1>
-    <p>Todos tus jardínes creados en un solo lugar.</p>
+   <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
+    <h2 class="heading heading--medium">Mis Jardínes de Recuerdos</h2>
+    <p class="text">Todos tus jardínes creados en un solo lugar.</p>
 
-    <section class="section-recuerdos">
-
-        <div class ="card">
-        <div class="card-jardin">
-            <div class="container-ultima-vez"><p id="ultima-vez" name="ultima-vez" class="guia">2 días</p></div>
-            <p id="nombre-jardin" nam="nombre-jardin" class="titulo-form">Ejemplo</p>
-            <p id="descripcion-jardin" name="descripcion-jardin" class="descripcion-jardin">Descripcion</p>
-            <p id="fecha-jardin" name="fecha-jardin" class="guia">Creado: 15 de Julio del 2025</p>
-            <p id="conteo-recuerdos" name="conteo-recuerdos" class="guia"># Recuerdos guardados</p>
-            <button id="btn-ver-jardin" class="btn-acceder">Ver Jardín</button>
+    <section class="section">
+        <div class="gardens-grid">
+            <div class="card card--garden">
+                <div class="card__header"><p id="ultima-vez" name="ultima-vez" class="text text--guide">2 días</p></div>
+                <p id="nombre-jardin" nam="nombre-jardin" class="form__legend card__title">Ejemplo</p>
+                <p id="descripcion-jardin" name="descripcion-jardin" class="text text--garden-description">Descripcion</p>
+                <p id="fecha-jardin" name="fecha-jardin" class="text text--guide">Creado: 15 de Julio del 2025</p>
+                <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--guide"># Recuerdos guardados</p>
+                <button id="btn-ver-jardin" class="button button--access">Ver Jardín</button>
+            </div>
+            <div class="card card--garden">
+                <div class="card__header"><p id="ultima-vez" name="ultima-vez" class="text text--guide">2 días</p></div>
+                <p id="nombre-jardin" nam="nombre-jardin" class="form__legend card__title">Ejemplo</p>
+                <p id="descripcion-jardin" name="descripcion-jardin" class="text text--garden-description">Descripcion</p>
+                <p id="fecha-jardin" name="fecha-jardin" class="text text--guide">Creado: 15 de Julio del 2025</p>
+                <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--guide"># Recuerdos guardados</p>
+                <button id="btn-ver-jardin" class="button button--access">Ver Jardín</button>
+            </div>
+            <div class="card card--garden">
+                <div class="card__header"><p id="ultima-vez" name="ultima-vez" class="text text--guide">2 días</p></div>
+                <p id="nombre-jardin" nam="nombre-jardin" class="form__legend card__title">Ejemplo</p>
+                <p id="descripcion-jardin" name="descripcion-jardin" class="text text--garden-description">Descripcion</p>
+                <p id="fecha-jardin" name="fecha-jardin" class="text text--guide">Creado: 15 de Julio del 2025</p>
+                <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--guide"># Recuerdos guardados</p>
+                <button id="btn-ver-jardin" class="button button--access">Ver Jardín</button>
+            </div>
         </div>
-        <div class="card-jardin">
-            <div class="container-ultima-vez"><p id="ultima-vez" name="ultima-vez" class="guia">2 días</p></div>
-            <p id="nombre-jardin" nam="nombre-jardin" class="titulo-form">Ejemplo</p>
-            <p id="descripcion-jardin" name="descripcion-jardin" class="descripcion-jardin">Descripcion</p>
-            <p id="fecha-jardin" name="fecha-jardin" class="guia">Creado: 15 de Julio del 2025</p>
-            <p id="conteo-recuerdos" name="conteo-recuerdos" class="guia"># Recuerdos guardados</p>
-            <button id="btn-ver-jardin" class="btn-acceder">Ver Jardín</button>
-        </div>
-        <div class="card-jardin">
-            <div class="container-ultima-vez"><p id="ultima-vez" name="ultima-vez" class="guia">2 días</p></div>
-            <p id="nombre-jardin" nam="nombre-jardin" class="titulo-form">Ejemplo</p>
-            <p id="descripcion-jardin" name="descripcion-jardin" class="descripcion-jardin">Descripcion</p>
-            <p id="fecha-jardin" name="fecha-jardin" class="guia">Creado: 15 de Julio del 2025</p>
-            <p id="conteo-recuerdos" name="conteo-recuerdos" class="guia"># Recuerdos guardados</p>
-            <button id="btn-ver-jardin" class="btn-acceder">Ver Jardín</button>
-        </div>
-        </div>
-    </section>
-
-    <section class="section-estadisticas">
-        <div id="estadisticas" name="estadisticas" class="container-estadisticas">
-            <div class="container-estadisticas-left">
-                <div class="estadisticas">
-                <p class="titulo-form">Estadísticas</p>
-                </div>
-            </div>   
-
-            <div class="container-estadisticas-right">
+    </section>    <section class="section section--stats">
+        <div id="estadisticas" name="estadisticas" class="card card--stats">
+            <p class="form__legend">Estadísticas</p>
+            
+            <div class="stats-grid">
                 <div class="mini-card">
-                    <p id="conteo-jardines-creados" name="conteo-jardines-creados" class="conteo-estadisticas">2</p>
-                    <p class="conteo-tipo">Jardínes creados</p>
+                    <p id="conteo-jardines-creados" name="conteo-jardines-creados" class="text text--stats">2</p>
+                    <p class="text text--stats-label">Jardínes creados</p>
                 </div>
 
                 <div class="mini-card">
-                    <p id="conteo-recuerdos" name="conteo-recuerdos" class="conteo-estadisticas">72</p>
-                    <p class="conteo-tipo">Recuerdos totales</p>
+                    <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--stats">72</p>
+                    <p class="text text--stats-label">Recuerdos totales</p>
                 </div>
 
                 <div class="mini-card">
-                    <p id="conteo-promedio" name="conteo-promedio" class="conteo-estadisticas">24</p>
-                    <p class="conteo-tipo">Promedio por jardín</p>
+                    <p id="conteo-promedio" name="conteo-promedio" class="text text--stats">24</p>
+                    <p class="text text--stats-label">Promedio por jardín</p>
                 </div>
 
                 <div class="mini-card">
-                    <img src="./assets/icons/red-heart.png" alt="heart" class="icon-heart">
-                    <p class="conteo-tipo">Momentos felices</p>
+                    <img src="./assets/icons/red-heart.png" alt="heart" class="icon icon--heart">
+                    <p class="text text--stats-label">Momentos felices</p>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('SPA Navigation cargado'); // Debug
     
-    const navItems = document.querySelectorAll('.nav-item');
+    const navItems = document.querySelectorAll('.nav__item');
     const sections = document.querySelectorAll('.page-section');
 
     console.log('Nav items encontrados:', navItems.length); // Debug
@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Ocultar todas las secciones
         sections.forEach(section => {
-            section.classList.remove('active');
+            section.classList.remove('page-section--active');
         });
 
         // Mostrar sección objetivo
         const section = document.getElementById(targetSection);
         if (section) {
-            section.classList.add('active');
+            section.classList.add('page-section--active');
             console.log('Sección mostrada:', targetSection); // Debug
         } else {
             console.error('Sección no encontrada:', targetSection); // Debug
@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Actualizar navegación activa
         navItems.forEach(item => {
-            item.classList.remove('active');
+            item.classList.remove('nav__item--active');
         });
 
         // Marcar botón activo
         const activeButton = document.querySelector(`[data-section="${targetSection}"]`);
         if (activeButton) {
-            activeButton.classList.add('active');
+            activeButton.classList.add('nav__item--active');
             console.log('Botón marcado como activo:', targetSection); // Debug
         }
 
@@ -84,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Funcionalidad del modal
 function initializeModal() {
     const modal = document.getElementById('add-modal');
-    const addOptionBtns = document.querySelectorAll('.add-option-btn');
-    const modalClose = document.querySelector('.modal-close');
+    const addOptionBtns = document.querySelectorAll('.button--add-option');
+    const modalClose = document.querySelector('.modal__close');
     const modalCancel = document.querySelector('.modal-cancel');
     const modalSave = document.querySelector('.modal-save');
     const modalTitle = document.getElementById('modal-title');
@@ -94,18 +94,18 @@ function initializeModal() {
     // Formularios para cada tipo de contenido
     const formTemplates = {
         texto: `
-            <form class="modal-form">
-                <label for="texto-titulo">Título del recuerdo</label>
-                <input type="text" id="texto-titulo" required>
+            <form class="form form--modal">
+                <label for="texto-titulo" class="form__label form__label--modal">Título del recuerdo</label>
+                <input type="text" id="texto-titulo" class="form__input form__input--modal" required>
                 
-                <label for="texto-contenido">Contenido</label>
-                <textarea id="texto-contenido" rows="4" required></textarea>
+                <label for="texto-contenido" class="form__label form__label--modal">Contenido</label>
+                <textarea id="texto-contenido" rows="4" class="form__textarea form__textarea--modal" required></textarea>
                 
-                <label for="texto-fecha">Fecha</label>
-                <input type="date" id="texto-fecha">
+                <label for="texto-fecha" class="form__label form__label--modal">Fecha</label>
+                <input type="date" id="texto-fecha" class="form__input form__input--modal">
                 
-                <label for="texto-estado">Estado de ánimo</label>
-                <select id="texto-estado">
+                <label for="texto-estado" class="form__label form__label--modal">Estado de ánimo</label>
+                <select id="texto-estado" class="form__select form__select--modal">
                     <option value="feliz">😊 Feliz</option>
                     <option value="nostalgico">😌 Nostálgico</option>
                     <option value="emocionado">🤗 Emocionado</option>
@@ -114,84 +114,84 @@ function initializeModal() {
             </form>
         `,
         foto: `
-            <form class="modal-form">
-                <label for="foto-titulo">Título de la foto</label>
-                <input type="text" id="foto-titulo" required>
+            <form class="form form--modal">
+                <label for="foto-titulo" class="form__label form__label--modal">Título de la foto</label>
+                <input type="text" id="foto-titulo" class="form__input form__input--modal" required>
                 
-                <label for="foto-descripcion">Descripción</label>
-                <textarea id="foto-descripcion" rows="3"></textarea>
+                <label for="foto-descripcion" class="form__label form__label--modal">Descripción</label>
+                <textarea id="foto-descripcion" rows="3" class="form__textarea form__textarea--modal"></textarea>
                 
-                <label>Subir foto</label>
+                <label class="form__label form__label--modal">Subir foto</label>
                 <div class="file-upload">
-                    <input type="file" id="foto-file" accept="image/*">
-                    <div class="file-upload-btn">
+                    <input type="file" id="foto-file" class="file-upload__input" accept="image/*">
+                    <div class="file-upload__button">
                         <span>📁 Seleccionar imagen</span>
                     </div>
                 </div>
                 
-                <label for="foto-fecha">Fecha de la foto</label>
-                <input type="date" id="foto-fecha">
+                <label for="foto-fecha" class="form__label form__label--modal">Fecha de la foto</label>
+                <input type="date" id="foto-fecha" class="form__input form__input--modal">
             </form>
         `,
         audio: `
-            <form class="modal-form">
-                <label for="audio-titulo">Título del audio</label>
-                <input type="text" id="audio-titulo" required>
+            <form class="form form--modal">
+                <label for="audio-titulo" class="form__label form__label--modal">Título del audio</label>
+                <input type="text" id="audio-titulo" class="form__input form__input--modal" required>
                 
-                <label for="audio-descripcion">Descripción</label>
-                <textarea id="audio-descripcion" rows="2"></textarea>
+                <label for="audio-descripcion" class="form__label form__label--modal">Descripción</label>
+                <textarea id="audio-descripcion" rows="2" class="form__textarea form__textarea--modal"></textarea>
                 
-                <label>Subir audio</label>
+                <label class="form__label form__label--modal">Subir audio</label>
                 <div class="file-upload">
-                    <input type="file" id="audio-file" accept="audio/*">
-                    <div class="file-upload-btn">
+                    <input type="file" id="audio-file" class="file-upload__input" accept="audio/*">
+                    <div class="file-upload__button">
                         <span>🎵 Seleccionar audio</span>
                     </div>
                 </div>
                 
                 <div class="record-section">
-                    <button type="button" class="btn-secundario record-btn">🎤 Grabar ahora</button>
+                    <button type="button" class="button button--secondary record-btn">🎤 Grabar ahora</button>
                 </div>
             </form>
         `,
         video: `
-            <form class="modal-form">
-                <label for="video-titulo">Título del video</label>
-                <input type="text" id="video-titulo" required>
+            <form class="form form--modal">
+                <label for="video-titulo" class="form__label form__label--modal">Título del video</label>
+                <input type="text" id="video-titulo" class="form__input form__input--modal" required>
                 
-                <label for="video-descripcion">Descripción</label>
-                <textarea id="video-descripcion" rows="3"></textarea>
+                <label for="video-descripcion" class="form__label form__label--modal">Descripción</label>
+                <textarea id="video-descripcion" rows="3" class="form__textarea form__textarea--modal"></textarea>
                 
-                <label>Subir video</label>
+                <label class="form__label form__label--modal">Subir video</label>
                 <div class="file-upload">
-                    <input type="file" id="video-file" accept="video/*">
-                    <div class="file-upload-btn">
+                    <input type="file" id="video-file" class="file-upload__input" accept="video/*">
+                    <div class="file-upload__button">
                         <span>🎬 Seleccionar video</span>
                     </div>
                 </div>
                 
-                <label for="video-fecha">Fecha del video</label>
-                <input type="date" id="video-fecha">
+                <label for="video-fecha" class="form__label form__label--modal">Fecha del video</label>
+                <input type="date" id="video-fecha" class="form__input form__input--modal">
             </form>
         `,
         ubicacion: `
-            <form class="modal-form">
-                <label for="ubicacion-nombre">Nombre del lugar</label>
-                <input type="text" id="ubicacion-nombre" required>
+            <form class="form form--modal">
+                <label for="ubicacion-nombre" class="form__label form__label--modal">Nombre del lugar</label>
+                <input type="text" id="ubicacion-nombre" class="form__input form__input--modal" required>
                 
-                <label for="ubicacion-descripcion">¿Por qué es especial este lugar?</label>
-                <textarea id="ubicacion-descripcion" rows="3"></textarea>
+                <label for="ubicacion-descripcion" class="form__label form__label--modal">¿Por qué es especial este lugar?</label>
+                <textarea id="ubicacion-descripcion" rows="3" class="form__textarea form__textarea--modal"></textarea>
                 
-                <label for="ubicacion-direccion">Dirección</label>
-                <input type="text" id="ubicacion-direccion">
+                <label for="ubicacion-direccion" class="form__label form__label--modal">Dirección</label>
+                <input type="text" id="ubicacion-direccion" class="form__input form__input--modal">
                 
                 <div class="map-placeholder">
-                    <p>📍 Mapa del lugar aparecerá aquí</p>
-                    <button type="button" class="btn-secundario">Usar ubicación actual</button>
+                    <p class="text text--description">📍 Mapa del lugar aparecerá aquí</p>
+                    <button type="button" class="button button--secondary">Usar ubicación actual</button>
                 </div>
                 
-                <label for="ubicacion-fecha">Fecha de la visita</label>
-                <input type="date" id="ubicacion-fecha">
+                <label for="ubicacion-fecha" class="form__label form__label--modal">Fecha de la visita</label>
+                <input type="date" id="ubicacion-fecha" class="form__input form__input--modal">
             </form>
         `
     };
@@ -210,14 +210,14 @@ function initializeModal() {
             const type = this.getAttribute('data-type');
             modalTitle.textContent = titleMap[type];
             formContainer.innerHTML = formTemplates[type];
-            modal.classList.add('active');
+            modal.classList.add('modal--active');
             document.body.style.overflow = 'hidden'; // Prevenir scroll
         });
     });
 
     // Cerrar modal
     function closeModal() {
-        modal.classList.remove('active');
+        modal.classList.remove('modal--active');
         document.body.style.overflow = 'auto';
     }
 
@@ -246,7 +246,7 @@ function initializeModal() {
 
     // Escape key para cerrar
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        if (e.key === 'Escape' && modal.classList.contains('modal--active')) {
             closeModal();
         }
     });
