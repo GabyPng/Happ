@@ -93,4 +93,8 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log('Para obtener tu IP: ipconfig (Windows) o ifconfig (Linux/Mac) :)');
 });
 
-
+// Conección base de datos MongoDB
+const connectToDB = require("./db");
+connectToDB().then(db => {
+  
+});

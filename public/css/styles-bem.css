@@ -234,6 +234,41 @@ html {
     transition: all 0.2s ease;
 }
 
+.button--save {
+    width:120px;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: 2px solid #e2e2e2;
+    background:white;
+    color: #666;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing:border-box
+}
+
+.button--share {
+    width:120px;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: 2px solid #e2e2e2;
+    background:white;
+    color: #666;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing:border-box
+}
 
 
 .button--add-option {
