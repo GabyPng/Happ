@@ -6,7 +6,9 @@ html {
     font-family: Arial, sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: inherit;
 }
 
@@ -152,6 +154,7 @@ html {
     font-size: 1.1rem;
     font-weight: 500;
     color: #333;
+    text-align: left;
 }
 
 .text--music-name {
@@ -221,15 +224,17 @@ html {
     width: 40px;
     height: 40px;
     padding: 1rem;
-    background: #f8f9fa;
-    border: 2px solid #dee2e6;
     border-radius: 0.5rem;
-    color: #6c757d;
+    border: 3px solid #ffbcdc;
+    background-color: #fff;
+    color: #7a6c7d;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
 }
+
+
 
 .button--add-option {
     display: flex;
@@ -261,8 +266,29 @@ html {
 
 .button:active {
     transform: translateY(2px) scale(0.98);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
     opacity: 0.85;
+}
+
+#theme-default:hover{
+    background-color: #ffe7f3;
+    border: 3px solid #ff0080;
+    box-shadow: 0 2px 10px rgba(255, 0, 128, 0.514);
+    color: #ff0080;
+}
+
+#theme-blue:hover{
+    background-color: #e7f3ff;
+    border: 3px solid #007bff;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.514);
+    color: #007bff;
+}
+
+#theme-green:hover{
+    background-color: #e7ffe7;
+    border: 3px solid #28a745;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.514);
+    color: #28a745;
 }
 
 /* ===== FORMULARIOS ===== */
@@ -326,6 +352,7 @@ html {
 .form--modal {
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
     gap: 1rem;
 }
 
@@ -341,7 +368,7 @@ html {
     font-size: 1.1em;
     font-weight: 500;
     color: #FF0080;
-    margin:0;
+    margin: 0;
     padding: 0;
     width: 100%;
 }
@@ -350,10 +377,12 @@ html {
     font-size: 0.9rem;
     font-weight: 550;
     color: rgb(37, 37, 37);
-    padding:.5rem 0;
+    padding: .5rem 0;
 }
 
 .form__label--modal {
+    margin: 0;
+    padding:0;
     font-size: 0.9rem;
     font-weight: 550;
     color: #333;
@@ -387,7 +416,8 @@ html {
 
 .form__input--modal {
     width: 100%;
-    padding: 0.75rem;
+    margin: 0;
+    padding: 0.5rem;
     border: 1px solid #e2e2e2;
     border-radius: 0.5rem;
     font-family: inherit;
@@ -414,6 +444,7 @@ html {
 
 .form__textarea--modal {
     width: 100%;
+    margin: 0;
     padding: 0.75rem;
     border: 1px solid #e2e2e2;
     border-radius: 0.5rem;
@@ -442,6 +473,7 @@ html {
 
 .form__select--modal {
     width: 100%;
+    margin: 0;
     padding: 0.75rem;
     border: 1px solid #e2e2e2;
     border-radius: 0.5rem;
@@ -505,27 +537,37 @@ html {
 .nav__item {
     display: flex;
     align-items: center;
+    width:150px;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
     background: none;
     border: none;
     color: #666;
+    justify-content: center;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
     border-radius: 1.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-sizing:border-box
 }
 
 .nav__item:hover {
-    background-color: rgba(255, 0, 128, 0.1);
-    color: #FF0080;
+    background-color: #FF0080;
+    color: rgb(255, 255, 255);
+
+    .nav__icon {
+        filter: brightness(0) invert(1);    
+    }
 }
 
+
+
 .nav__item--active {
-    background-color: #FF0080;
-    color: white;
+    background-color: #ff008029;
+    color: #000000;
+
 }
 
 .nav__icon {
@@ -535,7 +577,7 @@ html {
 /* ===== HEADER ===== */
 .header {
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -617,6 +659,29 @@ html {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
+/* ===== ZONAS ===== */
+.zone {
+    display: relative;
+    width: 1500px;   
+    height: 600px;
+    padding: 20px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
+    background-color: #fff;
+    margin: 10px 0;
+}
+
+.zone__grass{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 550px;
+    background: linear-gradient(185deg, #ecffdd, rgb(159, 255, 168));
+}
+
 
 /* ===== CARDS ===== */
 .card {
@@ -704,6 +769,7 @@ html {
     text-align: left;
 }
 
+
 .card__header {
     display: flex;
     justify-content: flex-end;
@@ -722,6 +788,7 @@ html {
     flex: 1;
     flex-direction: column;
     justify-content: left;
+    padding-bottom:10px;
 }
 
 .card__right {
@@ -818,7 +885,7 @@ html {
 .theme-options {
     display: flex;
     flex-direction: column;
-    width: 620px;
+    width: 800px;
     padding: 20px;
     gap: 10px;
     margin: 10px;
@@ -847,7 +914,7 @@ html {
 .music-player {
     display: flex;
     flex-direction: column;
-    width: 620px;
+    width: 800px;
     padding: 20px;
     gap: 10px;
     margin: 10px;
@@ -865,7 +932,7 @@ html {
     border: 1px solid #e2e2e2;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
-    background-color: #fff4f4;
+    background-color: #fff4fc;
     text-align: left;
 }
 
@@ -882,6 +949,130 @@ html {
     align-items: center;
     gap: 15px;
 }
+
+/* ===== REPRODUCTOR DE AUDIO DE CODEPIN===== */
+
+.audio-player {
+    background: linear-gradient(135deg, #ff7abc, rgb(238, 127, 255));
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.play-pause-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.play-pause-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.time-display {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    min-width: 80px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.volume-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.volume-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* Hace la imagen blanca */
+    transition: all 0.3s ease;
+}
+
+.volume-btn:hover .volume-icon {
+    transform: scale(1.1);
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estado activo del reproductor */
+.audio-player.playing .play-icon {
+    display: none;
+}
+
+.audio-player.playing .pause-icon {
+    display: inline !important;
+}
+
 
 /* ===== OPCIONES DE AGREGAR ===== */
 .add-options {
@@ -936,7 +1127,7 @@ html {
     background: white;
     border-radius: 1rem;
     width: min(90%, 500px);
-    max-height: 90vh;
+    max-height: 100vh;
     overflow-y: auto;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     animation: modalSlideIn 0.3s ease;
@@ -1024,16 +1215,22 @@ html {
 
 /* ===== ANIMACIONES ===== */
 @keyframes modalFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes modalSlideIn {
-    from { 
+    from {
         opacity: 0;
         transform: translateY(-50px) scale(0.9);
     }
-    to { 
+
+    to {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
@@ -1113,24 +1310,24 @@ html {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
-    
+
     .button--add-option {
         padding: 1rem;
     }
-    
+
     .add-option__icon {
         font-size: 2rem;
     }
-    
+
     .modal__content {
         width: 95%;
         margin: 1rem;
     }
-    
+
     .modal__footer {
         flex-direction: column-reverse;
     }
-    
+
     .modal__footer .button {
         width: 100%;
     }
@@ -1139,13 +1336,13 @@ html {
         flex-wrap: wrap;
         gap: 0.25rem;
     }
-    
+
     .nav__item {
         flex-direction: column;
         padding: 0.5rem;
         font-size: 0.8rem;
     }
-    
+
     .nav__icon {
         font-size: 1.2rem;
     }

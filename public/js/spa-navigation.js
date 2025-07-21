@@ -1,16 +1,16 @@
 // Lógica de la zona: recuerdos, música, herbario (archivados)
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('SPA Navigation cargado'); // Debug
+    console.log('SPA Navigation cargado'); 
     
     const navItems = document.querySelectorAll('.nav__item');
     const sections = document.querySelectorAll('.page-section');
 
-    console.log('Nav items encontrados:', navItems.length); // Debug
-    console.log('Secciones encontradas:', sections.length); // Debug
+    console.log('Nav items encontrados:', navItems.length); 
+    console.log('Secciones encontradas:', sections.length); 
 
     // Función para cambiar sección
     function showSection(targetSection) {
-        console.log('Cambiando a sección:', targetSection); // Debug
+        console.log('Cambiando a sección:', targetSection); 
         
         // Ocultar todas las secciones
         sections.forEach(section => {
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const section = document.getElementById(targetSection);
         if (section) {
             section.classList.add('page-section--active');
-            console.log('Sección mostrada:', targetSection); // Debug
+            console.log('Sección mostrada:', targetSection); 
         } else {
-            console.error('Sección no encontrada:', targetSection); // Debug
+            console.error('Sección no encontrada:', targetSection); 
         }
 
         // Actualizar navegación activa
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const activeButton = document.querySelector(`[data-section="${targetSection}"]`);
         if (activeButton) {
             activeButton.classList.add('nav__item--active');
-            console.log('Botón marcado como activo:', targetSection); // Debug
+            console.log('Botón marcado como activo:', targetSection); 
         }
 
         // Cambiar URL sin recargar (opcional)
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function(e) {
             e.preventDefault(); // Prevenir comportamiento por defecto
             const section = this.getAttribute('data-section');
-            console.log('Click en botón:', section); // Debug
+            console.log('Click en botón:', section); 
             showSection(section);
         });
     });

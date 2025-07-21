@@ -28,6 +28,7 @@ const path = require('path');
 const url = require('url');
 
 const PORT = 3000;
+const { MongoClient } = require("mongodb");
 
 // Función para obtener el tipo MIME del archivo
 function getMimeType(filePath) {
@@ -91,3 +92,5 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log('Archivos estáticos servidos desde la carpeta public/');
   console.log('Para obtener tu IP: ipconfig (Windows) o ifconfig (Linux/Mac) :)');
 });
+
+

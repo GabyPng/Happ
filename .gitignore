@@ -141,4 +141,13 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+# MongoDB
+*.local
+*.mongo
+*.mongodb
+dump/
+*.bak
+*.archive
+*.json
+
 # End of https://www.toptal.com/developers/gitignore/api/node
