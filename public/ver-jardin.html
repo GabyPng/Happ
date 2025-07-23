@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles-bem.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
     <title>Jardín - HappiEty</title>
 </head>
@@ -16,6 +16,14 @@
         <a href="./index.html" class="header__link">< Volver al inicio</a>
         <div class="header__right">
             <div class="button-group">
+                <!-- Controles de desarrollo temporales -->
+                <button class="button button--secondary" onclick="createEmptyGarden()" style="font-size: 0.8em; margin-right: 10px;">
+                    🗑️ Vaciar
+                </button>
+                <button class="button button--secondary" onclick="createSampleMemories()" style="font-size: 0.8em; margin-right: 10px;">
+                    🌱 Llenar
+                </button>
+                
                 <button class="button button--share" id="shareGardenBtn">
                 <img src="icons/share.svg" alt="" class="nav__icon">
                 Compartir
@@ -129,37 +137,10 @@
         </section>
 
         <!-- SECCIÓN RECUERDOS -->
+                <!-- SECCIÓN RECUERDOS -->
         <section id="recuerdos" class="page-section">
-            <div class="card">
-                <div class="card--memory">
-                    <h3 class="heading heading--small">Mi primer recuerdo</h3>
-                    <p class="text text--garden-description">Descripción del recuerdo...</p>
-                </div>
-
-                <div class="card--memory">
-                    <h3 class="heading heading--small">Mi primer recuerdo</h3>
-                    <p class="text text--garden-description">Descripción del recuerdo...</p>
-                </div>
-
-                <div class="card--memory">
-                    <h3 class="heading heading--small">Mi primer recuerdo</h3>
-                    <p class="text text--garden-description">Descripción del recuerdo...</p>
-                </div>
-
-                <div class="card--memory">
-                    <h3 class="heading heading--small">Mi primer recuerdo</h3>
-                    <p class="text text--garden-description">Descripción del recuerdo...</p>
-                </div>
-
-                <div class="card--memory">
-                    <h3 class="heading heading--small">Mi primer recuerdo</h3>
-                    <p class="text text--garden-description">Descripción del recuerdo...</p>
-                </div>
-
-                <div class="card--memory">
-                    <h3 class="heading heading--small">Mi primer recuerdo</h3>
-                    <p class="text text--garden-description">Descripción del recuerdo...</p>
-                </div>
+            <div class="memories-grid">
+                <!-- Las tarjetas de recuerdos se cargan dinámicamente aquí -->
             </div>
         </section>
 
@@ -232,8 +213,9 @@
             </div>
         </section>
     </main>
+    <script src="./js/sample-data.js"></script>
     <script src="./js/music-player.js"></script>
-
+    <script src="./js/memory-manager.js"></script>
     <script src="./js/spa-navigation.js"></script>
 </body>
 

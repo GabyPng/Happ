@@ -1,23 +1,27 @@
 {
-  "name": "happ",
+  "name": "happiety",
   "version": "1.0.0",
-  "description": "Aplicación para programación web",
-  "main": "index.js",
+  "description": "Jardines de recuerdos digitales - Aplicación web para guardar y compartir momentos especiales",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "dev-simple": "nodemon src/server-dev.js",
+    "db:examples": "node src/examples/database-examples.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GabyPng/Happ.git"
   },
   "keywords": [
-    "html",
-    "css",
-    "js",
-    "node",
-    "22.17.0"
+    "jardines",
+    "recuerdos",
+    "memorias",
+    "mongodb",
+    "mongoose",
+    "nodejs",
+    "discriminators"
   ],
   "author": "Laura Paniagua lagapaniaguago@ittepic.edu.mx",
   "license": "MIT",
@@ -27,7 +31,14 @@
   "homepage": "https://github.com/GabyPng/Happ#readme",
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
     "express": "^5.1.0",
-    "mongodb": "^6.17.0"
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

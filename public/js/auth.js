@@ -1,0 +1,274 @@
+// ============= GESTIÓN DE AUTENTICACIÓN =============
+
+class AuthManager {
+    constructor() {
+        this.apiUrl = 'http://localhost:3000/api';
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.checkAuthentication();
+    }
+
+    setupEventListeners() {
+        // Formulario de login
+        const loginForm = document.querySelector('.login form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleLogin(e.target);
+            });
+        }
+
+        // Formulario de registro
+        const signupForm = document.querySelector('.signup form');
+        if (signupForm) {
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleRegister(e.target);
+            });
+        }
+
+        // Alternancia entre login y signup
+        const slideInputs = document.querySelectorAll('input[name="slide"]');
+        slideInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                this.clearMessages();
+            });
+        });
+    }
+
+    // ============= MANEJAR LOGIN =============
+    async handleLogin(form) {
+        try {
+            const formData = new FormData(form);
+            const credentials = {
+                email: formData.get('email'),
+                password: formData.get('password')
+            };
+
+            // Validar campos
+            if (!credentials.email || !credentials.password) {
+                this.showMessage('Por favor completa todos los campos', 'error');
+                return;
+            }
+
+            // Mostrar loading
+            this.showLoading(form, true);
+
+            // Hacer petición de login
+            const response = await fetch(`${this.apiUrl}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(credentials)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Guardar token y usuario
+                localStorage.setItem('happiety_token', result.token);
+                localStorage.setItem('happiety_user', JSON.stringify(result.user));
+                
+                this.showMessage('¡Login exitoso! Redirigiendo...', 'success');
+                
+                // Redirigir después de 1 segundo
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                this.showMessage(result.message, 'error');
+            }
+
+        } catch (error) {
+            console.error('Error en login:', error);
+            this.showMessage('Error de conexión. Intenta de nuevo.', 'error');
+        } finally {
+            this.showLoading(form, false);
+        }
+    }
+
+    // ============= MANEJAR REGISTRO =============
+    async handleRegister(form) {
+        try {
+            const formData = new FormData(form);
+            const userData = {
+                email: formData.get('email'),
+                password: formData.get('password'),
+                displayName: formData.get('displayName')
+            };
+
+            // Validar campos
+            if (!userData.email || !userData.password || !userData.displayName) {
+                this.showMessage('Por favor completa todos los campos', 'error');
+                return;
+            }
+
+            // Validar longitud de contraseña
+            if (userData.password.length < 6) {
+                this.showMessage('La contraseña debe tener mínimo 6 caracteres', 'error');
+                return;
+            }
+
+            // Mostrar loading
+            this.showLoading(form, true);
+
+            // Hacer petición de registro
+            const response = await fetch(`${this.apiUrl}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Guardar token y usuario
+                localStorage.setItem('happiety_token', result.token);
+                localStorage.setItem('happiety_user', JSON.stringify(result.user));
+                
+                this.showMessage('¡Registro exitoso! Redirigiendo...', 'success');
+                
+                // Redirigir después de 1 segundo
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                this.showMessage(result.message, 'error');
+            }
+
+        } catch (error) {
+            console.error('Error en registro:', error);
+            this.showMessage('Error de conexión. Intenta de nuevo.', 'error');
+        } finally {
+            this.showLoading(form, false);
+        }
+    }
+
+    // ============= VERIFICAR AUTENTICACIÓN =============
+    checkAuthentication() {
+        const token = localStorage.getItem('happiety_token');
+        const user = localStorage.getItem('happiety_user');
+
+        // Si ya está logueado, redirigir
+        if (token && user) {
+            window.location.href = 'index.html';
+        }
+    }
+
+    // ============= UTILITIES =============
+    showMessage(message, type = 'info') {
+        // Remover mensaje anterior
+        const existingMessage = document.querySelector('.auth-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+
+        // Crear nuevo mensaje
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `auth-message auth-message--${type}`;
+        messageDiv.textContent = message;
+
+        // Insertar antes del formulario activo
+        const activeForm = document.querySelector('.form-inner');
+        activeForm.insertBefore(messageDiv, activeForm.firstChild);
+
+        // Auto-remover después de 5 segundos
+        setTimeout(() => {
+            if (messageDiv && messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 5000);
+    }
+
+    clearMessages() {
+        const messages = document.querySelectorAll('.auth-message');
+        messages.forEach(msg => msg.remove());
+    }
+
+    showLoading(form, show) {
+        const submitBtn = form.querySelector('input[type="submit"]');
+        if (show) {
+            submitBtn.value = 'Cargando...';
+            submitBtn.disabled = true;
+        } else {
+            const isLogin = form.closest('.login');
+            submitBtn.value = isLogin ? 'Login' : 'Signup';
+            submitBtn.disabled = false;
+        }
+    }
+
+    // ============= MÉTODO ESTÁTICO PARA LOGOUT =============
+    static logout() {
+        localStorage.removeItem('happiety_token');
+        localStorage.removeItem('happiety_user');
+        window.location.href = 'login-signup.html';
+    }
+
+    // ============= OBTENER USUARIO ACTUAL =============
+    static getCurrentUser() {
+        const user = localStorage.getItem('happiety_user');
+        return user ? JSON.parse(user) : null;
+    }
+
+    // ============= VERIFICAR SI ESTÁ LOGUEADO =============
+    static isAuthenticated() {
+        const token = localStorage.getItem('happiety_token');
+        const user = localStorage.getItem('happiety_user');
+        return !!(token && user);
+    }
+
+    // ============= OBTENER TOKEN =============
+    static getToken() {
+        return localStorage.getItem('happiety_token');
+    }
+
+    // ============= HACER PETICIONES AUTENTICADAS =============
+    static async apiCall(endpoint, options = {}) {
+        const token = this.getToken();
+        
+        const defaultOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
+            }
+        };
+
+        const finalOptions = {
+            ...defaultOptions,
+            ...options,
+            headers: {
+                ...defaultOptions.headers,
+                ...options.headers
+            }
+        };
+
+        try {
+            const response = await fetch(`http://localhost:3000/api${endpoint}`, finalOptions);
+            
+            // Si el token expiró, redirigir al login
+            if (response.status === 401 || response.status === 403) {
+                this.logout();
+                return;
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Error en API call:', error);
+            throw error;
+        }
+    }
+}
+
+// ============= INICIALIZAR =============
+document.addEventListener('DOMContentLoaded', () => {
+    new AuthManager();
+});
+
+// ============= EXPORTAR PARA USO GLOBAL =============
+window.AuthManager = AuthManager;

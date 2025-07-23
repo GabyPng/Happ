@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Botón marcado como activo:', targetSection); 
         }
 
+        // Emitir evento para que el memory manager pueda reaccionar
+        document.dispatchEvent(new CustomEvent('sectionChanged', {
+            detail: { section: targetSection }
+        }));
+
         // Cambiar URL sin recargar (opcional)
         if (history.pushState) {
             history.pushState(null, '', `#${targetSection}`);

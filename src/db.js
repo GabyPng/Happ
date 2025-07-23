@@ -1,27 +1,76 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = process.env.MONGO_URI;
+class DatabaseConnection {
+    constructor() {
+        this.isConnected = false;
+    }
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+    async connect() {
+        try {
+            // Configuración de conexión optimizada
+            const options = {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                maxPoolSize: 10,
+                serverSelectionTimeoutMS: 5000,
+                socketTimeoutMS: 45000,
+                bufferCommands: false
+            };
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+            // Conectar usando Mongoose
+            await mongoose.connect(process.env.MONGO_URI, options);
+            this.isConnected = true;
+
+            console.log('✅ Conectado exitosamente a MongoDB Atlas');
+            console.log(`📍 Base de datos: ${mongoose.connection.name}`);
+
+            // Configurar eventos de conexión
+            this.setupConnectionEvents();
+
+            return mongoose.connection;
+        } catch (error) {
+            console.error('❌ Error conectando a MongoDB:', error.message);
+            process.exit(1);
+        }
+    }
+
+    setupConnectionEvents() {
+        mongoose.connection.on('connected', () => {
+            console.log('🔗 Mongoose conectado a MongoDB');
+        });
+
+        mongoose.connection.on('error', (err) => {
+            console.error('🚨 Error de conexión MongoDB:', err);
+        });
+
+        mongoose.connection.on('disconnected', () => {
+            console.log('🔌 Mongoose desconectado');
+            this.isConnected = false;
+        });
+
+        // Manejo de cierre graceful
+        process.on('SIGINT', async () => {
+            await this.disconnect();
+            process.exit(0);
+        });
+    }
+
+    async disconnect() {
+        if (this.isConnected) {
+            await mongoose.connection.close();
+            console.log('👋 Conexión cerrada correctamente');
+        }
+    }
+
+    getHealth() {
+        return {
+            connected: this.isConnected,
+            readyState: mongoose.connection.readyState,
+            host: mongoose.connection.host,
+            name: mongoose.connection.name
+        };
+    }
 }
-run().catch(console.dir);
+
+module.exports = new DatabaseConnection();
