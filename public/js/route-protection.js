@@ -1,10 +1,9 @@
 /**
- * New Route Protection - Middleware de autenticación mejorado
+ * Route Protection - Middleware de autenticación
  */
 
-class NewRouteProtection {
+class RouteProtection {
     constructor() {
-        this.apiUrl = 'http://localhost:3000';
         this.protectedRoutes = [
             'mis-jardines.html',
             'crear-jardin.html', 
@@ -27,7 +26,7 @@ class NewRouteProtection {
         }
     }
 
-    async checkAuthentication() {
+    checkAuthentication() {
         const token = localStorage.getItem('happiety_token');
         const userData = localStorage.getItem('happiety_user');
 
@@ -37,56 +36,35 @@ class NewRouteProtection {
         }
 
         try {
-            const response = await fetch(`${this.apiUrl}/validateToken`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                
-                if (result.success) {
-                    localStorage.setItem('happiety_user', JSON.stringify(result.user));
-                    return true;
-                } else {
-                    throw new Error('Token inválido');
-                }
-            } else {
-                throw new Error('Token expirado');
+            const user = JSON.parse(userData);
+            if (!user.email || !user.id) {
+                this.redirectToLogin();
+                return false;
             }
+            
+            return true;
         } catch (error) {
-            console.error('Error de autenticación:', error);
             this.redirectToLogin();
             return false;
         }
     }
 
-    async checkIfAlreadyAuthenticated() {
+    checkIfAlreadyAuthenticated() {
         const token = localStorage.getItem('happiety_token');
+        const userData = localStorage.getItem('happiety_user');
 
-        if (token) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const forceLogin = urlParams.get('force') === 'true';
+
+        if (token && userData && !forceLogin) {
             try {
-                const response = await fetch(`${this.apiUrl}/validateToken`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        window.location.href = 'index.html';
-                        return;
-                    }
+                const user = JSON.parse(userData);
+                if (user.email && user.id) {
+                    window.location.href = 'index.html';
+                    return;
                 }
             } catch (error) {
-                console.error('Error al verificar autenticación:', error);
+                // Error al parsear datos
             }
         }
     }
@@ -94,24 +72,26 @@ class NewRouteProtection {
     redirectToLogin() {
         localStorage.removeItem('happiety_token');
         localStorage.removeItem('happiety_user');
-        localStorage.removeItem('currentGarden');
-        localStorage.removeItem('editingGardenId');
-        
-        setTimeout(() => {
-            window.location.href = 'login-signup.html';
-        }, 100);
+        window.location.href = 'login-signup.html';
     }
 
     static logout() {
         localStorage.removeItem('happiety_token');
         localStorage.removeItem('happiety_user');
-        localStorage.removeItem('currentGarden');
-        localStorage.removeItem('editingGardenId');
         window.location.href = 'login-signup.html';
+    }
+
+    static isAuthenticated() {
+        const token = localStorage.getItem('happiety_token');
+        const userData = localStorage.getItem('happiety_user');
+        return !!(token && userData);
     }
 }
 
-// Inicializar
+// Inicializar automáticamente
 document.addEventListener('DOMContentLoaded', () => {
-    window.newRouteProtection = new NewRouteProtection();
+    new RouteProtection();
 });
+
+// Exportar para uso global
+window.RouteProtection = RouteProtection;

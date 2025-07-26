@@ -1,168 +1,360 @@
 # 🌸 HappiEty - Jardines de Recuerdos Digitales
 
-**HappiEty** es una aplicación web que permite crear jardines virtuales donde guardar y compartir recuerdos especiales.
+**HappiEty** es una aplicación web completa que permite crear jardines virtuales donde guardar y compartir recuerdos especiales. Un espacio digital donde cada memoria tiene su lugar y cada jardín cuenta una historia.
+
+## ✨ Características Destacadas
+
+- 🌱 **Jardines Virtuales**: Crea espacios únicos para tus recuerdos
+- 📝 **Memorias Multimedia**: Texto, imágenes, audio, video y ubicaciones
+- 🔗 **Compartir Fácil**: Códigos de acceso únicos para cada jardín
+- 🔐 **Autenticación Segura**: Sistema JWT con encriptación bcrypt
+- 📱 **Responsive Design**: Interfaz adaptativa para todos los dispositivos
+- 🎨 **Temas Personalizables**: Rosa, Azul y Verde
+- 🗂️ **Gestión Completa**: CRUD completo para jardines y memorias
 
 ## 🚀 Inicio Rápido
 
 ### Prerrequisitos
-- Node.js (v14 o superior)
-- MongoDB Atlas (cloud) configurado
+- Node.js (v16 o superior)
+- MongoDB Atlas configurado
+- Git
 
 ### Instalación
-1. Clona el repositorio
-2. Instala dependencias: `npm install`
-3. Configura tu `.env` con las credenciales de MongoDB
-4. Ejecuta el servidor: `npm start`
-5. Abre `http://localhost:3000` en tu navegador
 
-## 📦 Dependencias
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/GabyPng/Happ.git
+cd Happ
 
-### Dependencias de Producción
-- **mongoose** (^8.0.0) - ODM para MongoDB
-- **bcrypt** (^5.1.1) - Encriptación de contraseñas
-- **jsonwebtoken** (^9.0.2) - Autenticación JWT
-- **dotenv** (^16.3.1) - Variables de entorno
-- **cors** (^2.8.5) - Cross-Origin Resource Sharing
-- **mongodb** (^6.17.0) - Driver nativo de MongoDB
-- **express** (^5.1.0) - Framework web (no usado actualmente)
+# 2. Instalar dependencias
+npm install
 
-### Dependencias de Desarrollo
-- **nodemon** (^3.1.10) - Auto-restart del servidor
+# 3. Configurar variables de entorno
+cp .env.example .env
+# Edita .env con tus credenciales de MongoDB Atlas
+
+# 4. Iniciar el servidor
+npm start
+
+# 5. Abrir en navegador
+# http://localhost:3000
+```
+
+### Variables de Entorno (.env)
+```env
+MONGO_URI=mongodb+srv://usuario:contraseña@cluster.mongodb.net/happiety
+JWT_SECRET=tu-secret-key-super-seguro
+PORT=3000
+```
 
 ## 🗂️ Estructura del Proyecto
 
 ```
 📁 Happ/
 ├── 📁 public/                    # Frontend completo
-│   ├── 📁 css/                   # Estilos
-│   │   ├── styles.css            # Estilos principales
-│   │   └── style--login.css      # Estilos del login
-│   ├── 📁 js/                    # JavaScript modular
+│   ├── 📁 css/                   # Estilos CSS
+│   │   ├── styles.css            # Estilos principales (BEM)
+│   │   ├── style--login.css      # Estilos de autenticación
+│   │   └── auth-messages.css     # Mensajes de estado
+│   ├── 📁 js/                    # JavaScript modular ES6+
 │   │   ├── auth.js              # Sistema de autenticación
 │   │   ├── route-protection.js  # Protección de rutas
-│   │   ├── memory-manager.js    # Gestión de memorias
-│   │   ├── garden-manager.js    # Gestión de jardines
-│   │   ├── crear-jardin.js      # Creación de jardines
-│   │   ├── acceder-jardin.js    # Acceso a jardines
-│   │   ├── music-player.js      # Reproductor de música
+│   │   ├── garden-manager.js    # CRUD de jardines
+│   │   ├── crear-jardin.js      # Creación/edición jardines
+│   │   ├── acceder-jardin.js    # Acceso con código
+│   │   ├── memory-manager.js    # CRUD de memorias
+│   │   ├── music-player.js      # Reproductor multimedia
 │   │   └── spa-navigation.js    # Navegación SPA
 │   ├── 📁 assets/               # Recursos multimedia
-│   │   ├── 📁 icons/            # Iconos de la interfaz
+│   │   ├── 📁 icons/            # Iconos SVG/PNG
 │   │   ├── 📁 img/              # Imágenes
 │   │   └── 📁 audio/            # Archivos de audio
-│   └── *.html                   # Páginas web
+│   ├── index.html               # Página principal
+│   ├── login-signup.html        # Autenticación
+│   ├── mis-jardines.html        # Gestión de jardines
+│   ├── crear-jardin.html        # Crear/editar jardín
+│   ├── acceder-jardin.html      # Unirse con código
+│   └── ver-jardin.html          # Vista del jardín
 ├── 📁 src/                      
-│   └── index.js                 # Servidor principal
+│   └── index.js                 # Servidor HTTP nativo
+├── 📁 documentación/            # Documentación técnica
+├── 📁 obsoletos/                # Archivos antiguos
+├── package.json                 # Dependencias NPM
+├── .env                         # Variables de entorno
+└── README.md                    # Este archivo
 ```
 
-## 🔧 Archivos Principales
+## 🔧 Tecnologías y Arquitectura
 
-### Backend (`src/index.js`)
-**Servidor HTTP nativo con MongoDB**
+### Frontend
+- **HTML5**: Estructura semántica
+- **CSS3**: Metodología BEM, Grid/Flexbox, Responsive Design
+- **JavaScript ES6+**: Modules, Classes, Async/Await
+- **SPA**: Single Page Application con navegación client-side
 
-#### Esquemas de Base de Datos:
-- `usuarioSchema` - Usuarios con displayName, email, contraseña encriptada, stats
-- `jardinSchema` - Jardines con código de acceso, tema, privacidad
-- `memoriaSchema` - Memorias con tipo, contenido, posición, tags
+### Backend
+- **Node.js**: Servidor HTTP nativo (sin Express)
+- **MongoDB Atlas**: Base de datos en la nube
+- **Mongoose**: ODM para MongoDB
+- **JWT**: Autenticación stateless
+- **bcrypt**: Encriptación de contraseñas
 
-#### API Endpoints:
-- `POST /loginUsuario` - Autenticación de usuarios
-- `POST /newUsuario` - Registro de nuevos usuarios  
-- `POST /newJardin` - Crear jardines
-- `GET /getJardin/code/{codigo}` - Buscar jardín por código
-- `POST /newMemoria` - Crear memorias
+### Seguridad
+- Autenticación JWT con tokens
+- Encriptación bcrypt (salt rounds 10)
+- Validación de entrada
+- Protección de rutas
+- CORS configurado
+
+## 📊 Base de Datos (MongoDB)
+
+### Colecciones
+
+#### `usuarios`
+```javascript
+{
+  _id: ObjectId,
+  email: String (único, requerido),
+  passwordHash: String (bcrypt),
+  displayName: String,
+  avatar: String,
+  preferences: {
+    theme: String ['rosado', 'azul', 'verde'],
+    notifications: Boolean
+  },
+  stats: {
+    jardinesCreados: Number,
+    memoriasGuardadas: Number,
+    fechaUltimoAcceso: Date
+  },
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+#### `jardins`
+```javascript
+{
+  _id: ObjectId,
+  name: String (requerido),
+  description: String,
+  accessCode: String (único, 8 chars),
+  owner: ObjectId (ref: usuarios),
+  members: [ObjectId] (ref: usuarios),
+  theme: {
+    name: String ['rosado', 'azul', 'verde'],
+    colors: String
+  },
+  isPrivate: Boolean,
+  stats: {
+    memoryCount: Number,
+    viewCount: Number,
+    lastAccessed: Date
+  },
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+#### `memorias`
+```javascript
+{
+  _id: ObjectId,
+  jardin: ObjectId (ref: jardins),
+  creator: ObjectId (ref: usuarios),
+  title: String (requerido),
+  description: String,
+  memoryType: String ['texto', 'imagen', 'audio', 'video', 'ubicacion'],
+  content: {
+    text: String,
+    fileUrl: String,
+    fileName: String,
+    coordinates: { lat: Number, lng: Number },
+    locationName: String
+  },
+  emoji: String,
+  position: { x: Number, y: Number },
+  tags: [String],
+  isPublic: Boolean,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+## 🛠️ API Endpoints
+
+### Autenticación
+- `POST /loginUsuario` - Iniciar sesión
+- `POST /newUsuario` - Registrar usuario
+
+### Jardines
+- `GET /getJardines` - Obtener jardines del usuario
+- `POST /newJardin` - Crear jardín
+- `GET /getJardin/edit/{id}` - Obtener jardín para editar
+- `PUT /updateJardin/{id}` - Actualizar jardín
+- `DELETE /deleteJardin/{id}` - Eliminar jardín
+- `GET /getJardin/code/{codigo}` - Buscar por código
+
+### Memorias
 - `GET /getMemorias/{gardenId}` - Obtener memorias
+- `POST /newMemoria` - Crear memoria
+- `PUT /updateMemoria/{id}` - Actualizar memoria
+- `DELETE /deleteMemoria/{id}` - Eliminar memoria
+
+### Sistema
 - `GET /health` - Estado del servidor
 
-#### Funciones Auxiliares:
-- `parseRequestBody()` - Parser de JSON requests
-- `generateAccessCode()` - Generador de códigos únicos
-- `getMimeType()` - Tipos MIME para archivos estáticos
+## 🎨 Frontend - Módulos JavaScript
 
-### Frontend JavaScript
+### AuthManager (`auth.js`)
+```javascript
+class AuthManager {
+  handleLogin()      // Procesar inicio de sesión
+  handleRegister()   // Procesar registro
+  showMessage()      // Notificaciones flotantes
+  apiCall()          // Cliente HTTP
+}
+```
 
-#### `auth.js` - Gestión de Autenticación
-**Clase:** `AuthManager`
-- `handleLogin()` - Procesa login de usuarios
-- `handleRegister()` - Procesa registro de usuarios
-- `showMessage()` - Muestra mensajes de estado
-- `apiCall()` - Llamadas HTTP a la API
+### GardenManager (`garden-manager.js`)
+```javascript
+class GardenManager {
+  loadUserGardens()   // Cargar jardines del usuario
+  createGardenCard()  // Renderizar tarjetas
+  deleteGarden()      // Eliminar con confirmación
+  editGarden()        // Redirigir a edición
+  updateStats()       // Actualizar estadísticas
+}
+```
 
-#### `memory-manager.js` - Gestión de Memorias
-**Clase:** `MemoryManager`
-- `loadMemories()` - Carga memorias desde API
-- `renderZoneView()` - Vista de zona interactiva
-- `renderMemoriesGrid()` - Vista de grilla de memorias
-- `createMemoryElement()` - Elementos DOM de memorias
-- `deleteMemory()` - Eliminar memorias
-- `editMemory()` - Editar memorias existentes
+### CrearJardin (`crear-jardin.js`)
+```javascript
+class CrearJardin {
+  handleSubmit()      // Crear/actualizar jardín
+  loadGardenForEdit() // Cargar datos para edición
+  validateForm()      // Validación cliente
+  setupThemeSelection() // Selección de tema
+}
+```
 
-#### `route-protection.js` - Protección de Rutas
-**Clase:** `NewRouteProtection`
-- `init()` - Inicializar protección
-- `checkAuth()` - Verificar autenticación
-- `redirectToLogin()` - Redirección a login
-- `validateToken()` - Validación de JWT
+### MemoryManager (`memory-manager.js`)
+```javascript
+class MemoryManager {
+  loadMemories()      // Cargar memorias
+  renderZoneView()    // Vista de zona interactiva
+  renderGrid()        // Vista de grilla
+  createMemory()      // Crear nueva memoria
+  deleteMemory()      // Eliminar memoria
+}
+```
 
-#### `garden-manager.js` - Gestión de Jardines
-- `loadUserGardens()` - Cargar jardines del usuario
-- `renderGardenCard()` - Tarjetas de jardines
-- `deleteGarden()` - Eliminar jardines
+### RouteProtection (`route-protection.js`)
+```javascript
+class RouteProtection {
+  checkAuth()         // Verificar autenticación
+  validateToken()     // Validar JWT
+  redirectToLogin()   // Redirección segura
+}
+```
 
-#### `crear-jardin.js` - Creación de Jardines
-- `handleGardenCreation()` - Procesar formulario
-- `generatePreview()` - Vista previa del jardín
-- `validateForm()` - Validación de datos
+## 🎵 Características Especiales
 
-#### `acceder-jardin.js` - Acceso a Jardines
-- `handleAccessCode()` - Procesar código de acceso
-- `searchGarden()` - Buscar jardín por código
-- `joinGarden()` - Unirse a jardín
+### Sistema de Temas
+- **Rosa**: Colores cálidos y suaves
+- **Azul**: Tonos frescos y tranquilos  
+- **Verde**: Colores naturales y relajantes
 
-#### `music-player.js` - Reproductor de Audio
-**Clase:** `MusicPlayer`
-- `play()` - Reproducir audio
-- `pause()` - Pausar audio
-- `setVolume()` - Control de volumen
-- `updateProgress()` - Actualizar progreso
+### Reproductor de Música
+- Controles de reproducción completos
+- Control de volumen
+- Soporte para múltiples formatos
 
-#### `spa-navigation.js` - Navegación SPA
-- `showSection()` - Cambiar secciones
-- `initializeModal()` - Modales de la interfaz
-- `handleNavigation()` - Navegación entre vistas
+### Gestión de Memorias
+- Tipos: Texto, Imagen, Audio, Video, Ubicación
+- Posicionamiento libre en zona
+- Sistema de etiquetas
+- Edición in-situ
 
-## 🛠️ Tecnologías
+### Códigos de Acceso
+- Generación automática (8 caracteres)
+- Únicos por jardín
+- Fácil compartición
 
-- **Frontend**: HTML5, CSS3, JavaScript vanilla (ES6+)
-- **Backend**: Node.js con HTTP nativo (sin Express)
-- **Base de datos**: MongoDB Atlas cloud
-- **Autenticación**: JWT + bcrypt
-- **Arquitectura**: SPA (Single Page Application)
+## 📱 Diseño Responsive
 
-## 📖 Documentación Completa
+- **Móvil**: 320px - 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: 1024px+
 
-Para información detallada, consulta:
-- `/documentación/ARCHITECTURE_GUIDE.md`
-- `/documentación/FRONTEND_GUIDE.md`
-- `/documentación/BACKEND_GUIDE.md`
-- `/documentación/DATABASE_GUIDE.md`
+CSS Grid y Flexbox para layouts adaptativos.
 
-## ✨ Funcionalidades
+## 🔐 Seguridad Implementada
 
-- 🌱 Crear jardines virtuales únicos
-- 📝 Agregar memorias (texto, imagen, audio, video, ubicación)
-- 🔗 Compartir jardines con códigos de acceso
-- 🔐 Sistema de autenticación seguro (JWT)
-- 📱 Interfaz responsive y amigable
-- 🎵 Reproductor de música integrado
-- 🗂️ Organización por zonas y grillas
+- **JWT Tokens**: Autenticación stateless
+- **bcrypt**: Hash de contraseñas seguro
+- **Validación**: Entrada sanitizada
+- **CORS**: Configurado apropiadamente
+- **Route Protection**: Rutas protegidas por autenticación
 
-## 🚀 Scripts Disponibles
+## 📖 Documentación Adicional
 
-- `npm start` - Iniciar servidor de producción
-- `npm run dev` - Desarrollo con auto-restart
-- `npm run db:seed` - Poblar base de datos con datos de prueba
+- [Guía de Arquitectura](documentación/ARCHITECTURE_GUIDE.md)
+- [Guía Frontend](documentación/FRONTEND_GUIDE.md)
+- [Guía Backend](documentación/BACKEND_GUIDE.md)
+- [Guía Base de Datos](documentación/DATABASE_GUIDE.md)
+
+## 🚀 Scripts NPM
+
+```bash
+npm start          # Iniciar servidor producción
+npm run dev        # Desarrollo con nodemon
+npm install        # Instalar dependencias
+```
+
+## 📦 Dependencias
+
+### Producción
+- `mongoose` ^8.0.0 - ODM MongoDB
+- `bcrypt` ^5.1.1 - Encriptación
+- `jsonwebtoken` ^9.0.2 - JWT
+- `dotenv` ^16.3.1 - Variables entorno
+
+### Desarrollo
+- `nodemon` ^3.1.10 - Auto-restart
+
+## 🌟 Estado del Proyecto
+
+✅ **Completado:**
+- Sistema de autenticación completo
+- CRUD de jardines y memorias
+- Interfaz responsive
+- Base de datos MongoDB
+- API REST funcional
+
+🚧 **En desarrollo:**
+- Subida de archivos multimedia
+- Notificaciones en tiempo real
+- Sistema de colaboración avanzado
+
+## 🤝 Contribución
+
+1. Fork del proyecto
+2. Crear rama feature (`git checkout -b feature/nueva-caracteristica`)
+3. Commit cambios (`git commit -m 'Agregar nueva característica'`)
+4. Push a la rama (`git push origin feature/nueva-caracteristica`)
+5. Abrir Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
+
+## 👥 Autores
+
+- **GabyPng** - Desarrollo principal
+- **Laura** - Desarrollo y testing
 
 ---
 
-🌸 **¡Empieza a crear tus jardines de recuerdos!**
+🌸 **¡Empieza a crear tus jardines de recuerdos digitales!**
+
+**HappiEty** - Donde cada recuerdo encuentra su hogar digital 🏡✨

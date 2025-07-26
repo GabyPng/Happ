@@ -2,7 +2,10 @@
 
 class AuthManager {
     constructor() {
-        this.apiUrl = 'http://localhost:3000'; // Sin /api
+        // Detectar automáticamente la URL base
+        this.apiUrl = window.location.protocol === 'file:' 
+            ? 'http://localhost:3000' 
+            : window.location.origin;
         this.init();
     }
 
@@ -13,7 +16,7 @@ class AuthManager {
 
     setupEventListeners() {
         // Formulario de login
-        const loginForm = document.querySelector('.login form');
+        const loginForm = document.querySelector('form.login');
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -22,7 +25,7 @@ class AuthManager {
         }
 
         // Formulario de registro
-        const signupForm = document.querySelector('.signup form');
+        const signupForm = document.querySelector('form.signup');
         if (signupForm) {
             signupForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -127,21 +130,23 @@ class AuthManager {
 
             const result = await response.json();
 
-        if (result.success) {
-            // Guardar token y datos del usuario
-            localStorage.setItem('happiety_token', result.token);
-            localStorage.setItem('happiety_user', JSON.stringify(result.user));
-            
-            // Mostrar mensaje de éxito
-            this.showSuccess(result.message || 'Registro exitoso');
-            
-            // Redirigir a la página principal después de un breve delay
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500);
-        } else {
-            throw new Error(result.message || 'Error en el registro');
-        }        } catch (error) {
+            if (result.success) {
+                // Guardar token y datos del usuario
+                localStorage.setItem('happiety_token', result.token);
+                localStorage.setItem('happiety_user', JSON.stringify(result.user));
+                
+                // Mostrar mensaje de éxito
+                this.showMessage('¡Registro exitoso! Redirigiendo...', 'success');
+                
+                // Redirigir a la página principal después de un breve delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                this.showMessage(result.message || 'Error en el registro', 'error');
+            }
+
+        } catch (error) {
             console.error('Error en registro:', error);
             this.showMessage('Error de conexión. Intenta de nuevo.', 'error');
         } finally {
@@ -153,9 +158,13 @@ class AuthManager {
     checkAuthentication() {
         const token = localStorage.getItem('happiety_token');
         const user = localStorage.getItem('happiety_user');
+        
+        // Verificar si se quiere forzar el login
+        const urlParams = new URLSearchParams(window.location.search);
+        const forceLogin = urlParams.get('force') === 'true';
 
-        // Si ya está logueado, redirigir
-        if (token && user) {
+        // Si ya está logueado y no se fuerza el login, redirigir
+        if (token && user && !forceLogin) {
             window.location.href = 'index.html';
         }
     }
@@ -173,9 +182,16 @@ class AuthManager {
         messageDiv.className = `auth-message auth-message--${type}`;
         messageDiv.textContent = message;
 
-        // Insertar antes del formulario activo
-        const activeForm = document.querySelector('.form-inner');
-        activeForm.insertBefore(messageDiv, activeForm.firstChild);
+        // Crear contenedor fijo para el mensaje
+        let messageContainer = document.querySelector('.message-container');
+        if (!messageContainer) {
+            messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+            document.body.appendChild(messageContainer);
+        }
+
+        // Agregar mensaje al contenedor
+        messageContainer.appendChild(messageDiv);
 
         // Auto-remover después de 5 segundos
         setTimeout(() => {
@@ -225,6 +241,13 @@ class AuthManager {
     // ============= OBTENER TOKEN =============
     static getToken() {
         return localStorage.getItem('happiety_token');
+    }
+
+    // ============= CERRAR SESIÓN =============
+    static logout() {
+        localStorage.removeItem('happiety_token');
+        localStorage.removeItem('happiety_user');
+        window.location.href = 'login-signup.html';
     }
 
     // ============= HACER PETICIONES AUTENTICADAS =============

@@ -4,7 +4,10 @@
 
 class CrearJardin {
     constructor() {
-        this.apiUrl = 'http://localhost:3000';
+        // Detectar automáticamente la URL base
+        this.apiUrl = window.location.protocol === 'file:' 
+            ? 'http://localhost:3000' 
+            : window.location.origin;
         this.currentUser = null;
         this.editingGardenId = null;
         this.isEditing = false;
@@ -14,6 +17,12 @@ class CrearJardin {
     }
 
     init() {
+        // Limpiar cualquier estado de edición al inicializar si no hay parámetro edit en URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!urlParams.get('edit')) {
+            localStorage.removeItem('editingGardenId');
+        }
+        
         this.loadCurrentUser();
         this.getFormElements();
         this.checkEditMode();
@@ -49,21 +58,42 @@ class CrearJardin {
     checkEditMode() {
         // Verificar si estamos editando un jardín existente
         const urlParams = new URLSearchParams(window.location.search);
-        const editId = urlParams.get('edit') || localStorage.getItem('editingGardenId');
+        const editId = urlParams.get('edit');
+        
+        console.log('checkEditMode: URL params edit =', editId);
+        console.log('checkEditMode: window.location.search =', window.location.search);
+        console.log('checkEditMode: localStorage editingGardenId =', localStorage.getItem('editingGardenId'));
         
         if (editId) {
+            console.log('Modo EDITAR activado con ID:', editId);
             this.editingGardenId = editId;
             this.isEditing = true;
+            // Asegurar que esté en localStorage para consistencia
+            localStorage.setItem('editingGardenId', editId);
             this.loadGardenForEdit();
             this.updateUIForEdit();
+        } else {
+            console.log('Modo CREAR activado');
+            // Modo crear - limpiar estado de edición
+            this.editingGardenId = null;
+            this.isEditing = false;
+            localStorage.removeItem('editingGardenId');
         }
     }
 
     async loadGardenForEdit() {
-        if (!this.editingGardenId) return;
+        console.log('loadGardenForEdit llamado con editingGardenId:', this.editingGardenId);
+        
+        if (!this.editingGardenId || this.editingGardenId === 'undefined' || this.editingGardenId === 'null') {
+            console.error('No hay ID válido de jardín para editar:', this.editingGardenId);
+            alert('Error: No se pudo identificar el jardín a editar');
+            window.location.href = 'mis-jardines.html';
+            return;
+        }
 
         try {
-            const response = await fetch(`${this.apiUrl}/getJardin/${this.editingGardenId}`, {
+            console.log('Cargando jardín para editar:', this.editingGardenId);
+            const response = await fetch(`${this.apiUrl}/getJardin/edit/${this.editingGardenId}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('happiety_token')}`
                 }
@@ -211,10 +241,8 @@ class CrearJardin {
         const formData = {
             name: this.formElements.nameInput.value.trim(),
             description: this.formElements.descriptionInput.value.trim(),
-            theme: {
-                name: this.formElements.themeSelect.value,
-                primaryColor: this.getThemeColor(this.formElements.themeSelect.value)
-            }
+            theme: this.formElements.themeSelect.value,
+            privacy: 'private' // Por defecto privado
         };
 
         if (this.isEditing) {
@@ -230,19 +258,16 @@ class CrearJardin {
             this.formElements.submitBtn.disabled = true;
             this.formElements.submitBtn.textContent = 'Creando...';
 
-            const requestData = {
-                ...gardenData,
-                owner: this.currentUser.id,
-                members: [] // Jardín privado inicialmente
-            };
+            const token = localStorage.getItem('happiety_token');
+            console.log('🎫 Token para crear jardín:', token ? token.substring(0, 20) + '...' : 'NO HAY TOKEN');
 
             const response = await fetch(`${this.apiUrl}/newJardin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('happiety_token')}`
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(requestData)
+                body: JSON.stringify(gardenData)
             });
 
             const result = await response.json();

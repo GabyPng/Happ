@@ -5,7 +5,10 @@
 
 class GardenManager {
     constructor() {
-        this.apiUrl = 'http://localhost:3000';
+        // Detectar automáticamente la URL base
+        this.apiUrl = window.location.protocol === 'file:' 
+            ? 'http://localhost:3000' 
+            : window.location.origin;
         this.currentUser = null;
         this.userGardens = [];
         this.isLoading = false;
@@ -68,9 +71,12 @@ class GardenManager {
 
         try {
             // Obtener todos los jardines con autorización
+            const token = localStorage.getItem('happiety_token');
+            console.log('🎫 Token para obtener jardines:', token ? token.substring(0, 20) + '...' : 'NO HAY TOKEN');
+            
             const response = await fetch(`${this.apiUrl}/getJardines`, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('happiety_token')}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
             
@@ -110,15 +116,10 @@ class GardenManager {
 
         if (this.userGardens.length === 0) {
             this.gardensContainer.innerHTML = `
-                <div class="card card--garden card--empty">
-                    <div class="card__header">
-                        <p class="text text--guide">¡Nuevo!</p>
-                    </div>
-                    <p class="form__legend card__title">No tienes jardines aún</p>
-                    <p class="text text--garden-description">Crea tu primer jardín de recuerdos o únete a uno usando un código de acceso</p>
-                    <p class="text text--guide">Comienza tu aventura de recuerdos</p>
-                    <p class="text text--guide">Momentos especiales te esperan</p>
-                    <button class="button button--access" onclick="window.location.href='crear-jardin.html'">Crear mi primer jardín</button>
+                <div class="empty-state">
+                    <div class="empty-state__icon">📚</div>
+                    <h3 class="empty-state__title">No tienes jardines aún</h3>
+                    <p class="empty-state__description">Usa el botón "+ Nuevo Jardín" arriba para crear tu primer jardín de recuerdos o únete a uno usando un código de acceso</p>
                 </div>
             `;
             return;
@@ -138,56 +139,38 @@ class GardenManager {
 
     createGardenCardHTML(garden, index) {
         const isOwner = garden.owner._id === this.currentUser.id;
-        const memberCount = garden.members.length + 1; // +1 por el owner
         const createdDate = new Date(garden.createdAt).toLocaleDateString('es-ES', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'
         });
-        const lastAccessed = this.getTimeAgo(garden.stats.lastAccessed);
         
-        // Determinar el tema
-        const themeNames = {
-            'rosado': 'Rosa',
-            'azul': 'Azul', 
-            'verde': 'Verde'
-        };
-
         return `
             <div class="card card--garden" data-garden-id="${garden._id}" data-access-code="${garden.accessCode}">
                 <div class="card__header">
-                    <p class="text text--guide">${lastAccessed}</p>
-                    ${isOwner ? 
-                        '<span class="owner-badge" title="Eres el propietario">👑</span>' : 
-                        '<span class="member-badge" title="Eres miembro">👥</span>'
-                    }
+                    <p class="text text--guide">Hace ${this.getTimeAgo(garden.createdAt)}📅</p>
+                    ${isOwner ? '<span class="owner-badge" title="Eres el propietario">👑</span>' : ''}
                 </div>
                 <p class="form__legend card__title">${garden.name}</p>
                 <p class="text text--garden-description">
                     ${garden.description || 'Sin descripción'}
                 </p>
                 <p class="text text--guide">Creado: ${createdDate}</p>
-                <p class="text text--guide">${garden.stats.memoryCount} Recuerdos guardados</p>
-                <p class="text text--guide">Tema: ${themeNames[garden.theme.name] || 'Rosa'}</p>
+                <p class="text text--guide">${garden.stats?.memoryCount || 0} Recuerdos guardados</p>
                 <p class="text text--guide">Código: ${garden.accessCode}</p>
-                <p class="text text--guide">${memberCount} miembros | ${garden.stats.viewCount} visitas</p>
                 
                 <div class="button-group">
-                    <button class="button button--access garden-enter-btn" data-garden-id="${garden._id}">
-                        Ver Jardín
+                    <button class="button button--icon garden-enter-btn" data-access-code="${garden.accessCode}" title="Ver jardín">
+                        <img src="./assets/icons/visualize.png" alt="Ver" class="icon icon--button">
                     </button>
                     ${isOwner ? `
-                        <button class="button button--secondary garden-edit-btn" data-garden-id="${garden._id}" style="margin-top: 8px;">
-                            Editar
+                        <button class="button button--icon garden-edit-btn" data-garden-id="${garden._id}" title="Editar jardín">
+                            <img src="./assets/icons/text.png" alt="Editar" class="icon icon--button">
                         </button>
-                        <button class="button button--danger garden-delete-btn" data-garden-id="${garden._id}" style="margin-top: 8px; background: #ff4444;">
-                            Eliminar
+                        <button class="button button--icon button--danger garden-delete-btn" data-garden-id="${garden._id}" title="Eliminar jardín">
+                            <img src="./assets/icons/add.png" alt="Eliminar" class="icon icon--button" style="transform: rotate(45deg);">
                         </button>
-                    ` : `
-                        <button class="button button--secondary garden-leave-btn" data-garden-id="${garden._id}" style="margin-top: 8px;">
-                            Salir del jardín
-                        </button>
-                    `}
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -199,8 +182,8 @@ class GardenManager {
         // Entrar al jardín
         this.gardensContainer.querySelectorAll('.garden-enter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const gardenId = e.target.dataset.gardenId;
-                this.enterGarden(gardenId);
+                const accessCode = e.target.dataset.accessCode;
+                this.enterGarden(accessCode);
             });
         });
 
@@ -251,9 +234,9 @@ class GardenManager {
         }
     }
 
-    async enterGarden(gardenId) {
+    async enterGarden(accessCode) {
         try {
-            const garden = this.userGardens.find(g => g._id === gardenId);
+            const garden = this.userGardens.find(g => g.accessCode === accessCode);
             if (garden) {
                 // Guardar jardín actual en localStorage
                 localStorage.setItem('currentGarden', JSON.stringify(garden));
@@ -275,6 +258,13 @@ class GardenManager {
         
         if (!confirm(confirmMessage)) return;
 
+        // Mostrar indicador de carga
+        const gardenCard = document.querySelector(`[data-garden-id="${gardenId}"]`);
+        const deleteBtn = gardenCard.querySelector('.garden-delete-btn');
+        const originalContent = deleteBtn.innerHTML;
+        deleteBtn.innerHTML = '<div style="width: 20px; height: 20px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>';
+        deleteBtn.disabled = true;
+
         try {
             const response = await fetch(`${this.apiUrl}/deleteJardin/${gardenId}`, {
                 method: 'DELETE',
@@ -285,7 +275,7 @@ class GardenManager {
             });
 
             if (response.ok) {
-                // Remover del array local
+                // Remover del array local inmediatamente para una respuesta rápida
                 this.userGardens = this.userGardens.filter(g => g._id !== gardenId);
                 this.renderGardensWithExistingHTML();
                 this.updateStats();
@@ -297,6 +287,9 @@ class GardenManager {
         } catch (error) {
             console.error('Error al eliminar jardín:', error);
             this.showError('Error al eliminar el jardín');
+            // Restaurar el botón en caso de error
+            deleteBtn.innerHTML = originalContent;
+            deleteBtn.disabled = false;
         }
     }
 

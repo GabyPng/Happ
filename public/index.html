@@ -12,6 +12,11 @@
 
 <body class="page">
 
+    <!-- Botón de cerrar sesión en esquina superior derecha -->
+    <div class="logout-container">
+        <button id="btn-logout" class="button-logout">Cerrar Sesión</button>
+    </div>
+
     <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
     <header>
         <h1 class="heading heading--large">HappiEty</h1>
@@ -36,12 +41,37 @@
     </section>
     
     <script>
-        document.getElementById('btn-crear-jardin').addEventListener('click', function() {
-        window.location.href = 'crear-jardin.html';
-    });
-        document.getElementById('btn-acceder-jardin').addEventListener('click', function() {
-        window.location.href = 'acceder-jardin.html';
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botones de navegación
+            document.getElementById('btn-crear-jardin').addEventListener('click', function() {
+                window.location.href = 'crear-jardin.html';
+            });
+            document.getElementById('btn-acceder-jardin').addEventListener('click', function() {
+                window.location.href = 'acceder-jardin.html';
+            });
+
+            // Botón de cerrar sesión
+            document.getElementById('btn-logout').addEventListener('click', function() {
+                // Confirmar logout
+                if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                    // Limpiar localStorage
+                    localStorage.removeItem('happiety_token');
+                    localStorage.removeItem('happiety_user');
+                    
+                    // Redirigir al login
+                    window.location.href = 'login-signup.html';
+                }
+            });
+
+            // Verificar si hay sesión activa y mostrar/ocultar botón
+            const token = localStorage.getItem('happiety_token');
+            const logoutBtn = document.getElementById('btn-logout');
+            
+            if (!token) {
+                // Si no hay sesión, ocultar el botón de logout
+                logoutBtn.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>

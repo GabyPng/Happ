@@ -282,6 +282,43 @@ html {
     padding: 40px 20px;
 }
 
+/* Estado vacío para jardines */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    color: #16a34a;
+    opacity: 0.7;
+    text-align: center;
+    padding: 40px 20px;
+    grid-column: 1 / -1;
+}
+
+.empty-state__icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.empty-state__title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: #16a34a;
+}
+
+.empty-state__description {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-align: center;
+    color: #16a34a;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 .memory-card {
     background: white;
     border-radius: 15px;
@@ -723,6 +760,47 @@ html {
     box-shadow: 0 8px 25px rgba(255, 0, 128, 0.15);
 }
 
+/* Botones con iconos */
+.button--icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    margin: 0 4px;
+    border-radius: 8px;
+    background: linear-gradient(111deg, #FF0080 10.49%, #D0F 95.51%);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button--icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+}
+
+.button--icon.button--danger {
+    background: linear-gradient(111deg, #ff4444 10.49%, #ff6666 95.51%);
+}
+
+.button--icon.button--danger:hover {
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+}
+
+.icon--button {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* Convierte los iconos a blanco */
+}
+
+/* Animación de carga */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Estados de los botones */
 .button:hover {
     opacity: 0.9;
@@ -1158,9 +1236,8 @@ html {
 }
 
 .gardens-grid {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     padding: 20px;
     margin: 0 auto;
@@ -1170,16 +1247,24 @@ html {
 .card--garden {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    gap: 5px;
-    width: 270px;
-    height: 270px;
+    justify-content: flex-start;
+    gap: 8px;
+    width: 100%;
+    min-height: 280px;
     padding: 20px 22px;
     border: 1px solid #e2e2e2;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(239, 177, 239, 0.1);
     background-color: #fff;
     text-align: left;
+    position: relative;
+}
+
+.card--garden .button-group {
+    margin-top: auto;
+    margin-bottom: 0;
+    justify-content: flex-start;
+    gap: 8px;
 }
 
 .card--memory {
@@ -1812,4 +1897,36 @@ html {
     .nav__icon {
         font-size: 1.2rem;
     }
+}
+
+/* ===== BOTÓN DE CERRAR SESIÓN ===== */
+.logout-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.button-logout {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-logout:hover {
+    background: rgba(220, 38, 38, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button-logout:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

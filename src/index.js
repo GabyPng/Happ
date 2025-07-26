@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || 'secret-key';
 
 // ============= CONEXIÓN A MONGODB =============
 mongoose.connect(process.env.MONGO_URI)
@@ -147,7 +148,32 @@ const Usuario = mongoose.model('Usuario', usuarioSchema);
 const Jardin = mongoose.model('Jardin', jardinSchema);
 const Memoria = mongoose.model('Memoria', memoriaSchema);
 
-// ============= FUNCIONES AUXILIARES =============
+// ============= UTILIDADES DE AUTENTICACIÓN =============
+async function verifyToken(req) {
+    const authHeader = req.headers.authorization;
+    console.log('🔍 Auth header recibido:', authHeader);
+    
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        console.log('❌ No hay header Authorization o no empieza con Bearer');
+        return null;
+    }
+    
+    const token = authHeader.substring(7);
+    console.log('🎫 Token extraído:', token.substring(0, 20) + '...');
+    
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        console.log('✅ Token decodificado:', decoded.userId);
+        const usuario = await Usuario.findById(decoded.userId);
+        console.log('👤 Usuario encontrado:', !!usuario);
+        return usuario;
+    } catch (error) {
+        console.log('❌ Error al verificar token:', error.message);
+        return null;
+    }
+}
+
+// ============= UTILIDADES =============
 
 // Función para obtener el tipo MIME del archivo
 function getMimeType(filePath) {
@@ -265,7 +291,7 @@ async function handleApiRoutes(req, res, pathname) {
                     userId: usuario._id,
                     email: usuario.email 
                 }, 
-                process.env.JWT_SECRET || 'secret-key', 
+                JWT_SECRET, 
                 { expiresIn: '1h' }
             );
 
@@ -337,7 +363,7 @@ async function handleApiRoutes(req, res, pathname) {
                     userId: newUsuario._id,
                     email: newUsuario.email 
                 }, 
-                process.env.JWT_SECRET || 'secret-key', 
+                JWT_SECRET, 
                 { expiresIn: '1h' }
             );
 
@@ -359,9 +385,26 @@ async function handleApiRoutes(req, res, pathname) {
 
         // Crear nuevo jardín
         if (method === 'POST' && pathname === '/newJardin') {
+            console.log('🌻 Petición para crear jardín recibida');
+            
+            // Verificar autenticación
+            const usuario = await verifyToken(req);
+            if (!usuario) {
+                console.log('❌ Token inválido o no proporcionado');
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Token de autenticación requerido"
+                }));
+                return true;
+            }
+            console.log('👤 Usuario autenticado:', usuario.email);
+            
             const { name, description, theme, privacy } = await parseRequestBody(req);
+            console.log('📝 Datos del jardín:', { name, description, theme, privacy });
             
             if (!name || name.trim().length === 0) {
+                console.log('❌ Nombre del jardín requerido');
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({
                     success: false,
@@ -372,6 +415,7 @@ async function handleApiRoutes(req, res, pathname) {
 
             // Generar código de acceso único
             const accessCode = await generateAccessCode();
+            console.log('🔑 Código de acceso generado:', accessCode);
 
             const newJardin = new Jardin({
                 name: name.trim(),
@@ -379,11 +423,12 @@ async function handleApiRoutes(req, res, pathname) {
                 accessCode: accessCode,
                 theme: theme || 'green',
                 isPrivate: privacy === 'private',
-                owner: null, // Por ahora sin autenticación
+                owner: usuario._id, // Asociar con el usuario autenticado
                 members: []
             });
 
             await newJardin.save();
+            console.log('✅ Jardín creado exitosamente:', newJardin._id);
 
             res.writeHead(201, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
@@ -451,6 +496,253 @@ async function handleApiRoutes(req, res, pathname) {
                 memorias: memorias,
                 count: memorias.length
             }));
+            return true;
+        }
+
+        // Obtener jardines del usuario
+        if (method === 'GET' && pathname === '/getJardines') {
+            console.log('🌻 Petición para obtener jardines del usuario');
+            
+            // Verificar autenticación
+            const usuario = await verifyToken(req);
+            if (!usuario) {
+                console.log('❌ Token inválido o no proporcionado');
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Token de autenticación requerido",
+                    requiresAuth: true
+                }));
+                return true;
+            }
+            console.log('👤 Obteniendo jardines para usuario:', usuario.email);
+            
+            try {
+                // Buscar jardines donde el usuario es owner o member
+                const jardines = await Jardin.find({
+                    $or: [
+                        { owner: usuario._id },
+                        { members: usuario._id }
+                    ]
+                }).populate('owner', 'email displayName').exec();
+                
+                console.log('🌻 Jardines encontrados:', jardines.length);
+                
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: true,
+                    jardines: jardines
+                }));
+            } catch (error) {
+                console.error('❌ Error al obtener jardines:', error);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Error interno del servidor"
+                }));
+            }
+            return true;
+        }
+
+        // Eliminar jardín
+        if (method === 'DELETE' && pathname.startsWith('/deleteJardin/')) {
+            const gardenId = pathname.split('/')[2];
+            console.log('🗑️ Petición para eliminar jardín:', gardenId);
+            
+            // Verificar autenticación
+            const usuario = await verifyToken(req);
+            if (!usuario) {
+                console.log('❌ Token inválido o no proporcionado');
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Token de autenticación requerido",
+                    requiresAuth: true
+                }));
+                return true;
+            }
+
+            try {
+                // Buscar el jardín y verificar que el usuario es el propietario
+                const jardin = await Jardin.findById(gardenId);
+                if (!jardin) {
+                    res.writeHead(404, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "Jardín no encontrado"
+                    }));
+                    return true;
+                }
+
+                if (jardin.owner.toString() !== usuario._id.toString()) {
+                    res.writeHead(403, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "No tienes permisos para eliminar este jardín"
+                    }));
+                    return true;
+                }
+
+                // Eliminar todas las memorias del jardín
+                await Memoria.deleteMany({ jardin: gardenId });
+                console.log('🗑️ Memorias del jardín eliminadas');
+
+                // Eliminar el jardín
+                await Jardin.findByIdAndDelete(gardenId);
+                console.log('✅ Jardín eliminado exitosamente');
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: true,
+                    message: "Jardín eliminado correctamente"
+                }));
+            } catch (error) {
+                console.error('❌ Error al eliminar jardín:', error);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Error interno del servidor"
+                }));
+            }
+            return true;
+        }
+
+        // Obtener jardín para editar
+        if (method === 'GET' && pathname.startsWith('/getJardin/edit/')) {
+            const gardenId = pathname.split('/')[3];
+            console.log('📝 Petición para obtener jardín para editar:', gardenId);
+            
+            // Verificar autenticación
+            const usuario = await verifyToken(req);
+            if (!usuario) {
+                console.log('❌ Token inválido o no proporcionado');
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Token de autenticación requerido",
+                    requiresAuth: true
+                }));
+                return true;
+            }
+
+            try {
+                // Buscar el jardín y verificar que el usuario es el propietario
+                const jardin = await Jardin.findById(gardenId).populate('owner', 'email displayName');
+                if (!jardin) {
+                    res.writeHead(404, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "Jardín no encontrado"
+                    }));
+                    return true;
+                }
+
+                if (jardin.owner._id.toString() !== usuario._id.toString()) {
+                    res.writeHead(403, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "No tienes permisos para editar este jardín"
+                    }));
+                    return true;
+                }
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: true,
+                    jardin: jardin
+                }));
+            } catch (error) {
+                console.error('❌ Error al obtener jardín:', error);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Error interno del servidor"
+                }));
+            }
+            return true;
+        }
+
+        // Actualizar jardín
+        if (method === 'PUT' && pathname.startsWith('/updateJardin/')) {
+            const gardenId = pathname.split('/')[2];
+            console.log('📝 Petición para actualizar jardín:', gardenId);
+            
+            // Verificar autenticación
+            const usuario = await verifyToken(req);
+            if (!usuario) {
+                console.log('❌ Token inválido o no proporcionado');
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Token de autenticación requerido",
+                    requiresAuth: true
+                }));
+                return true;
+            }
+
+            try {
+                const { name, description, theme } = await parseRequestBody(req);
+                
+                if (!name || !theme) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "Nombre y tema son requeridos"
+                    }));
+                    return true;
+                }
+
+                // Buscar el jardín y verificar que el usuario es el propietario
+                const jardin = await Jardin.findById(gardenId);
+                if (!jardin) {
+                    res.writeHead(404, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "Jardín no encontrado"
+                    }));
+                    return true;
+                }
+
+                if (jardin.owner.toString() !== usuario._id.toString()) {
+                    res.writeHead(403, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: false,
+                        message: "No tienes permisos para editar este jardín"
+                    }));
+                    return true;
+                }
+
+                // Actualizar el jardín
+                const updatedJardin = await Jardin.findByIdAndUpdate(gardenId, {
+                    name,
+                    description,
+                    theme: {
+                        name: theme,
+                        colors: {
+                            rosado: '#FFE4F6',
+                            azul: '#E4F2FF', 
+                            verde: '#E4FFE4'
+                        }[theme] || '#FFE4F6'
+                    },
+                    updatedAt: new Date()
+                }, { new: true }).populate('owner', 'email displayName');
+
+                console.log('✅ Jardín actualizado exitosamente');
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: true,
+                    message: "Jardín actualizado correctamente",
+                    jardin: updatedJardin
+                }));
+            } catch (error) {
+                console.error('❌ Error al actualizar jardín:', error);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    success: false,
+                    message: "Error interno del servidor"
+                }));
+            }
             return true;
         }
 
