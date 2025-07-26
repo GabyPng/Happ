@@ -34,10 +34,13 @@ cp .env.example .env
 # Edita .env con tus credenciales de MongoDB Atlas
 
 # 4. Iniciar el servidor
+# Asegurate de cerrar todo
+ pkill -f "node src/index.js" && node src/index.js
+# Y ya iniciarlo
 npm start
 
 # 5. Abrir en navegador
-# http://localhost:3000
+# http://localhost:3000 
 ```
 
 ### Variables de Entorno (.env)
