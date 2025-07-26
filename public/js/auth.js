@@ -2,7 +2,7 @@
 
 class AuthManager {
     constructor() {
-        this.apiUrl = 'http://localhost:3000/api';
+        this.apiUrl = 'http://localhost:3000'; // Sin /api
         this.init();
     }
 
@@ -58,7 +58,7 @@ class AuthManager {
             this.showLoading(form, true);
 
             // Hacer petición de login
-            const response = await fetch(`${this.apiUrl}/auth/login`, {
+            const response = await fetch(`${this.apiUrl}/loginUsuario`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ class AuthManager {
             this.showLoading(form, true);
 
             // Hacer petición de registro
-            const response = await fetch(`${this.apiUrl}/auth/register`, {
+            const response = await fetch(`${this.apiUrl}/newUsuario`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -127,22 +127,21 @@ class AuthManager {
 
             const result = await response.json();
 
-            if (result.success) {
-                // Guardar token y usuario
-                localStorage.setItem('happiety_token', result.token);
-                localStorage.setItem('happiety_user', JSON.stringify(result.user));
-                
-                this.showMessage('¡Registro exitoso! Redirigiendo...', 'success');
-                
-                // Redirigir después de 1 segundo
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1000);
-            } else {
-                this.showMessage(result.message, 'error');
-            }
-
-        } catch (error) {
+        if (result.success) {
+            // Guardar token y datos del usuario
+            localStorage.setItem('happiety_token', result.token);
+            localStorage.setItem('happiety_user', JSON.stringify(result.user));
+            
+            // Mostrar mensaje de éxito
+            this.showSuccess(result.message || 'Registro exitoso');
+            
+            // Redirigir a la página principal después de un breve delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        } else {
+            throw new Error(result.message || 'Error en el registro');
+        }        } catch (error) {
             console.error('Error en registro:', error);
             this.showMessage('Error de conexión. Intenta de nuevo.', 'error');
         } finally {

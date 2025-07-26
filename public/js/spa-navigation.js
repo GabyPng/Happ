@@ -76,11 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         showSection('zona'); // Sección por defecto
     }
-
-    // Test: Funciones globales para debug
-    window.testNavigation = function(section) {
-        showSection(section);
-    };
 });
 
 

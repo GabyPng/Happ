@@ -10,8 +10,49 @@ html,body{
   height: 100%;
   width: 100%;
   place-items: center;
-  background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+  background: linear-gradient(-45deg, #ee52d7, #e73c7e, #23a6d5, #7323d5);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+  cursor:none;
 }
+
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+
+.cursor {
+  position: absolute;
+  --c: rgb(255, 155, 222);
+  aspect-ratio: 1;
+  background:
+    /* 1 */ radial-gradient(circle at 60% 65%, var(--c) 64%, #0000 65%) top left/50% 50%,
+    /* 2 */ radial-gradient(circle at 40% 65%, var(--c) 64%, #0000 65%) top right/50% 50%,
+    /* 3 */ conic-gradient(from -45deg at 50% 85.5%, var(--c) 90deg, #0000 0) bottom/100% 50%;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fadeOut 0.5s forwards;
+  filter: drop-shadow(0 0 10px #ff007f) drop-shadow(0 0 20px #fa4299);
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
 ::selection{
   background: #fa4299;
   color: #fff;
@@ -59,7 +100,10 @@ html,body{
   transition: all 0.6s ease;
 }
 .slide-controls label.signup{
-  color: #000;
+  color: #fa4299; 
+}
+.slide-controls label.login{
+  color: #a445b2; 
 }
 .slide-controls .slider-tab{
   position: absolute;
@@ -83,12 +127,13 @@ input[type="radio"]{
   user-select: none;
 }
 #signup:checked ~ label.login{
-  color: #000;
+  color: #a445b2; /* Morado cuando login no está activo */
 }
 #login:checked ~ label.signup{
-  color: #000;
+  color: #fa4299; /* Rosa cuando signup no está activo */
 }
 #login:checked ~ label.login{
+  color: #fff;
   cursor: default;
   user-select: none;
 }

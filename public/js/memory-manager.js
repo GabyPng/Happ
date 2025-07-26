@@ -46,31 +46,20 @@ class MemoryManager {
         this.showLoading();
         
         try {
-            const response = await fetch(`/api/memorias/jardin/${this.currentGarden._id}`);
+            const response = await fetch(`http://localhost:3000/getMemorias/${this.currentGarden._id}`);
             if (response.ok) {
-                this.memories = await response.json();
+                const result = await response.json();
+                this.memories = result.memorias || [];
                 this.renderCurrentView();
             } else {
-                // Fallback: usar datos de ejemplo si la API no funciona
-                console.warn('API no disponible, usando datos de ejemplo');
-                this.loadSampleMemories();
+                console.error('Error al cargar memorias desde API');
+                this.showError('No se pudieron cargar los recuerdos. Intenta refrescar la página.');
             }
         } catch (error) {
             console.error('Error al cargar memorias:', error);
-            // Fallback: usar datos de ejemplo
-            this.loadSampleMemories();
+            this.showError('No se pudieron cargar los recuerdos. Intenta refrescar la página.');
         } finally {
             this.isLoading = false;
-        }
-    }
-
-    loadSampleMemories() {
-        const sampleData = localStorage.getItem('sampleMemories');
-        if (sampleData) {
-            this.memories = JSON.parse(sampleData);
-            this.renderCurrentView();
-        } else {
-            this.showError('No se pudieron cargar los recuerdos');
         }
     }
 
@@ -336,7 +325,7 @@ class MemoryManager {
         }
         
         try {
-            const response = await fetch(`/api/memorias/${memoryId}`, {
+            const response = await fetch(`http://localhost:3000/deleteMemoria/${memoryId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

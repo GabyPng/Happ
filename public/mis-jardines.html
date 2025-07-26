@@ -22,30 +22,7 @@
 
     <section class="section">
         <div class="gardens-grid">
-            <div class="card card--garden">
-                <div class="card__header"><p id="ultima-vez" name="ultima-vez" class="text text--guide">2 días</p></div>
-                <p id="nombre-jardin" nam="nombre-jardin" class="form__legend card__title">Ejemplo</p>
-                <p id="descripcion-jardin" name="descripcion-jardin" class="text text--garden-description">Descripcion</p>
-                <p id="fecha-jardin" name="fecha-jardin" class="text text--guide">Creado: 15 de Julio del 2025</p>
-                <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--guide"># Recuerdos guardados</p>
-                <button id="btn-ver-jardin" class="button button--access">Ver Jardín</button>
-            </div>
-            <div class="card card--garden">
-                <div class="card__header"><p id="ultima-vez" name="ultima-vez" class="text text--guide">2 días</p></div>
-                <p id="nombre-jardin" nam="nombre-jardin" class="form__legend card__title">Ejemplo</p>
-                <p id="descripcion-jardin" name="descripcion-jardin" class="text text--garden-description">Descripcion</p>
-                <p id="fecha-jardin" name="fecha-jardin" class="text text--guide">Creado: 15 de Julio del 2025</p>
-                <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--guide"># Recuerdos guardados</p>
-                <button id="btn-ver-jardin" class="button button--access">Ver Jardín</button>
-            </div>
-            <div class="card card--garden">
-                <div class="card__header"><p id="ultima-vez" name="ultima-vez" class="text text--guide">2 días</p></div>
-                <p id="nombre-jardin" nam="nombre-jardin" class="form__legend card__title">Ejemplo</p>
-                <p id="descripcion-jardin" name="descripcion-jardin" class="text text--garden-description">Descripcion</p>
-                <p id="fecha-jardin" name="fecha-jardin" class="text text--guide">Creado: 15 de Julio del 2025</p>
-                <p id="conteo-recuerdos" name="conteo-recuerdos" class="text text--guide"># Recuerdos guardados</p>
-                <button id="btn-ver-jardin" class="button button--access">Ver Jardín</button>
-            </div>
+            <!-- Los jardines serán generados dinámicamente por garden-manager.js -->
         </div>
     </section>    <section class="section section--stats">
         <div id="estadisticas" name="estadisticas" class="card card--stats">
@@ -75,10 +52,8 @@
         </div>
     </section>
 
-    <script>
-        document.getElementById('btn-nuevo-jardin').addEventListener('click', function() {
-        window.location.href = 'index.html';
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="./js/route-protection.js"></script>
+    <script src="./js/garden-manager.js"></script>
 </body>
 </html>

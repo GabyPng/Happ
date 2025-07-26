@@ -154,3 +154,4 @@ dump/
 
 # Archivos obsoletos - carpeta local para desarrollo
 .obsoletos/
+.documentación/

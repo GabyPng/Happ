@@ -6,16 +6,17 @@
       <title>Login and Registration Form in HTML | CodingNepal</title>
       <link rel="stylesheet" href="./css/style--login.css">
       <link rel="stylesheet" href="./css/auth-messages.css">
+      <link rel="stylesheet" href="./css/styles.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
       <div class="wrapper">
          <div class="title-text">
             <div class="title login">
-               Login
+               <span class="heading heading--medium">HappiEty</span>
             </div>
             <div class="title signup">
-               Signup
+               <span class="heading heading--medium">HappiEty</span>
             </div>
          </div>
          <div class="form-container">
@@ -29,31 +30,31 @@
             <div class="form-inner">
                <form action="#" class="login">
                   <div class="field">
-                     <input type="email" name="email" placeholder="Email Address" required>
+                     <input type="email" name="email" placeholder="Correo Electrónico" required>
                   </div>
                   <div class="field">
-                     <input type="password" name="password" placeholder="Password" required>
+                     <input type="password" name="password" placeholder="Contraseña" required>
                   </div>
                   <div class="pass-link">
-                     <a href="#">Forgot password?</a>
+                     <a href="#">¿Olvidaste la contraseña?</a>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
                      <input type="submit" value="Login">
                   </div>
                   <div class="signup-link">
-                     Not a member? <a href="">Signup now</a>
+                     ¿No estas registrado? <a href="">Registrate ya</a>
                   </div>
                </form>
                <form action="#" class="signup">
                   <div class="field">
-                     <input type="text" name="displayName" placeholder="Nombre completo" required>
+                     <input type="text" name="displayName" placeholder="Usuario" required>
                   </div>
                   <div class="field">
-                     <input type="email" name="email" placeholder="Email Address" required>
+                     <input type="email" name="email" placeholder="Correo Electrónico" required>
                   </div>
                   <div class="field">
-                     <input type="password" name="password" placeholder="Password" required>
+                     <input type="password" name="password" placeholder="Contraseña" required>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
@@ -63,6 +64,7 @@
             </div>
          </div>
       </div>
+      
       <script src="./js/auth.js"></script>
       <script>
          const loginText = document.querySelector(".title-text .login");
@@ -82,6 +84,33 @@
            signupBtn.click();
            return false;
          });
+
+         // CURSOR 
+         let trail = [];
+         const trailLength = 20;
+
+         document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.classList.add('cursor');
+            document.body.appendChild(cursor);
+
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+
+            trail.push(cursor);
+
+            if (trail.length > trailLength) {
+               const oldCursor = trail.shift();
+               oldCursor.remove();
+            }
+         });
+
+         document.addEventListener('animationend', (e) => {
+            if (e.target.classList.contains('cursor')) {
+               e.target.remove();
+            }
+         });
+
       </script>
    </body>
 </html>

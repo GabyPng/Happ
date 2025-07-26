@@ -1,107 +1,117 @@
-// ============= PROTECCIÓN DE RUTAS =============
+/**
+ * New Route Protection - Middleware de autenticación mejorado
+ */
 
-class RouteProtection {
-    static init() {
-        // Verificar si la página actual requiere autenticación
-        const currentPage = window.location.pathname.split('/').pop();
-        const publicPages = ['login-signup.html', 'index.html', ''];
+class NewRouteProtection {
+    constructor() {
+        this.apiUrl = 'http://localhost:3000';
+        this.protectedRoutes = [
+            'mis-jardines.html',
+            'crear-jardin.html', 
+            'acceder-jardin.html',
+            'ver-jardin.html'
+        ];
         
-        // Si no es página pública, verificar autenticación
-        if (!publicPages.includes(currentPage)) {
-            this.requireAuth();
+        this.init();
+    }
+
+    init() {
+        const currentPage = window.location.pathname.split('/').pop();
+        
+        if (this.protectedRoutes.includes(currentPage)) {
+            this.checkAuthentication();
         }
         
-        // Actualizar UI según estado de autenticación
-        this.updateUI();
+        if (currentPage === 'login-signup.html') {
+            this.checkIfAlreadyAuthenticated();
+        }
     }
-    
-    static requireAuth() {
-        if (!AuthManager.isAuthenticated()) {
-            // Si no está autenticado, redirigir al login
-            window.location.href = 'login-signup.html';
+
+    async checkAuthentication() {
+        const token = localStorage.getItem('happiety_token');
+        const userData = localStorage.getItem('happiety_user');
+
+        if (!token || !userData) {
+            this.redirectToLogin();
             return false;
         }
-        return true;
-    }
-    
-    static updateUI() {
-        const user = AuthManager.getCurrentUser();
-        
-        if (user) {
-            // Mostrar información del usuario
-            this.showUserInfo(user);
-            // Ocultar botones de login
-            this.hideLoginButtons();
-        } else {
-            // Mostrar botones de login
-            this.showLoginButtons();
-        }
-    }
-    
-    static showUserInfo(user) {
-        // Buscar elementos donde mostrar info del usuario
-        const userNameElements = document.querySelectorAll('.user-name');
-        const userAvatarElements = document.querySelectorAll('.user-avatar');
-        
-        userNameElements.forEach(el => {
-            el.textContent = user.displayName;
-        });
-        
-        userAvatarElements.forEach(el => {
-            if (user.avatar) {
-                el.src = user.avatar;
-            } else {
-                // Avatar por defecto con iniciales
-                el.textContent = user.displayName.charAt(0).toUpperCase();
-            }
-        });
-    }
-    
-    static hideLoginButtons() {
-        const loginButtons = document.querySelectorAll('.login-btn, .signup-btn');
-        loginButtons.forEach(btn => {
-            btn.style.display = 'none';
-        });
-        
-        const userMenu = document.querySelectorAll('.user-menu');
-        userMenu.forEach(menu => {
-            menu.style.display = 'block';
-        });
-    }
-    
-    static showLoginButtons() {
-        const loginButtons = document.querySelectorAll('.login-btn, .signup-btn');
-        loginButtons.forEach(btn => {
-            btn.style.display = 'block';
-        });
-        
-        const userMenu = document.querySelectorAll('.user-menu');
-        userMenu.forEach(menu => {
-            menu.style.display = 'none';
-        });
-    }
-    
-    static setupLogoutButton() {
-        const logoutButtons = document.querySelectorAll('.logout-btn');
-        logoutButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                    AuthManager.logout();
+
+        try {
+            const response = await fetch(`${this.apiUrl}/validateToken`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 }
             });
-        });
+
+            if (response.ok) {
+                const result = await response.json();
+                
+                if (result.success) {
+                    localStorage.setItem('happiety_user', JSON.stringify(result.user));
+                    return true;
+                } else {
+                    throw new Error('Token inválido');
+                }
+            } else {
+                throw new Error('Token expirado');
+            }
+        } catch (error) {
+            console.error('Error de autenticación:', error);
+            this.redirectToLogin();
+            return false;
+        }
+    }
+
+    async checkIfAlreadyAuthenticated() {
+        const token = localStorage.getItem('happiety_token');
+
+        if (token) {
+            try {
+                const response = await fetch(`${this.apiUrl}/validateToken`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.error('Error al verificar autenticación:', error);
+            }
+        }
+    }
+
+    redirectToLogin() {
+        localStorage.removeItem('happiety_token');
+        localStorage.removeItem('happiety_user');
+        localStorage.removeItem('currentGarden');
+        localStorage.removeItem('editingGardenId');
+        
+        setTimeout(() => {
+            window.location.href = 'login-signup.html';
+        }, 100);
+    }
+
+    static logout() {
+        localStorage.removeItem('happiety_token');
+        localStorage.removeItem('happiety_user');
+        localStorage.removeItem('currentGarden');
+        localStorage.removeItem('editingGardenId');
+        window.location.href = 'login-signup.html';
     }
 }
 
-// ============= AUTO-INICIALIZAR =============
+// Inicializar
 document.addEventListener('DOMContentLoaded', () => {
-    // Solo si AuthManager está disponible
-    if (typeof AuthManager !== 'undefined') {
-        RouteProtection.init();
-        RouteProtection.setupLogoutButton();
-    }
+    window.newRouteProtection = new NewRouteProtection();
 });
-
-// ============= EXPORTAR =============
-window.RouteProtection = RouteProtection;
