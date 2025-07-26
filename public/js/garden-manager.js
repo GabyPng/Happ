@@ -62,7 +62,7 @@ class GardenManager {
     async loadUserGardens() {
         if (!this.currentUser) {
             this.showMessage('Debes iniciar sesión para ver tus jardines', 'error');
-            window.location.href = 'login-signup.html';
+            window.location.href = 'index.html';
             return;
         }
 
@@ -98,7 +98,7 @@ class GardenManager {
                     // Token inválido, redirigir a login
                     localStorage.removeItem('happiety_token');
                     localStorage.removeItem('happiety_user');
-                    window.location.href = 'login-signup.html';
+                    window.location.href = 'index.html';
                     return;
                 }
                 throw new Error(error.message || 'Error al cargar jardines');

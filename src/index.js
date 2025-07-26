@@ -849,7 +849,7 @@ const server = http.createServer(async (req, res) => {
     
     // Servir archivos estáticos
     if (pathname === '/') {
-        pathname = '/login-signup.html';
+        pathname = '/index.html';
     }
     
     const filePath = path.join(process.cwd(), 'public', pathname);

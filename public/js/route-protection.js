@@ -60,7 +60,7 @@ class RouteProtection {
             try {
                 const user = JSON.parse(userData);
                 if (user.email && user.id) {
-                    window.location.href = 'index.html';
+                    window.location.href = 'inicio.html';
                     return;
                 }
             } catch (error) {

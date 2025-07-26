@@ -80,7 +80,7 @@ class AuthManager {
                 
                 // Redirigir después de 1 segundo
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'inicio.html';
                 }, 1000);
             } else {
                 this.showMessage(result.message, 'error');
@@ -140,7 +140,7 @@ class AuthManager {
                 
                 // Redirigir a la página principal después de un breve delay
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'inicio.html';
                 }, 1500);
             } else {
                 this.showMessage(result.message || 'Error en el registro', 'error');
@@ -165,7 +165,7 @@ class AuthManager {
 
         // Si ya está logueado y no se fuerza el login, redirigir
         if (token && user && !forceLogin) {
-            window.location.href = 'index.html';
+            window.location.href = 'inicio.html';
         }
     }
 

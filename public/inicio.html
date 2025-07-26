@@ -1,0 +1,77 @@
+
+<!--Página principal-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Escalado para los móviles-->
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
+    <title>HappiEty</title>
+</head>
+
+<body class="page">
+
+    <!-- Botón de cerrar sesión en esquina superior derecha -->
+    <div class="logout-container">
+        <button id="btn-logout" class="button-logout">Cerrar Sesión</button>
+    </div>
+
+    <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
+    <header>
+        <h1 class="heading heading--large">HappiEty</h1>
+    </header>
+    <main>
+        <section class="intro">
+            <p class="text">Crea un jardín de <strong>recuerdos</strong> más felices y compártelos con alguien especial</p>
+        </section>
+    </main>
+
+    <section class="form form--garden">
+        <form id="form-jardin">
+             <input class="form__input" type="text" id="input-jardin" name="nombre-jardin" placeholder="Nombre de tu jardín" required>
+            
+             <div class="button-group">
+                    <button id="btn-crear-jardin" type="button" class="button button--primary">Crear nuevo jardín</button>
+            
+                    <button id="btn-acceder-jardin" type="button" class="button button--secondary">Acceder a un jardín</button>
+                
+            </div>
+        </form>
+    </section>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botones de navegación
+            document.getElementById('btn-crear-jardin').addEventListener('click', function() {
+                window.location.href = 'crear-jardin.html';
+            });
+            document.getElementById('btn-acceder-jardin').addEventListener('click', function() {
+                window.location.href = 'acceder-jardin.html';
+            });
+
+            // Botón de cerrar sesión
+            document.getElementById('btn-logout').addEventListener('click', function() {
+                // Confirmar logout
+                if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                    // Limpiar localStorage
+                    localStorage.removeItem('happiety_token');
+                    localStorage.removeItem('happiety_user');
+                    
+                    // Redirigir al login
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Verificar si hay sesión activa y mostrar/ocultar botón
+            const token = localStorage.getItem('happiety_token');
+            const logoutBtn = document.getElementById('btn-logout');
+            
+            if (!token) {
+                // Si no hay sesión, ocultar el botón de logout
+                logoutBtn.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

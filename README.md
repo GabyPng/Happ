@@ -69,8 +69,8 @@ PORT=3000
 │   │   ├── 📁 icons/            # Iconos SVG/PNG
 │   │   ├── 📁 img/              # Imágenes
 │   │   └── 📁 audio/            # Archivos de audio
-│   ├── index.html               # Página principal
-│   ├── login-signup.html        # Autenticación
+│   ├── index.html               # Página de autenticación (Login/Signup)
+│   ├── inicio.html              # Página principal de la aplicación
 │   ├── mis-jardines.html        # Gestión de jardines
 │   ├── crear-jardin.html        # Crear/editar jardín
 │   ├── acceder-jardin.html      # Unirse con código

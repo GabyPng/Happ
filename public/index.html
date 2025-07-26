@@ -1,77 +1,117 @@
-
-<!--Página principal-->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Escalado para los móviles-->
-    <link rel="stylesheet" href="./css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scada:wght@700&display=swap" rel="stylesheet">
-    <title>HappiEty</title>
-</head>
-
-<body class="page">
-
-    <!-- Botón de cerrar sesión en esquina superior derecha -->
-    <div class="logout-container">
-        <button id="btn-logout" class="button-logout">Cerrar Sesión</button>
-    </div>
-
-    <img src="./assets/icons/heart-outline.png" alt="Heart" class="icon">
-    <header>
-        <h1 class="heading heading--large">HappiEty</h1>
-    </header>
-    <main>
-        <section class="intro">
-            <p class="text">Crea un jardín de <strong>recuerdos</strong> más felices y compártelos con alguien especial</p>
-        </section>
-    </main>
-
-    <section class="form form--garden">
-        <form id="form-jardin">
-             <input class="form__input" type="text" id="input-jardin" name="nombre-jardin" placeholder="Nombre de tu jardín" required>
-            
-             <div class="button-group">
-                    <button id="btn-crear-jardin" type="button" class="button button--primary">Crear nuevo jardín</button>
-            
-                    <button id="btn-acceder-jardin" type="button" class="button button--secondary">Acceder a un jardín</button>
-                
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Login</title>
+      <link rel="icon" type="image/png" href="./assets/icons/heart-outline.png">
+      <link rel="stylesheet" href="./css/style--login.css">
+      <link rel="stylesheet" href="./css/auth-messages.css">
+      <link rel="stylesheet" href="./css/styles.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body>
+      <div class="wrapper">
+         <div class="title-text">
+            <div class="title login">
+               <span class="heading heading--medium">HappiEty</span>
             </div>
-        </form>
-    </section>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Botones de navegación
-            document.getElementById('btn-crear-jardin').addEventListener('click', function() {
-                window.location.href = 'crear-jardin.html';
-            });
-            document.getElementById('btn-acceder-jardin').addEventListener('click', function() {
-                window.location.href = 'acceder-jardin.html';
-            });
+            <div class="title signup">
+               <span class="heading heading--medium">HappiEty</span>
+            </div>
+         </div>
+         <div class="form-container">
+            <div class="slide-controls">
+               <input type="radio" name="slide" id="login" checked>
+               <input type="radio" name="slide" id="signup">
+               <label for="login" class="slide login">Login</label>
+               <label for="signup" class="slide signup">Signup</label>
+               <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+               <form action="#" class="login">
+                  <div class="field">
+                     <input type="email" name="email" placeholder="Correo Electrónico" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" name="password" placeholder="Contraseña" required>
+                  </div>
+                  <div class="pass-link">
+                     <a href="#">¿Olvidaste la contraseña?</a>
+                  </div>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Login">
+                  </div>
+                  <div class="signup-link">
+                     ¿No estas registrado? <a href="">Registrate ya</a>
+                  </div>
+               </form>
+               <form action="#" class="signup">
+                  <div class="field">
+                     <input type="text" name="displayName" placeholder="Usuario" required>
+                  </div>
+                  <div class="field">
+                     <input type="email" name="email" placeholder="Correo Electrónico" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" name="password" placeholder="Contraseña" required>
+                  </div>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Signup">
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      
+      <script src="./js/auth.js"></script>
+      <script>
+         const loginText = document.querySelector(".title-text .login");
+         const loginForm = document.querySelector("form.login");
+         const loginBtn = document.querySelector("label.login");
+         const signupBtn = document.querySelector("label.signup");
+         const signupLink = document.querySelector("form .signup-link a");
+         signupBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "-50%";
+           loginText.style.marginLeft = "-50%";
+         });
+         loginBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "0%";
+           loginText.style.marginLeft = "0%";
+         });
+         signupLink.onclick = (()=>{
+           signupBtn.click();
+           return false;
+         });
 
-            // Botón de cerrar sesión
-            document.getElementById('btn-logout').addEventListener('click', function() {
-                // Confirmar logout
-                if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-                    // Limpiar localStorage
-                    localStorage.removeItem('happiety_token');
-                    localStorage.removeItem('happiety_user');
-                    
-                    // Redirigir al login
-                    window.location.href = 'login-signup.html';
-                }
-            });
+         // CURSOR 
+         let trail = [];
+         const trailLength = 20;
 
-            // Verificar si hay sesión activa y mostrar/ocultar botón
-            const token = localStorage.getItem('happiety_token');
-            const logoutBtn = document.getElementById('btn-logout');
-            
-            if (!token) {
-                // Si no hay sesión, ocultar el botón de logout
-                logoutBtn.style.display = 'none';
+         document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.classList.add('cursor');
+            document.body.appendChild(cursor);
+
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+
+            trail.push(cursor);
+
+            if (trail.length > trailLength) {
+               const oldCursor = trail.shift();
+               oldCursor.remove();
             }
-        });
-    </script>
-</body>
+         });
+
+         document.addEventListener('animationend', (e) => {
+            if (e.target.classList.contains('cursor')) {
+               e.target.remove();
+            }
+         });
+
+      </script>
+   </body>
 </html>
