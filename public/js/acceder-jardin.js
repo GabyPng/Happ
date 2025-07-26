@@ -4,7 +4,7 @@
 
 class AccederJardin {
     constructor() {
-        this.apiUrl = 'http://localhost:3000';
+        this.apiUrl = 'https://happ-k5za.onrender.com';
         this.currentUser = null;
         this.formElements = {};
         

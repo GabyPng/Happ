@@ -2,12 +2,11 @@
 
 class AuthManager {
     constructor() {
-        // Detectar automáticamente la URL base
-        this.apiUrl = window.location.protocol === 'file:' 
-            ? 'http://localhost:3000' 
-            : window.location.origin;
+        // Usa siempre la URL de Render para el backend
+        this.apiUrl = 'https://happ-k5za.onrender.com';
         this.init();
     }
+    
 
     init() {
         this.setupEventListeners();

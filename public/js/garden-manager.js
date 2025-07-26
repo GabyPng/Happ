@@ -5,10 +5,7 @@
 
 class GardenManager {
     constructor() {
-        // Detectar automáticamente la URL base
-        this.apiUrl = window.location.protocol === 'file:' 
-            ? 'http://localhost:3000' 
-            : window.location.origin;
+        this.apiUrl = 'https://happ-k5za.onrender.com';
         this.currentUser = null;
         this.userGardens = [];
         this.isLoading = false;
