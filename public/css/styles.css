@@ -1930,3 +1930,74 @@ html {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* ===================================================================================== */
+/* ===================================================================================== */
+/* ===================================================================================== */
+
+/* Tema Azul */
+
+body.theme-blue {
+    background: linear-gradient(to bottom, #b3c6ff 0%, #e6f0ff 100%);
+}
+body.theme-blue .header,
+body.theme-blue .main,
+body.theme-blue .card,
+body.theme-blue .button,
+body.theme-blue .nav__item--active {
+    background-color: #e6f0ff !important;
+    color: #22577a !important;
+    border-color: #22577a !important;
+}
+body.theme-blue .button--theme[data-theme="blue"] {
+    background: #22577a;
+    color: #fff;
+    border-color: #22577a;
+}
+
+/* ===================================================================================== */
+/* ===================================================================================== */
+/* ===================================================================================== */
+
+/* Tema Verde */
+
+body.theme-green {
+    background: linear-gradient(to bottom, #b2f7c1 0%, #e6ffe6 100%);
+}
+body.theme-green .header,
+body.theme-green .main,
+body.theme-green .card,
+body.theme-green .button,
+body.theme-green .nav__item--active {
+    background-color: #e6ffe6 !important;
+    color: #388e3c !important;
+    border-color: #388e3c !important;
+}
+body.theme-green .button--theme[data-theme="green"] {
+    background: #388e3c;
+    color: #fff;
+    border-color: #388e3c;
+}
+
+/* ===================================================================================== */
+/* ===================================================================================== */
+/* ===================================================================================== */
+
+/* Tema Rosado (por defecto, ya está en tu CSS, pero puedes reforzar) */
+body.theme-default {
+    background: linear-gradient(to bottom, #ffd1eb 0%, #e0eaff 100%);
+}
+body.theme-default .header,
+body.theme-default .main,
+body.theme-default .card,
+body.theme-default .button,
+body.theme-default .nav__item--active {
+    background-color: #fff0fa !important;
+    color: #e75480 !important;
+    border-color: #e75480 !important;
+}
+body.theme-default .button--theme[data-theme="default"] {
+    background: #e75480;
+    color: #fff;
+    border-color: #e75480;
+}
