@@ -1941,7 +1941,17 @@ body.theme-blue {
     background: linear-gradient(to bottom, #b3c6ff 0%, #e6f0ff 100%);
 }
 body.theme-blue .header,
-body.theme-blue .main,
+body.theme-blue .main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 body.theme-blue .card,
 body.theme-blue .button,
 body.theme-blue .nav__item--active {
@@ -1965,7 +1975,17 @@ body.theme-green {
     background: linear-gradient(to bottom, #b2f7c1 0%, #e6ffe6 100%);
 }
 body.theme-green .header,
-body.theme-green .main,
+body.theme-green .main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 body.theme-green .card,
 body.theme-green .button,
 body.theme-green .nav__item--active {
@@ -1983,12 +2003,23 @@ body.theme-green .button--theme[data-theme="green"] {
 /* ===================================================================================== */
 /* ===================================================================================== */
 
-/* Tema Rosado (por defecto, ya está en tu CSS, pero puedes reforzar) */
+/* Tema Rosado */
+
 body.theme-default {
     background: linear-gradient(to bottom, #ffd1eb 0%, #e0eaff 100%);
 }
 body.theme-default .header,
-body.theme-default .main,
+body.theme-default .main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 body.theme-default .card,
 body.theme-default .button,
 body.theme-default .nav__item--active {
