@@ -145,8 +145,8 @@ class GardenManager {
         return `
             <div class="card card--garden" data-garden-id="${garden._id}" data-access-code="${garden.accessCode}">
                 <div class="card__header">
-                    <p class="text text--guide">Hace ${this.getTimeAgo(garden.createdAt)}📅</p>
-                    ${isOwner ? '<span class="owner-badge" title="Eres el propietario">👑</span>' : ''}
+                    <p class="text text--guide">Hace ${this.getTimeAgo(garden.createdAt)} <img src="./assets/icons/calendar.png" alt="Calendar" class="card__header__calendar"></p>
+                    ${isOwner ? '<span class="owner-badge" title="Eres el propietario"></span>' : ''}
                 </div>
                 <p class="form__legend card__title">${garden.name}</p>
                 <p class="text text--garden-description">

@@ -1,4 +1,15 @@
 // Lógica de la zona: recuerdos, música, herbario (archivados)
+
+// Función auxiliar para convertir archivos a Base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('SPA Navigation cargado'); 
     
@@ -145,12 +156,12 @@ function initializeModal() {
                 <div class="file-upload">
                     <input type="file" id="audio-file" class="file-upload__input" accept="audio/*">
                     <div class="file-upload__button">
-                        <span>🎵 Seleccionar audio</span>
+                        <span><img src="./assets/icons/music.png" alt="Música" class="inline-icon"> Seleccionar audio</span>
                     </div>
                 </div>
                 
                 <div class="record-section">
-                    <button type="button" class="button button--secondary record-btn">🎤 Grabar ahora</button>
+                    <button type="button" class="button button--secondary record-btn"><img src="./assets/icons/audio.png" alt="Micrófono" class="inline-icon"> Grabar ahora</button>
                 </div>
             </form>
         `,
@@ -186,7 +197,7 @@ function initializeModal() {
                 <input type="text" id="ubicacion-direccion" class="form__input form__input--modal">
                 
                 <div class="map-placeholder">
-                    <p class="text text--description">📍 Mapa del lugar aparecerá aquí</p>
+                    <p class="text text--description"><img src="./assets/icons/location-map.png" alt="Ubicación" class="inline-icon"> Mapa del lugar aparecerá aquí</p>
                     <button type="button" class="button button--secondary">Usar ubicación actual</button>
                 </div>
                 
@@ -232,16 +243,161 @@ function initializeModal() {
     });
 
     // Guardar contenido
-    modalSave.addEventListener('click', function() {
-        // Aquí procesas el formulario
+    modalSave.addEventListener('click', async function() {
         console.log('Guardando contenido...');
         
-        // TODO: Obtener datos del formulario y guardar
-        const formData = new FormData(formContainer.querySelector('form'));
-        
-        // Mostrar confirmación
-        alert('¡Recuerdo guardado exitosamente!');
-        closeModal();
+        try {
+            const form = formContainer.querySelector('form');
+            if (!form) return;
+            
+            // Determinar tipo de recuerdo por el modal activo
+            const currentType = modalTitle.textContent.toLowerCase();
+            let memoryType = 'Text';
+            let memoryData = {};
+            
+            if (currentType.includes('texto')) {
+                memoryType = 'Text';
+                memoryData = {
+                    title: document.getElementById('texto-titulo')?.value || '',
+                    content: document.getElementById('texto-contenido')?.value || '',
+                    description: document.getElementById('texto-contenido')?.value || '',
+                    eventDate: document.getElementById('texto-fecha')?.value || new Date().toISOString().split('T')[0]
+                };
+            } else if (currentType.includes('foto')) {
+                memoryType = 'Image';
+                const fileInput = document.getElementById('foto-file');
+                const file = fileInput?.files[0];
+                
+                memoryData = {
+                    title: document.getElementById('foto-titulo')?.value || '',
+                    description: document.getElementById('foto-descripcion')?.value || '',
+                    eventDate: document.getElementById('foto-fecha')?.value || new Date().toISOString().split('T')[0],
+                    file: file
+                };
+                
+                // Convertir imagen a Base64 para persistencia
+                if (file) {
+                    try {
+                        const base64 = await fileToBase64(file);
+                        memoryData.filePath = base64;
+                        memoryData.fileName = file.name;
+                        memoryData.fileType = file.type;
+                        console.log('Imagen convertida a Base64 para persistencia');
+                    } catch (error) {
+                        console.error('Error al convertir imagen a Base64:', error);
+                        // Fallback a URL temporal
+                        memoryData.filePath = URL.createObjectURL(file);
+                        memoryData.fileName = file.name;
+                        memoryData.fileType = file.type;
+                    }
+                }
+            } else if (currentType.includes('audio')) {
+                memoryType = 'Audio';
+                const fileInput = document.getElementById('audio-file');
+                const file = fileInput?.files[0] || null;
+                memoryData = {
+                    title: document.getElementById('audio-titulo')?.value || '',
+                    description: document.getElementById('audio-descripcion')?.value || '',
+                    eventDate: new Date().toISOString().split('T')[0],
+                    file: file
+                };
+                
+                // Convertir audio a Base64 para persistencia
+                if (file) {
+                    try {
+                        const base64 = await fileToBase64(file);
+                        memoryData.filePath = base64;
+                        memoryData.fileName = file.name;
+                        memoryData.fileType = file.type;
+                        console.log('Audio convertido a Base64 para persistencia');
+                    } catch (error) {
+                        console.error('Error al convertir audio a Base64:', error);
+                        // Fallback a URL temporal
+                        memoryData.filePath = URL.createObjectURL(file);
+                        memoryData.fileName = file.name;
+                        memoryData.fileType = file.type;
+                    }
+                }
+            } else if (currentType.includes('video')) {
+                memoryType = 'Video';
+                const fileInput = document.getElementById('video-file');
+                const file = fileInput?.files[0] || null;
+                memoryData = {
+                    title: document.getElementById('video-titulo')?.value || '',
+                    description: document.getElementById('video-descripcion')?.value || '',
+                    eventDate: document.getElementById('video-fecha')?.value || new Date().toISOString().split('T')[0],
+                    file: file
+                };
+                
+                // Convertir video a Base64 para persistencia
+                if (file) {
+                    try {
+                        const base64 = await fileToBase64(file);
+                        memoryData.filePath = base64;
+                        memoryData.fileName = file.name;
+                        memoryData.fileType = file.type;
+                        console.log('Video convertido a Base64 para persistencia');
+                    } catch (error) {
+                        console.error('Error al convertir video a Base64:', error);
+                        // Fallback a URL temporal
+                        memoryData.filePath = URL.createObjectURL(file);
+                        memoryData.fileName = file.name;
+                        memoryData.fileType = file.type;
+                    }
+                }
+            } else if (currentType.includes('ubicación')) {
+                memoryType = 'Location';
+                memoryData = {
+                    title: document.getElementById('ubicacion-nombre')?.value || '',
+                    description: document.getElementById('ubicacion-descripcion')?.value || '',
+                    locationName: document.getElementById('ubicacion-nombre')?.value || '',
+                    address: document.getElementById('ubicacion-direccion')?.value || '',
+                    eventDate: document.getElementById('ubicacion-fecha')?.value || new Date().toISOString().split('T')[0],
+                    coordinates: { lat: -34.6037, lng: -58.3816 } // Por ahora coordenadas por defecto
+                };
+            }
+            
+            // Validar datos mínimos
+            if (!memoryData.title || memoryData.title.trim() === '') {
+                alert('Por favor, ingresa un título para el recuerdo');
+                return;
+            }
+            
+            // Crear objeto de memoria completo
+            const newMemory = {
+                _id: Date.now().toString(), // ID temporal hasta que se guarde en el backend
+                title: memoryData.title.trim(),
+                description: memoryData.description?.trim() || '',
+                memoryType: memoryType,
+                eventDate: memoryData.eventDate ? new Date(memoryData.eventDate).toISOString() : new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                ...memoryData
+            };
+            
+            // Agregar al MemoryManager inmediatamente (para que se vea)
+            if (window.memoryManager) {
+                window.memoryManager.addMemory(newMemory);
+                console.log('Recuerdo agregado al MemoryManager:', newMemory);
+                
+                // El MemoryManager ya se encarga de guardarlo en localStorage
+            }
+            
+            // TODO: Aquí se podría enviar al backend
+            // await saveMemoryToBackend(newMemory);
+            
+            // Mostrar confirmación
+            alert('¡Recuerdo guardado exitosamente!');
+            closeModal();
+            
+            // Cambiar a sección de recuerdos para ver el resultado
+            setTimeout(() => {
+                document.querySelector('[data-section="recuerdos"]')?.click();
+            }, 500);
+            
+        } catch (error) {
+            console.error('Error al guardar recuerdo:', error);
+            alert('Error al guardar el recuerdo. Inténtalo de nuevo.');
+        }
     });
 
     // Escape key para cerrar
