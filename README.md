@@ -1,18 +1,36 @@
 # 🌸 HappiEty - Jardines de Recuerdos Digitales
 
-**HappiEty** es una aplicación web completa que permite crear jardines virtuales donde guardar y compartir recuerdos especiales. Un espacio digital donde cada memoria tiene su lugar y cada jardín cuenta una historia.
+### Link: https://github.com/GabyPng/Happ
+<br>
 
-## ✨ Características Destacadas
+**HappiEty** es una aplicación web diseñada para compartir momentos felices con una persona especial. La plataforma permite a un usuario crear una "zona" personalizada, que funciona como un baúl interactivo lleno de recuerdos en forma de imágenes, vídeos, textos, música y notas. Estos recuerdos se representan metafóricamente como semillas que crecen en un campo llamado zona.
 
-- 🌱 **Jardines Virtuales**: Crea espacios únicos para tus recuerdos
-- 📝 **Memorias Multimedia**: Texto, imágenes, audio, video y ubicaciones
-- 🔗 **Compartir Fácil**: Códigos de acceso únicos para cada jardín
-- 🔐 **Autenticación Segura**: Sistema JWT con encriptación bcrypt
-- 📱 **Responsive Design**: Interfaz adaptativa para todos los dispositivos
-- 🎨 **Temas Personalizables**: Rosa, Azul y Verde
-- 🗂️ **Gestión Completa**: CRUD completo para jardines y memorias
+Una vez creada la zona, el usuario puede compartir un enlace o código único con otra persona para que ambos puedan colaborar y alimentar juntos este espacio emocional, desde cualquier dispositivo.
 
-## 🚀 Inicio Rápido
+---
+<br>
+
+## Diagrama de Casos de uso
+
+<img width="1524" height="446" alt="Casos de uso drawio" src="https://github.com/user-attachments/assets/56367a15-49df-4179-b782-5ad5488e0b88" />
+
+---
+<br>
+
+## Características Destacadas
+
+-  **Jardines Virtuales**: Crea espacios únicos para tus recuerdos
+
+-  **Memorias Multimedia**: Texto, imágenes, audio, video y ubicaciones
+
+-  **Diseño Responsivo**: Interfaz adaptativa para todos los dispositivos
+
+-  **Temas Personalizables**: Rosa, Azul y Verde
+
+##  Inicio Rápido
+El servidor de este proyecto se encuentra subido a Render y es Hosteado por Vercel.
+**Link** https://happ-ashy.vercel.app/
+Tiene que esperar 30 segundos para que el servidor con plan gratuito de Render vuelva a prender.
 
 ### Prerrequisitos
 - Node.js (v16 o superior)
@@ -60,25 +78,25 @@ PORT=3000
 │   │   ├── style--login.css      # Estilos de autenticación
 │   │   └── auth-messages.css     # Mensajes de estado
 │   ├── 📁 js/                    # JavaScript del frontend
-│   │   ├── auth.js              # Sistema de autenticación
-│   │   ├── route-protection.js  # Protección de rutas
-│   │   ├── garden-sharing.js  # Protección de rutas
-│   │   ├── garden-manager.js    # CRUD de jardines
-│   │   ├── crear-jardin.js      # Creación/edición jardines
-│   │   ├── acceder-jardin.js    # Acceso con código
-│   │   ├── memory-manager.js    # CRUD de memorias
-│   │   ├── music-player.js      # Reproductor multimedia
-│   │   └── spa-navigation.js    # Navegación SPA
-│   ├── 📁 assets/               # Recursos multimedia
-│   │   ├── 📁 icons/            # Iconos
-│   │   ├── 📁 img/              # Imágenes
-│   │   └── 📁 audio/            # Archivos de audio
-│   ├── index.html               # Página de autenticación (Login y Signup)
-│   ├── inicio.html              # Página principal de la aplicación
-│   ├── mis-jardines.html        # Gestión de jardines
-│   ├── crear-jardin.html        # Crear/editar jardín
-│   ├── acceder-jardin.html      # Unirse con código
-│   └── ver-jardin.html          # Vista del jardín
+│   │   ├── auth.js               # Sistema de autenticación
+│   │   ├── route-protection.js   # Protección de rutas
+│   │   ├── garden-sharing.js     # Protección de rutas
+│   │   ├── garden-manager.js     # CRUD de jardines
+│   │   ├── crear-jardin.js       # Creación/edición jardines
+│   │   ├── acceder-jardin.js     # Acceso con código
+│   │   ├── memory-manager.js     # CRUD de memorias
+│   │   ├── music-player.js       # Reproductor multimedia
+│   │   └── spa-navigation.js     # Navegación SPA
+│   ├── 📁 assets/                # Recursos multimedia
+│   │   ├── 📁 icons/             # Iconos
+│   │   ├── 📁 img/               # Imágenes
+│   │   └── 📁 audio/             # Archivos de audio
+│   ├── index.html                # Página de autenticación (Login y Signup)
+│   ├── inicio.html               # Página principal de la aplicación
+│   ├── mis-jardines.html         # Gestión de jardines
+│   ├── crear-jardin.html         # Crear/editar jardín
+│   ├── acceder-jardin.html       # Unirse con código
+│   └── ver-jardin.html           # Vista del jardín
 ├── 📁 src/                      
 │   └── index.js                 # Servidor con MongoDB y nodejs
 ├── 📁 obsoletos/                # Archivos antiguos
@@ -87,11 +105,11 @@ PORT=3000
 └── README.md                    # Este archivo
 ```
 
-## 🔧 Tecnologías y Arquitectura
+##  Tecnologías y Arquitectura
 
 ### Frontend
 - **HTML5**: Estructura semántica
-- **CSS3**: Metodología BEM, Grid/Flexbox, Responsive Design
+- **CSS3**: Uso de la Metodología BEM con Diseños responsivos
 - **JavaScript ES6+**: Modules, Classes, Async/Await
 - **SPA**: Single Page Application con navegación client-side
 
@@ -109,7 +127,7 @@ PORT=3000
 - Protección de rutas
 - CORS configurado
 
-## 📊 Base de Datos (MongoDB)
+##  Base de Datos (MongoDB)
 
 ### Colecciones
 
@@ -184,7 +202,7 @@ PORT=3000
 }
 ```
 
-## 🛠️ API Endpoints
+## API Endpoints
 
 ### Autenticación
 - `POST /loginUsuario` - Iniciar sesión
@@ -207,7 +225,7 @@ PORT=3000
 ### Sistema
 - `GET /health` - Estado del servidor
 
-## 🎨 Frontend - Módulos JavaScript
+## Frontend - Módulos JavaScript
 
 ### AuthManager (`auth.js`)
 ```javascript
@@ -260,7 +278,7 @@ class RouteProtection {
 }
 ```
 
-## 🎵 Características Especiales
+## Características Especiales
 
 ### Sistema de Temas
 - **Rosa**: Colores cálidos y suaves
@@ -291,7 +309,7 @@ class RouteProtection {
 
 CSS Grid y Flexbox para layouts adaptativos.
 
-## 🔐 Seguridad Implementada
+## Seguridad Implementada
 
 - **JWT Tokens**: Autenticación stateless
 - **bcrypt**: Hash de contraseñas seguro
@@ -299,14 +317,7 @@ CSS Grid y Flexbox para layouts adaptativos.
 - **CORS**: Configurado apropiadamente
 - **Route Protection**: Rutas protegidas por autenticación
 
-## 📖 Documentación Adicional
-
-- [Guía de Arquitectura](documentación/ARCHITECTURE_GUIDE.md)
-- [Guía Frontend](documentación/FRONTEND_GUIDE.md)
-- [Guía Backend](documentación/BACKEND_GUIDE.md)
-- [Guía Base de Datos](documentación/DATABASE_GUIDE.md)
-
-## 🚀 Scripts NPM
+## Scripts NPM
 
 ```bash
 npm start          # Iniciar servidor producción
@@ -314,7 +325,7 @@ npm run dev        # Desarrollo con nodemon
 npm install        # Instalar dependencias
 ```
 
-## 📦 Dependencias
+## Dependencias
 
 ### Producción
 - `mongoose` ^8.0.0 - ODM MongoDB
@@ -325,19 +336,11 @@ npm install        # Instalar dependencias
 ### Desarrollo
 - `nodemon` ^3.1.10 - Auto-restart
 
-## 🌟 Estado del Proyecto
-
-✅ **Completado:**
-- Sistema de autenticación completo
-- CRUD de jardines y memorias
-- Interfaz responsive
-- Base de datos MongoDB
-- API REST funcional
+## Estado del Proyecto
 
 🚧 **En desarrollo:**
-- Subida de archivos multimedia
-- Notificaciones en tiempo real
-- Sistema de colaboración avanzado
+- Compartir jardines entre usuarios
+- Guardar los jardines para usuarios ajenos al jardín
 
 ## 🤝 Contribución
 
@@ -346,6 +349,8 @@ npm install        # Instalar dependencias
 3. Commit cambios (`git commit -m 'Agregar nueva característica'`)
 4. Push a la rama (`git push origin feature/nueva-caracteristica`)
 5. Abrir Pull Request
+
+**VS CODE** Extension Live Server para ejecutar en vivo el proyecto.
 
 ## 📄 Licencia
 
