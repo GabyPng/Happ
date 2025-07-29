@@ -228,7 +228,7 @@ class MemoryManager {
         if (this.memories.length === 0) {
             this.zoneElement.innerHTML = `
                 <div class="zone__empty">
-                    <div class="zone__empty-icon"><img src="./assets/icons/memmories.png" alt="Jardín vacío" class="empty-icon"></div>
+                    <div class="zone__empty-icon"><img src="./assets/icons/flor.png" alt="Jardín vacío" class="empty-icon"></div>
                     <div class="zone__empty-text">Tu jardín está esperando sus primeros recuerdos</div>
                     <div class="zone__empty-hint">Ve a "Agregar" para plantar tus memorias</div>
                 </div>
@@ -360,7 +360,7 @@ class MemoryManager {
         if (this.isLoading) {
             this.memoriesGridElement.innerHTML = `
                 <div class="zone__loading">
-                    <img src="./assets/icons/memmories.png" alt="Cargando" class="loading-icon"> Cargando recuerdos...
+                    <img src="./assets/icons/flor.png" alt="Cargando" class="loading-icon"> Cargando recuerdos...
                 </div>
             `;
             return;
@@ -370,7 +370,7 @@ class MemoryManager {
         if (this.memories.length === 0) {
             this.memoriesGridElement.innerHTML = `
                 <div class="zone__empty">
-                    <div class="zone__empty-icon"><img src="./assets/icons/memmories.png" alt="Sin recuerdos" class="empty-icon"></div>
+                    <div class="zone__empty-icon"><img src="./assets/icons/flor.png" alt="Sin recuerdos" class="empty-icon"></div>
                     <div class="zone__empty-text">No hay recuerdos en este jardín</div>
                     <div class="zone__empty-hint">Comienza agregando tu primera memoria</div>
                 </div>

@@ -299,14 +299,12 @@ html {
     justify-content: center;
     min-height: 300px;
     color: #16a34a;
-    backdrop-filter: blur(10px);
     text-align: center;
     padding: 20px;
 }
 
 .zone__empty-icon {
     font-size: 4rem;
-    margin-bottom: 1rem;
     display: block;
 }
 
@@ -322,6 +320,7 @@ html {
     opacity: 0.8;
     text-align: center;
 }
+
 
 /* ===== GRID DE RECUERDOS (SECCIÓN RECUERDOS) ===== */
 .memories-grid {
