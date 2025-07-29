@@ -59,9 +59,10 @@ PORT=3000
 │   │   ├── styles.css            # Estilos principales (BEM)
 │   │   ├── style--login.css      # Estilos de autenticación
 │   │   └── auth-messages.css     # Mensajes de estado
-│   ├── 📁 js/                    # JavaScript modular ES6+
+│   ├── 📁 js/                    # JavaScript del frontend
 │   │   ├── auth.js              # Sistema de autenticación
 │   │   ├── route-protection.js  # Protección de rutas
+│   │   ├── garden-sharing.js  # Protección de rutas
 │   │   ├── garden-manager.js    # CRUD de jardines
 │   │   ├── crear-jardin.js      # Creación/edición jardines
 │   │   ├── acceder-jardin.js    # Acceso con código
@@ -69,21 +70,20 @@ PORT=3000
 │   │   ├── music-player.js      # Reproductor multimedia
 │   │   └── spa-navigation.js    # Navegación SPA
 │   ├── 📁 assets/               # Recursos multimedia
-│   │   ├── 📁 icons/            # Iconos SVG/PNG
+│   │   ├── 📁 icons/            # Iconos
 │   │   ├── 📁 img/              # Imágenes
 │   │   └── 📁 audio/            # Archivos de audio
-│   ├── index.html               # Página de autenticación (Login/Signup)
+│   ├── index.html               # Página de autenticación (Login y Signup)
 │   ├── inicio.html              # Página principal de la aplicación
 │   ├── mis-jardines.html        # Gestión de jardines
 │   ├── crear-jardin.html        # Crear/editar jardín
 │   ├── acceder-jardin.html      # Unirse con código
 │   └── ver-jardin.html          # Vista del jardín
 ├── 📁 src/                      
-│   └── index.js                 # Servidor HTTP nativo
-├── 📁 documentación/            # Documentación técnica
+│   └── index.js                 # Servidor con MongoDB y nodejs
 ├── 📁 obsoletos/                # Archivos antiguos
 ├── package.json                 # Dependencias NPM
-├── .env                         # Variables de entorno
+├── .env                         # Variables de entorno privadas
 └── README.md                    # Este archivo
 ```
 
