@@ -153,6 +153,7 @@ dump/
 # End of https://www.toptal.com/developers/gitignore/api/node
 
 # Archivos obsoletos - carpeta local para desarrollo
-.obsoletos/
-.documentación/*.md
+/obsoletos/
+/documentación/*.md
+
 
