@@ -351,10 +351,6 @@ npm install        # Instalar dependencias
 
 Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
-## 👥 Autores
-
-- **GabyPng** - Desarrollo principal
-- **Laura** - Desarrollo y testing
 
 ---
 
