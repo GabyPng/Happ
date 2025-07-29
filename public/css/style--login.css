@@ -46,6 +46,17 @@ background-position: 0% 50%;
   filter: drop-shadow(0 0 10px #ff007f) drop-shadow(0 0 20px #fa4299);
 }
 
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+::selection{
+  background: #fa4299;
+  color: #fff;
+}
 .wrapper{
   overflow: hidden;
   max-width: 390px;
