@@ -49,8 +49,10 @@ class GardenSharing {
      */
     async shareCurrentGarden() {
         try {
-            // Evitar múltiples modales
-            if (document.querySelector('.share-modal')) {
+            // Evitar múltiples modales activos
+            const existingModal = document.querySelector('.share-modal--active');
+            if (existingModal) {
+                console.log('❌ Modal ya está activo, cancelando');
                 return;
             }
 
@@ -139,7 +141,7 @@ class GardenSharing {
         
         // Crear modal para opciones de compartir
         const modal = document.createElement('div');
-        modal.className = 'share-modal';
+        modal.className = 'share-modal'; // Sin --active inicialmente
         modal.innerHTML = `
             <div class="share-modal__backdrop">
                 <div class="share-modal__content">
@@ -240,6 +242,13 @@ class GardenSharing {
         // Agregar al DOM
         document.body.appendChild(modal);
         
+        // ✅ ACTIVAR MODAL USANDO EL SISTEMA UNIFICADO
+        setTimeout(() => {
+            modal.classList.add('share-modal--active');
+            document.body.style.overflow = 'hidden';
+            console.log('🔓 Share modal activado con sistema unificado');
+        }, 10);
+        
         // Aplicar estilos inmediatamente para Chrome
         this.applyChromeCompatibilityStyles(modal);
         
@@ -255,7 +264,7 @@ class GardenSharing {
         // Asegurar visibilidad de elementos críticos después de añadir al DOM
         setTimeout(() => {
             this.ensureElementsVisible(modal);
-        }, 10);
+        }, 100);
         
         // Verificación adicional para Chrome después de un breve delay
         setTimeout(() => {
@@ -472,11 +481,20 @@ class GardenSharing {
         const emailBtn = modal.querySelector('#share-email');
         const whatsappBtn = modal.querySelector('#share-whatsapp');
 
-        // Cerrar modal
-        closeBtn.addEventListener('click', () => modal.remove());
+        // Cerrar modal usando sistema unificado
+        closeBtn.addEventListener('click', () => this.closeShareModal(modal));
         backdrop.addEventListener('click', (e) => {
-            if (e.target === backdrop) modal.remove();
+            if (e.target === backdrop) this.closeShareModal(modal);
         });
+
+        // Cerrar con tecla ESC
+        const handleEscape = (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('share-modal--active')) {
+                this.closeShareModal(modal);
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
 
         // Descargar archivo
         downloadBtn.addEventListener('click', () => {
@@ -850,6 +868,28 @@ class GardenSharing {
                 notification.remove();
             }
         }, 5000);
+    }
+
+    /**
+     * Cerrar modal de compartir usando el sistema unificado
+     */
+    closeShareModal(modal) {
+        if (modal && modal.classList.contains('share-modal--active')) {
+            console.log('🔒 Cerrando share modal con sistema unificado');
+            
+            // Desactivar modal
+            modal.classList.remove('share-modal--active');
+            
+            // Restaurar scroll del body
+            document.body.style.overflow = '';
+            
+            // Remover modal del DOM después de la animación
+            setTimeout(() => {
+                if (modal.parentNode) {
+                    modal.remove();
+                }
+            }, 300); // Esperar a que termine la animación
+        }
     }
 }
 

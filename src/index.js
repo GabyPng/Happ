@@ -784,7 +784,7 @@ async function handleApiRoutes(req, res, pathname) {
             await newMemoria.save();
 
             // Actualizar estadísticas del jardín
-            jardin.stats.memoriesCount += 1;
+            jardin.stats.memoryCount += 1;
             await jardin.save();
 
             res.writeHead(201, { 'Content-Type': 'application/json' });

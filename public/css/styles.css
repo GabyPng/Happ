@@ -71,7 +71,6 @@ html {
 }
 
 /* Iconos para memorias */
-/* Iconos para memorias */
 .memory-icon {
     width: 24px;
     height: 24px;
@@ -157,12 +156,11 @@ html {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: 0; 
     right: 0;
     bottom: 0;
     background: 
-        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%),
-        repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(255,255,255,0.05) 1px, rgba(255,255,255,0.05) 2px);
+        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
     animation: shimmer 3s ease-in-out infinite;
 }
 
@@ -197,6 +195,7 @@ html {
     border: 3px solid #ffffff;
     box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
 }
+
 /*
 .memory-item--text .memory-emoji {
     font-size: 24px;
@@ -1884,6 +1883,7 @@ html {
 
 
 .share-modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -1891,6 +1891,13 @@ html {
     height: 100%;
     z-index: 10000;
     backdrop-filter: blur(5px);
+}
+
+.share-modal--active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.3s ease;
 }
 
 .share-modal__backdrop {
