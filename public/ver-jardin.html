@@ -235,6 +235,18 @@
         });
 
     </script>
+
+    <script>
+    document.querySelectorAll('.button--theme').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            document.body.classList.remove('theme-default', 'theme-blue', 'theme-green');
+            document.body.classList.add('theme-' + theme);
+        });
+    });
+
+    document.body.classList.add('theme-default');
+    </script>
     
     <script src="./js/music-player.js"></script>
     <script src="./js/memory-manager.js"></script>
