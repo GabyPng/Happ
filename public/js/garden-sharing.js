@@ -501,7 +501,7 @@ class GardenSharing {
                     document.execCommand('copy');
                 }
                 
-                copyBtn.textContent = '✅ Copiado';
+                copyBtn.textContent = 'Copiado';
                 setTimeout(() => {
                     copyBtn.textContent = 'Copiar';
                 }, 2000);
@@ -511,7 +511,7 @@ class GardenSharing {
                 urlInput.focus();
                 urlInput.select();
                 document.execCommand('copy');
-                copyBtn.textContent = '✅ Copiado';
+                copyBtn.textContent = 'Copiado';
                 setTimeout(() => {
                     copyBtn.textContent = 'Copiar';
                 }, 2000);
