@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0237d7ca-1fd7-48ac-bff9-ea6453c26c9a" /># 🌸 HappiEty - Jardines de Recuerdos Digitales
+# 🌸 HappiEty - Jardines de Recuerdos Digitales
 
 ### Link: https://github.com/GabyPng/Happ
 <br>
