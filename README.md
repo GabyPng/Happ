@@ -1,4 +1,4 @@
-# 🌸 HappiEty - Jardines de Recuerdos Digitales
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0237d7ca-1fd7-48ac-bff9-ea6453c26c9a" /># 🌸 HappiEty - Jardines de Recuerdos Digitales
 
 ### Link: https://github.com/GabyPng/Happ
 <br>
@@ -31,6 +31,9 @@ Una vez creada la zona, el usuario puede compartir un enlace o código único co
 El servidor de este proyecto se encuentra subido a Render y es Hosteado por Vercel.
 **Link** https://happ-ashy.vercel.app/
 Tiene que esperar 30 segundos para que el servidor con plan gratuito de Render vuelva a prender.
+
+## Likn del video explicativo Youtube
+https://youtu.be/v0ldfwDSIcg
 
 ### Prerrequisitos
 - Node.js (v16 o superior)
