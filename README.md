@@ -64,13 +64,6 @@ npm start
 # http://localhost:3000 
 ```
 
-### Variables de Entorno (.env)
-```env
-MONGO_URI=mongodb+srv://usuario:contraseña@cluster.mongodb.net/happiety
-JWT_SECRET=tu-secret-key-super-seguro
-PORT=3000
-```
-
 ## 🗂️ Estructura del Proyecto
 
 ```
