@@ -32,7 +32,7 @@ El servidor de este proyecto se encuentra subido a Render y es Hosteado por Verc
 **Link** https://happ-ashy.vercel.app/
 Tiene que esperar 30 segundos para que el servidor con plan gratuito de Render vuelva a prender.
 
-## Likn del video explicativo Youtube
+## Link del video explicativo Youtube
 https://youtu.be/v0ldfwDSIcg
 
 ### Prerrequisitos
